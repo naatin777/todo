@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo/ui/pages/home/screens/settings/settings.dart';
 import 'package:todo/ui/providers/navigation_provider.dart';
 
 class Home extends ConsumerWidget {
@@ -9,6 +10,12 @@ class Home extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final navigation = ref.watch(navigationProvider);
     return Scaffold(
+      body: [
+        null,
+        null,
+        null,
+        const Settings(),
+      ][navigation.index],
       bottomNavigationBar: NavigationBar(
         selectedIndex: navigation.index,
         destinations: const [
