@@ -27,8 +27,8 @@ class Home extends ConsumerWidget {
         selectedIndex: navigation.index,
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.check),
-            selectedIcon: Icon(Icons.check_outlined),
+            icon: Icon(Icons.task),
+            selectedIcon: Icon(Icons.task_outlined),
             label: "Task",
             tooltip: "Task",
           ),
