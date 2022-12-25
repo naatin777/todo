@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/ui/pages/home/screens/settings/settings.dart';
+import 'package:todo/ui/pages/home/screens/settings/settings_screen.dart';
 import 'package:todo/ui/pages/home/screens/task/add_new_task_fab.dart';
 import 'package:todo/ui/providers/navigation_provider.dart';
 
@@ -15,7 +15,7 @@ class Home extends ConsumerWidget {
         null,
         null,
         null,
-        const Settings(),
+        const SettingsScreen(),
       ][navigation.index],
       floatingActionButton: [
         const AddNewTaskFab(),
