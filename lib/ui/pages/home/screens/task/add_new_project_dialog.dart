@@ -25,11 +25,16 @@ class AddNewProjectDialog extends ConsumerWidget {
       ),
       actions: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
           child: const Text("Cancel"),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () async {
+            Navigator.of(context).pop();
+            await ref.read(addNewProjectProvider).addNewProject();
+          },
           child: const Text("Ok"),
         ),
       ],

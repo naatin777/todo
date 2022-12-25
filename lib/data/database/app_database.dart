@@ -4,12 +4,13 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:todo/data/database/daos/projects_dao.dart';
 import 'package:todo/data/database/tables/projects.dart';
 import 'package:todo/data/database/tables/tasks.dart';
 
 part 'app_database.g.dart';
 
-@DriftDatabase(tables: [Tasks, Projects], daos: [])
+@DriftDatabase(tables: [Tasks, Projects], daos: [ProjectsDao])
 class AppDatabase extends _$AppDatabase {
   AppDatabase(QueryExecutor e) : super(e);
 
