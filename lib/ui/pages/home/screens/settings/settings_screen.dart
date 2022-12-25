@@ -8,15 +8,19 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeProvider);
-    return CustomScrollView(
-      slivers: [
-        const SliverAppBar(
-          title: Text("Settings"),
-          pinned: true,
-        ),
-        SliverList(
-          delegate: SliverChildListDelegate([
-            ListTile(
+    return NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return [
+          const SliverAppBar(
+            title: Text("Settings"),
+            pinned: true,
+          ),
+        ];
+      },
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: ListTile(
               title: const Text("Theme"),
               subtitle: Text(themeMode.title),
               onTap: () {
@@ -63,9 +67,9 @@ class SettingsScreen extends ConsumerWidget {
                 );
               },
             ),
-          ]),
-        ),
-      ],
+          )
+        ],
+      ),
     );
   }
 }
