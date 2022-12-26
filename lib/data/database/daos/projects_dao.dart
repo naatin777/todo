@@ -13,6 +13,10 @@ class ProjectsDao extends DatabaseAccessor<AppDatabase>
     return select(projects).get();
   }
 
+  Stream<List<Project>> watchAll() {
+    return select(projects).watch();
+  }
+
   Future<int> insert(Project project) {
     return into(projects).insert(project);
   }
