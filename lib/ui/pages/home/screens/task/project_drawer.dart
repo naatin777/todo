@@ -13,6 +13,17 @@ class ProjectDrawer extends ConsumerWidget {
       child: SafeArea(
         child: ListView(
           children: [
+            ListTile(
+              leading: const Icon(Icons.inbox),
+              title: Text(inbox.title),
+              onTap: () {
+                ref.read(projectDrawerProvider.notifier).changeProject(inbox);
+                Navigator.of(context).pop();
+              },
+            ),
+            const Divider(
+              height: 0,
+            ),
             projects.when(
               data: (data) => Column(
                 children: data
@@ -20,6 +31,12 @@ class ProjectDrawer extends ConsumerWidget {
                       (e) => ListTile(
                         leading: const Icon(Icons.list),
                         title: Text(e.title),
+                        onTap: () {
+                          ref
+                              .read(projectDrawerProvider.notifier)
+                              .changeProject(e);
+                          Navigator.of(context).pop();
+                        },
                       ),
                     )
                     .toList(),
@@ -31,6 +48,9 @@ class ProjectDrawer extends ConsumerWidget {
               loading: () => const Center(
                 child: CircularProgressIndicator(),
               ),
+            ),
+            const Divider(
+              height: 0,
             ),
             ListTile(
               leading: const Icon(Icons.add),
