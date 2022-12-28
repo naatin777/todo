@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/ui/pages/home/screens/settings/settings_screen.dart';
 import 'package:todo/ui/pages/home/screens/task/add_new_task_fab.dart';
 import 'package:todo/ui/pages/home/screens/task/project_drawer.dart';
+import 'package:todo/ui/pages/home/screens/task/task_screen.dart';
 import 'package:todo/ui/providers/navigation_provider.dart';
 
 class Home extends ConsumerWidget {
@@ -12,12 +13,6 @@ class Home extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final navigation = ref.watch(navigationProvider);
     return Scaffold(
-      appBar: [
-        AppBar(),
-        null,
-        null,
-        null,
-      ][navigation.index],
       drawer: [
         const ProjectDrawer(),
         null,
@@ -25,7 +20,7 @@ class Home extends ConsumerWidget {
         null,
       ][navigation.index],
       body: [
-        null,
+        const TaskScreen(),
         null,
         null,
         const SettingsScreen(),

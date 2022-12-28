@@ -13,7 +13,8 @@ class ProjectDrawerProvider extends StateNotifier<Project> {
 }
 
 final projectDrawerProvider =
-    StateNotifierProvider((ref) => ProjectDrawerProvider());
+    StateNotifierProvider<ProjectDrawerProvider, Project>(
+        (ref) => ProjectDrawerProvider());
 
 final projectDrawerStreamProvider = StreamProvider.autoDispose((ref) {
   final projectsDao = ref.watch(projectsProvider);

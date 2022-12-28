@@ -14,7 +14,7 @@ class AddNewProjectProvider {
   final uuid = const Uuid();
 
   Future<void> addNewProject() async {
-    await projectsDao.insert(
+    await projectsDao.insertProject(
       Project(id: uuid.v4(), title: titleController.text),
     );
     titleController.clear();

@@ -17,7 +17,11 @@ class ProjectsDao extends DatabaseAccessor<AppDatabase>
     return select(projects).watch();
   }
 
-  Future<int> insert(Project project) {
+  Future<int> insertProject(Project project) {
     return into(projects).insert(project);
+  }
+
+  Future<int> deleteProject(Project project) {
+    return (delete(projects)..where((tbl) => tbl.id.equals(project.id))).go();
   }
 }
