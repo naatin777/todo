@@ -17,6 +17,11 @@ class ProjectsDao extends DatabaseAccessor<AppDatabase>
     return select(projects).watch();
   }
 
+  Stream<Project?> watchProject(String projectId) {
+    return (select(projects)..where((tbl) => tbl.id.equals(projectId)))
+        .watchSingleOrNull();
+  }
+
   Future<int> insertProject(Project project) {
     return into(projects).insert(project);
   }

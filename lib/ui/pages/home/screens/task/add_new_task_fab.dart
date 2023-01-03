@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo/data/database/app_database.dart';
+import 'package:todo/ui/providers/add_new_task_provider.dart';
+import 'package:todo/ui/providers/project_drawer_provider.dart';
+import 'package:todo/ui/providers/projects_provider.dart';
 
 class AddNewTaskFab extends StatelessWidget {
   const AddNewTaskFab({super.key});
@@ -20,12 +25,10 @@ class AddNewTaskFab extends StatelessWidget {
               ),
               child: SingleChildScrollView(
                 padding: EdgeInsets.only(
-                  left: 8,
                   top: 8,
-                  right: 8,
                   bottom: viewInsets.bottom,
                 ),
-                child: Container(),
+                child: const AddNewTaskBottomSheet(),
               ),
             );
           },
@@ -37,6 +40,201 @@ class AddNewTaskFab extends StatelessWidget {
           isScrollControlled: true,
         );
       },
+    );
+  }
+}
+
+class AddNewTaskBottomSheet extends ConsumerWidget {
+  const AddNewTaskBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final addNewTask = ref.watch(addNewTaskProvider);
+    final titleController = ref.watch(addNewTaskTitleControllerProvider);
+    final titleFocusNode = ref.watch(addNewTaskTitleFocusNodeProvider);
+    final descriptionController =
+        ref.watch(addNewTaskDescriptionControllerProvider);
+    final descriptionFocusNode =
+        ref.watch(addNewTaskDescriptionFocusNodeProvider);
+    final project =
+        ref.watch(projectFromIdStreamProvider(addNewTask.projectId));
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: TextField(
+            controller: titleController,
+            focusNode: titleFocusNode,
+            decoration: const InputDecoration(
+              contentPadding: EdgeInsets.all(0.0),
+              border: InputBorder.none,
+              hintText: "Title",
+            ),
+            textInputAction: TextInputAction.done,
+            style: const TextStyle(fontSize: 20),
+            autofocus: true,
+            autocorrect: false,
+            onEditingComplete: () {
+              // done();
+            },
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: TextField(
+            controller: descriptionController,
+            focusNode: descriptionFocusNode,
+            decoration: const InputDecoration(
+              contentPadding: EdgeInsets.all(0.0),
+              border: InputBorder.none,
+              hintText: "Description",
+            ),
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              Container(
+                margin: const EdgeInsets.all(8.0),
+                child: InputChip(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  label: Row(
+                    children: const [
+                      Icon(
+                        Icons.calendar_month,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Text("Deadline"),
+                      ),
+                    ],
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(8.0),
+                child: InputChip(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  label: Row(
+                    children: const [
+                      Icon(
+                        Icons.priority_high,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Text("Priority"),
+                      ),
+                    ],
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(
+            left: 8.0,
+            right: 8.0,
+            bottom: MediaQuery.of(context).padding.bottom + 4.0,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                onPressed: () async {
+                  await showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return const ProjectSelectionBottomSheet();
+                    },
+                  );
+                },
+                child: Row(
+                  children: [
+                    project.when(
+                      data: (data) => ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width - 104,
+                        ),
+                        child: Text(
+                          data?.title ?? inbox.title,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      loading: () => const SizedBox(),
+                      error: (error, stackTrace) => const SizedBox(),
+                    ),
+                    const Icon(
+                      Icons.arrow_drop_down,
+                    ),
+                  ],
+                ),
+              ),
+              ValueListenableBuilder(
+                valueListenable: titleController,
+                builder: (context, value, child) {
+                  return IconButton(
+                    onPressed: value.text.isEmpty ? null : () {},
+                    icon: const Icon(Icons.send),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ProjectSelectionBottomSheet extends ConsumerWidget {
+  const ProjectSelectionBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final addNewTask = ref.watch(addNewTaskProvider);
+    final projects = ref.watch(projectsStreamProvider);
+    return projects.when(
+      data: (data) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.inbox),
+              title: Text(inbox.title),
+              onTap: () {
+                ref.read(addNewTaskProvider.notifier).changeProject(inbox.id);
+                Navigator.of(context).pop();
+              },
+              selected: addNewTask.projectId == inbox.id,
+            ),
+            const Divider(
+              height: 0,
+            ),
+            for (Project project in data)
+              ListTile(
+                leading: const Icon(Icons.list),
+                title: Text(project.title),
+                onTap: () {
+                  ref
+                      .read(addNewTaskProvider.notifier)
+                      .changeProject(project.id);
+                  Navigator.of(context).pop();
+                },
+                selected: addNewTask.projectId == project.id,
+              ),
+          ],
+        ),
+      ),
+      error: (error, stackTrace) => const SizedBox(),
+      loading: () => const SizedBox(),
     );
   }
 }
