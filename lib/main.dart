@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/data/preference/theme_mode_preference.dart';
+import 'package:todo/provider_logger.dart';
 import 'package:todo/ui/app.dart';
 import 'package:todo/ui/providers/theme_provider.dart';
 
@@ -14,6 +15,9 @@ Future<void> main() async {
   final themeMode = await ThemeModePreference.getThemeMode();
   runApp(
     ProviderScope(
+      observers: [
+        ProviderLogger(),
+      ],
       overrides: [
         themeProvider.overrideWith(
             (ref) => ref.read(themeProviderFamily(themeMode).notifier))
