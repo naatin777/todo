@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo/data/database/app_database.dart';
+import 'package:todo/data/database/daos/tasks_dao.dart';
 import 'package:todo/ui/providers/project_drawer_provider.dart';
+import 'package:todo/ui/providers/tasks_provider.dart';
 import 'package:uuid/uuid.dart';
 
 part 'add_new_task_provider.g.dart';
@@ -15,10 +17,13 @@ class AddNewTaskProvider extends StateNotifier<Task> {
   final TextEditingController titleController;
   final TextEditingController descriptionController;
 
+  final TasksDao tasksDao;
+
   AddNewTaskProvider({
     required String projectId,
     required this.titleController,
     required this.descriptionController,
+    required this.tasksDao,
   }) : super(Task(
             id: uuid.v4(),
             projectId: projectId,
@@ -50,6 +55,21 @@ class AddNewTaskProvider extends StateNotifier<Task> {
 
   void changePriority(int value) {
     state = state.copyWith(priority: value);
+  }
+
+  Future<void> saveTask() async {
+    await tasksDao.insertTask(state.copyWith(
+      title: titleController.text,
+      description: descriptionController.text,
+    ));
+    titleController.clear();
+    descriptionController.clear();
+    state = state.copyWith(
+      id: uuid.v4(),
+      title: "",
+      description: "",
+      priority: Priority.low.index,
+    );
   }
 }
 
@@ -94,10 +114,12 @@ final addNewTaskProvider =
       ref.watch(addNewTaskTitleControllerProvider);
   final descriptionController =
       ref.watch(addNewTaskDescriptionControllerProvider);
+  final tasksDao = ref.watch(tasksProvider);
   return AddNewTaskProvider(
     projectId: project.id,
     titleController: titleController,
     descriptionController: descriptionController,
+    tasksDao: tasksDao,
   );
 });
 

@@ -80,7 +80,7 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
             autofocus: true,
             autocorrect: false,
             onEditingComplete: () {
-              // done();
+              ref.read(addNewTaskProvider.notifier).saveTask();
             },
           ),
         ),
@@ -194,7 +194,11 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                 valueListenable: titleController,
                 builder: (context, value, child) {
                   return IconButton(
-                    onPressed: value.text.isEmpty ? null : () {},
+                    onPressed: value.text.isEmpty
+                        ? null
+                        : () {
+                            ref.read(addNewTaskProvider.notifier).saveTask();
+                          },
                     icon: const Icon(Icons.send),
                   );
                 },

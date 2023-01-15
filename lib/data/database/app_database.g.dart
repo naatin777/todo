@@ -591,6 +591,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   late final $TasksTable tasks = $TasksTable(this);
   late final $ProjectsTable projects = $ProjectsTable(this);
+  late final TasksDao tasksDao = TasksDao(this as AppDatabase);
   late final ProjectsDao projectsDao = ProjectsDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
