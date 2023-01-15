@@ -1,5 +1,7 @@
+import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/ui/providers/project_drawer_provider.dart';
@@ -28,7 +30,47 @@ class AddNewTaskProvider extends StateNotifier<Task> {
   void changeProject(String projectId) {
     state = state.copyWith(projectId: projectId);
   }
+
+  void changeDateTime(DateTime? dateTime, TimeOfDay? timeOfDay) {
+    state = state.copyWith(
+      deadlineDate: Value(dateTime),
+      deadlineTime: Value(
+        dateTime != null && timeOfDay != null
+            ? DateTime(
+                dateTime.year,
+                dateTime.month,
+                dateTime.day,
+                timeOfDay.hour,
+                timeOfDay.minute,
+              )
+            : null,
+      ),
+    );
+  }
 }
+
+final deadlineChipTextProvider = Provider.autoDispose((ref) {
+  final addNewTask = ref.watch(addNewTaskProvider);
+  final deadlineDate = addNewTask.deadlineDate;
+  final deadlineTime = addNewTask.deadlineTime;
+  final now = DateTime.now();
+  final tomorrow = DateTime.now().add(const Duration(days: 1));
+  final dateFormat = DateFormat("yyyy-MM-dd");
+  final time = deadlineTime == null
+      ? ""
+      : " ${deadlineTime.hour}:${deadlineTime.minute}";
+  if (deadlineDate != null) {
+    if (dateFormat.format(deadlineDate) == dateFormat.format(now)) {
+      return "Today$time";
+    } else if (dateFormat.format(deadlineDate) == dateFormat.format(tomorrow)) {
+      return "Tomorrow$time";
+    } else {
+      return "${dateFormat.format(deadlineDate)}$time";
+    }
+  } else {
+    return "Deadline";
+  }
+});
 
 enum Priority {
   critical(Colors.red),
