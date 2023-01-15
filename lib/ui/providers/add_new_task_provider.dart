@@ -47,6 +47,10 @@ class AddNewTaskProvider extends StateNotifier<Task> {
       ),
     );
   }
+
+  void changePriority(int value) {
+    state = state.copyWith(priority: value);
+  }
 }
 
 final deadlineChipTextProvider = Provider.autoDispose((ref) {

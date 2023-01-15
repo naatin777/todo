@@ -130,17 +130,22 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                 child: InputChip(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   label: Row(
-                    children: const [
-                      Icon(
+                    children: [
+                      const Icon(
                         Icons.priority_high,
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Text("Priority"),
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Text("p${addNewTask.priority + 1}"),
                       ),
                     ],
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const PrioritySelectionDialog(),
+                    );
+                  },
                 ),
               ),
             ],
@@ -342,6 +347,42 @@ class _DeadlineDialogState extends ConsumerState<DeadlineDialog> {
           ],
         )
       ],
+    );
+  }
+}
+
+class PrioritySelectionDialog extends ConsumerWidget {
+  const PrioritySelectionDialog({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final addNewTask = ref.watch(addNewTaskProvider);
+    return AlertDialog(
+      contentPadding: const EdgeInsets.symmetric(vertical: 24),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: Priority.values.map((e) {
+          return ListTile(
+            leading: Icon(
+              Icons.priority_high,
+              color: e.color,
+            ),
+            title: Text("P${(e.index + 1)}"),
+            trailing: Radio(
+              value: e,
+              groupValue: Priority.values[addNewTask.priority],
+              onChanged: (value) {
+                ref.read(addNewTaskProvider.notifier).changePriority(e.index);
+                Navigator.of(context).pop();
+              },
+            ),
+            onTap: () {
+              ref.read(addNewTaskProvider.notifier).changePriority(e.index);
+              Navigator.of(context).pop();
+            },
+          );
+        }).toList(),
+      ),
     );
   }
 }
