@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo/ui/providers/add_new_task_provider.dart';
 import 'package:todo/ui/providers/project_drawer_provider.dart';
 import 'package:todo/ui/providers/project_menu_provider.dart';
+import 'package:todo/ui/providers/tasks_provider.dart';
 
 class TaskScreen extends ConsumerWidget {
   const TaskScreen({super.key});
@@ -9,6 +11,7 @@ class TaskScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final project = ref.watch(projectDrawerProvider);
+    final tasks = ref.watch(tasksFromProjectIdStreamProvider(project.id));
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -43,6 +46,48 @@ class TaskScreen extends ConsumerWidget {
               },
             ),
           ],
+        ),
+        tasks.when(
+          data: (data) => SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final task = data[index];
+                return ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  leading: Checkbox(
+                    value: task.done,
+                    onChanged: (value) {},
+                    fillColor: MaterialStateProperty.all(() {
+                      switch (Priority.values[task.priority]) {
+                        case Priority.critical:
+                          return Colors.red;
+                        case Priority.high:
+                          return Colors.yellow;
+                        case Priority.medium:
+                          return Colors.blue;
+                        default:
+                          return Colors.grey;
+                      }
+                    }()),
+                  ),
+                  title: Text(task.title),
+                  subtitle:
+                      task.description.isEmpty ? null : Text(task.description),
+                  onTap: () {},
+                );
+              },
+              childCount: data.length,
+            ),
+          ),
+          loading: () => const SliverPadding(
+            padding: EdgeInsets.all(0),
+          ),
+          error: (error, stackTrace) => const SliverPadding(
+            padding: EdgeInsets.all(0),
+          ),
+        ),
+        const SliverPadding(
+          padding: EdgeInsets.all(50),
         ),
       ],
     );
