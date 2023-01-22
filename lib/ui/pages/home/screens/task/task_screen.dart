@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/ui/providers/add_new_task_provider.dart';
 import 'package:todo/ui/providers/project_drawer_provider.dart';
 import 'package:todo/ui/providers/project_menu_provider.dart';
+import 'package:todo/ui/providers/task_tile_provider.dart';
 import 'package:todo/ui/providers/tasks_provider.dart';
 
 class TaskScreen extends ConsumerWidget {
@@ -56,7 +57,9 @@ class TaskScreen extends ConsumerWidget {
                   contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                   leading: Checkbox(
                     value: task.done,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      ref.read(taskTileProvider).changeDone(task, value);
+                    },
                     fillColor: MaterialStateProperty.all(() {
                       switch (Priority.values[task.priority]) {
                         case Priority.critical:
