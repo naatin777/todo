@@ -21,7 +21,6 @@ class TaskScreen extends ConsumerWidget {
           snap: true,
           actions: [
             PopupMenuButton<ProjectMenuItem>(
-              color: Theme.of(context).colorScheme.secondaryContainer,
               onSelected: (ProjectMenuItem value) {
                 switch (value) {
                   case ProjectMenuItem.delete:
