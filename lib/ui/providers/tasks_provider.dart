@@ -9,3 +9,9 @@ final tasksFromProjectIdStreamProvider =
   final tasksDao = ref.watch(tasksProvider);
   return tasksDao.watchTasksFromProject(id);
 });
+
+final taskFromTaskIdStreamProvider =
+    StreamProvider.autoDispose.family((ref, String taskId) {
+  final tasksDao = ref.watch(tasksProvider);
+  return tasksDao.watchTask(taskId);
+});

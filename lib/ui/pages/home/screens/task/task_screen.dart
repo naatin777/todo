@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo/ui/providers/add_new_task_provider.dart';
 import 'package:todo/ui/providers/project_drawer_provider.dart';
 import 'package:todo/ui/providers/project_menu_provider.dart';
@@ -17,8 +18,7 @@ class TaskScreen extends ConsumerWidget {
       slivers: [
         SliverAppBar(
           title: Text(project.title),
-          floating: true,
-          snap: true,
+          pinned: true,
           actions: [
             PopupMenuButton<ProjectMenuItem>(
               onSelected: (ProjectMenuItem value) {
@@ -75,7 +75,9 @@ class TaskScreen extends ConsumerWidget {
                   title: Text(task.title),
                   subtitle:
                       task.description.isEmpty ? null : Text(task.description),
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).push("/detail/${task.id}");
+                  },
                 );
               },
               childCount: data.length,
