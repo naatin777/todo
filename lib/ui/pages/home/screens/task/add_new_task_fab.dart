@@ -103,8 +103,8 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
           child: Row(
             children: [
               Container(
-                margin: const EdgeInsets.all(8.0),
-                child: InputChip(
+                margin: const EdgeInsets.only(left: 12.0, right: 8.0),
+                child: ActionChip(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   label: Row(
                     children: [
@@ -127,7 +127,7 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
               ),
               Container(
                 margin: const EdgeInsets.all(8.0),
-                child: InputChip(
+                child: ActionChip(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   label: Row(
                     children: [
@@ -167,6 +167,11 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                     builder: (context) {
                       return const ProjectSelectionBottomSheet();
                     },
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(8),
+                      ),
+                    ),
                   );
                 },
                 child: Row(
@@ -220,34 +225,37 @@ class ProjectSelectionBottomSheet extends ConsumerWidget {
     final projects = ref.watch(projectsStreamProvider);
     return projects.when(
       data: (data) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.inbox),
-              title: Text(inbox.title),
-              onTap: () {
-                ref.read(addNewTaskProvider.notifier).changeProject(inbox.id);
-                Navigator.of(context).pop();
-              },
-              selected: addNewTask.projectId == inbox.id,
-            ),
-            const Divider(
-              height: 0,
-            ),
-            for (Project project in data)
+        child: Container(
+          margin: const EdgeInsets.only(top: 4.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
               ListTile(
-                leading: const Icon(Icons.list),
-                title: Text(project.title),
+                leading: const Icon(Icons.inbox),
+                title: Text(inbox.title),
                 onTap: () {
-                  ref
-                      .read(addNewTaskProvider.notifier)
-                      .changeProject(project.id);
+                  ref.read(addNewTaskProvider.notifier).changeProject(inbox.id);
                   Navigator.of(context).pop();
                 },
-                selected: addNewTask.projectId == project.id,
+                selected: addNewTask.projectId == inbox.id,
               ),
-          ],
+              const Divider(
+                height: 0,
+              ),
+              for (Project project in data)
+                ListTile(
+                  leading: const Icon(Icons.list),
+                  title: Text(project.title),
+                  onTap: () {
+                    ref
+                        .read(addNewTaskProvider.notifier)
+                        .changeProject(project.id);
+                    Navigator.of(context).pop();
+                  },
+                  selected: addNewTask.projectId == project.id,
+                ),
+            ],
+          ),
         ),
       ),
       error: (error, stackTrace) => const SizedBox(),
@@ -286,12 +294,14 @@ class _DeadlineDialogState extends ConsumerState<DeadlineDialog> {
     final timeOfDay = deadline.timeOfDay;
     final dateFormat = DateFormat('yyyy-MM-dd');
     return AlertDialog(
+      contentPadding: const EdgeInsets.symmetric(vertical: 24),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
             leading: const Icon(Icons.calendar_month),
-            title: const Text("Date"),
+            title:
+                Text(dateTime != null ? dateFormat.format(dateTime) : "Date"),
             onTap: () async {
               final now = DateTime.now();
               final result = await showDatePicker(
@@ -302,12 +312,10 @@ class _DeadlineDialogState extends ConsumerState<DeadlineDialog> {
               );
               ref.read(deadlineProvider.notifier).changeDateTime(result);
             },
-            subtitle:
-                dateTime != null ? Text(dateFormat.format(dateTime)) : null,
           ),
           ListTile(
             leading: const Icon(Icons.access_time),
-            title: const Text("Time"),
+            title: Text(timeOfDay != null ? timeOfDay.format(context) : "Time"),
             onTap: () async {
               final now = TimeOfDay.now();
               final result = await showTimePicker(
@@ -316,8 +324,6 @@ class _DeadlineDialogState extends ConsumerState<DeadlineDialog> {
               );
               ref.read(deadlineProvider.notifier).changeTimeOfDay(result);
             },
-            subtitle:
-                timeOfDay != null ? Text(timeOfDay.format(context)) : null,
             enabled: deadline.dateTime != null,
           ),
         ],
