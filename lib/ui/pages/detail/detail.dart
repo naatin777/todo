@@ -13,17 +13,28 @@ class Detail extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final task = ref.watch(taskFromTaskIdStreamProvider(id ?? ""));
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            GoRouter.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back),
+    return task.when(
+      data: (data) => Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              GoRouter.of(context).pop();
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () async {
+                GoRouter.of(context).pop();
+                if (data != null) {
+                  await ref.read(detailProvider).deleteTask(data);
+                }
+              },
+              icon: const Icon(Icons.delete),
+            ),
+          ],
         ),
-      ),
-      body: task.when(
-        data: (data) => Consumer(
+        body: Consumer(
           builder: (context, ref, child) {
             if (data != null) {
               final titleController =
@@ -73,9 +84,9 @@ class Detail extends ConsumerWidget {
             }
           },
         ),
-        error: (error, stackTrace) => const SizedBox(),
-        loading: () => const SizedBox(),
       ),
+      error: (error, stackTrace) => const SizedBox(),
+      loading: () => const SizedBox(),
     );
   }
 }
