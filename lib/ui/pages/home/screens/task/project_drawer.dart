@@ -51,13 +51,11 @@ class ProjectDrawer extends ConsumerWidget {
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ),
-          const Divider(),
           NavigationDrawerDestination(
             icon: const Icon(Icons.inbox),
             label: Text(inbox.title),
             selectedIcon: const Icon(Icons.inbox_outlined),
           ),
-          const Divider(),
           for (final e in data)
             NavigationDrawerDestination(
               icon: const Icon(Icons.list),
@@ -77,63 +75,6 @@ class ProjectDrawer extends ConsumerWidget {
       ),
       loading: () => const Center(
         child: CircularProgressIndicator(),
-      ),
-    );
-    return Drawer(
-      child: SafeArea(
-        child: ListView(
-          children: [
-            ListTile(
-              leading: const Icon(Icons.inbox),
-              title: Text(inbox.title),
-              onTap: () {
-                ref.read(projectDrawerProvider.notifier).changeProject(inbox);
-                Navigator.of(context).pop();
-              },
-            ),
-            const Divider(
-              height: 0,
-            ),
-            projects.when(
-              data: (data) => Column(
-                children: data
-                    .map(
-                      (e) => ListTile(
-                        leading: const Icon(Icons.list),
-                        title: Text(e.title),
-                        onTap: () {
-                          ref
-                              .read(projectDrawerProvider.notifier)
-                              .changeProject(e);
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    )
-                    .toList(),
-              ),
-              error: (error, stackTrace) => ListTile(
-                title: Text(error.toString()),
-                subtitle: Text(stackTrace.toString()),
-              ),
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
-              ),
-            ),
-            const Divider(
-              height: 0,
-            ),
-            ListTile(
-              leading: const Icon(Icons.add),
-              title: const Text("Add new project"),
-              onTap: () async {
-                await showDialog(
-                  context: context,
-                  builder: (context) => const AddNewProjectDialog(),
-                );
-              },
-            ),
-          ],
-        ),
       ),
     );
   }
