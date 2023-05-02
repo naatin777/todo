@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/database/daos/projects_dao.dart';
-import 'package:todo/ui/providers/projects_provider.dart';
+import 'package:todo/presentation/providers/projects_provider.dart';
 
 class ProjectMenuProvider {
   ProjectMenuProvider(this.projectsDao);

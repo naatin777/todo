@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/ui/providers/add_new_project_provider.dart';
+import 'package:todo/presentation/providers/home/screens/task/add_new_project_provider.dart';
 
 class AddNewProjectDialog extends ConsumerWidget {
   const AddNewProjectDialog({super.key});

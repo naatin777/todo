@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/database/daos/tasks_dao.dart';
-import 'package:todo/ui/providers/tasks_provider.dart';
+import 'package:todo/presentation/providers/tasks_provider.dart';
 
 final detailTitleProvider = Provider.autoDispose.family(
   (ref, String arg) {

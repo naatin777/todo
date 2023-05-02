@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/data/database/app_database.dart';
-import 'package:todo/ui/providers/add_new_task_provider.dart';
-import 'package:todo/ui/providers/deadline_provider.dart';
-import 'package:todo/ui/providers/project_drawer_provider.dart';
-import 'package:todo/ui/providers/projects_provider.dart';
+import 'package:todo/presentation/providers/home/screens/task/add_new_task_provider.dart';
+import 'package:todo/presentation/providers/home/screens/task/deadline_provider.dart';
+import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
+import 'package:todo/presentation/providers/projects_provider.dart';
 
 class AddNewTaskFab extends StatelessWidget {
   const AddNewTaskFab({super.key});

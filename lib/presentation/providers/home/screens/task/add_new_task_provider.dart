@@ -5,8 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/database/daos/tasks_dao.dart';
-import 'package:todo/ui/providers/project_drawer_provider.dart';
-import 'package:todo/ui/providers/tasks_provider.dart';
+import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
+import 'package:todo/presentation/providers/tasks_provider.dart';
 import 'package:uuid/uuid.dart';
 
 part 'add_new_task_provider.g.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/data/models/deadline_model.dart';
+import 'package:todo/domain/models/deadline_model.dart';
 
 class DeadlineProvider extends StateNotifier<DeadlineModel> {
   DeadlineProvider()
