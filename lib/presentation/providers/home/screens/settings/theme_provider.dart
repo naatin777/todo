@@ -9,6 +9,10 @@ class ThemeProvider extends StateNotifier<ThemeMode> {
     state = themeMode;
     await ThemeModePreference.setThemeMode(themeMode);
   }
+
+  static Future<ThemeMode> loadThemeMode() async {
+    return ThemeModePreference.getThemeMode();
+  }
 }
 
 final themeProviderFamily =
