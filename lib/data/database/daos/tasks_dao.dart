@@ -8,7 +8,7 @@ part 'tasks_dao.g.dart';
 class TasksDao extends DatabaseAccessor<AppDatabase> with _$TasksDaoMixin {
   TasksDao(AppDatabase db) : super(db);
 
-  Future<List<Task>> selectTasksFromProject(String projectId) {
+  Future<List<Task>> selectTasksFromProject(String projectId) async {
     return (select(tasks)..where((tbl) => tbl.projectId.equals(projectId)))
         .get();
   }
@@ -18,26 +18,24 @@ class TasksDao extends DatabaseAccessor<AppDatabase> with _$TasksDaoMixin {
         .watch();
   }
 
-  Future<Task?> selectTask(String taskId) {
-    return (select(tasks)..where((tbl) => tbl.id.equals(taskId)))
-        .getSingleOrNull();
+  Future<Task?> selectTask(String id) async {
+    return (select(tasks)..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
   }
 
-  Stream<Task?> watchTask(String taskId) {
-    return (select(tasks)..where((tbl) => tbl.id.equals(taskId)))
+  Stream<Task?> watchTask(String id) {
+    return (select(tasks)..where((tbl) => tbl.id.equals(id)))
         .watchSingleOrNull();
   }
 
-  Future<int> insertTask(Task task) {
-    return into(tasks).insert(task.toCompanion(true));
+  Future<int> insertTask(Task task) async {
+    return into(tasks).insert(task);
   }
 
-  Future<int> updateTask(Task task) {
-    return (update(tasks)..where((tbl) => tbl.id.equals(task.id)))
-        .write(task.toCompanion(true));
+  Future<int> updateTask(Task task) async {
+    return (update(tasks)..where((tbl) => tbl.id.equals(task.id))).write(task);
   }
 
-  Future<int> deleteTask(Task task) {
-    return (delete(tasks)..where((tbl) => tbl.id.equals(task.id))).go();
+  Future<int> deleteTask(String id) async {
+    return (delete(tasks)..where((tbl) => tbl.id.equals(id))).go();
   }
 }

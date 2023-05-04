@@ -30,7 +30,7 @@ class DetailProvider {
   final TasksDao tasksDao;
 
   Future<void> deleteTask(Task task) async {
-    await tasksDao.deleteTask(task);
+    await tasksDao.deleteTask(task.id);
   }
 }
 

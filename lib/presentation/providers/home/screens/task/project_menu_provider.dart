@@ -8,7 +8,7 @@ class ProjectMenuProvider {
   final ProjectsDao projectsDao;
 
   Future<void> deleteProject(Project project) async {
-    projectsDao.deleteProject(project);
+    projectsDao.deleteProject(project.id);
   }
 }
 
