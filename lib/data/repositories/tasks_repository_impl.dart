@@ -1,5 +1,6 @@
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/database/daos/tasks_dao.dart';
+import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/repositories/tasks_repository.dart';
 import 'package:uuid/uuid.dart';
 
@@ -32,19 +33,21 @@ class TasksRepositoryImpl implements TasksRepository {
   @override
   Future<void> createTask(
     final String projectId,
-    final bool done,
+    final bool isDone,
     final String title,
     final String description,
-    final int priority,
+    final Priority priority,
+    final bool isAllDay,
   ) async {
     await _tasksDao.insertTask(
       Task(
         id: _uuid.v4(),
         projectId: projectId,
-        done: done,
+        isDone: isDone,
         title: title,
         description: description,
         priority: priority,
+        isAllDay: isAllDay,
       ),
     );
   }

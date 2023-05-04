@@ -8,7 +8,7 @@ class TaskTileProvider {
   final TasksDao tasksDao;
 
   Future<void> changeDone(Task task, bool? value) async {
-    tasksDao.updateTask(task.copyWith(done: value));
+    tasksDao.updateTask(task.copyWith(isDone: value));
   }
 }
 

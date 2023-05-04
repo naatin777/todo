@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/data/database/app_database.dart';
+import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/presentation/providers/home/screens/task/add_new_task_provider.dart';
 import 'package:todo/presentation/providers/home/screens/task/deadline_provider.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
@@ -136,7 +137,7 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Text("p${addNewTask.priority + 1}"),
+                        child: Text("p${addNewTask.priority}"),
                       ),
                     ],
                   ),
@@ -277,9 +278,9 @@ class _DeadlineDialogState extends ConsumerState<DeadlineDialog> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final date =
-          ref.watch(addNewTaskProvider.select((value) => value.deadlineDate));
+          ref.watch(addNewTaskProvider.select((value) => value.dueDate));
       final time =
-          ref.watch(addNewTaskProvider.select((value) => value.deadlineTime));
+          ref.watch(addNewTaskProvider.select((value) => value.dueDate));
       ref.read(deadlineProvider.notifier).changeDateTime(date);
       ref
           .read(deadlineProvider.notifier)
@@ -380,14 +381,14 @@ class PrioritySelectionDialog extends ConsumerWidget {
             title: Text("P${(e.index + 1)}"),
             trailing: Radio(
               value: e,
-              groupValue: Priority.values[addNewTask.priority],
+              groupValue: addNewTask.priority,
               onChanged: (value) {
-                ref.read(addNewTaskProvider.notifier).changePriority(e.index);
+                ref.read(addNewTaskProvider.notifier).changePriority(e);
                 Navigator.of(context).pop();
               },
             ),
             onTap: () {
-              ref.read(addNewTaskProvider.notifier).changePriority(e.index);
+              ref.read(addNewTaskProvider.notifier).changePriority(e);
               Navigator.of(context).pop();
             },
           );

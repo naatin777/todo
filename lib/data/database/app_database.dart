@@ -6,6 +6,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:todo/data/database/daos/projects_dao.dart';
 import 'package:todo/data/database/daos/tasks_dao.dart';
+import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/tables/projects.dart';
 import 'package:todo/domain/tables/tasks.dart';
 

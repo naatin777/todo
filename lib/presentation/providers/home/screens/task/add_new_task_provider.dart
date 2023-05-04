@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/database/daos/tasks_dao.dart';
+import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
 import 'package:todo/presentation/providers/tasks_provider.dart';
 import 'package:uuid/uuid.dart';
@@ -27,10 +28,11 @@ class AddNewTaskProvider extends StateNotifier<Task> {
   }) : super(Task(
             id: uuid.v4(),
             projectId: projectId,
-            done: false,
+            isDone: false,
             title: "",
             description: "",
-            priority: Priority.low.index));
+            priority: Priority.low,
+            isAllDay: false));
 
   void changeProject(String projectId) {
     state = state.copyWith(projectId: projectId);
@@ -38,22 +40,11 @@ class AddNewTaskProvider extends StateNotifier<Task> {
 
   void changeDateTime(DateTime? dateTime, TimeOfDay? timeOfDay) {
     state = state.copyWith(
-      deadlineDate: Value(dateTime),
-      deadlineTime: Value(
-        dateTime != null && timeOfDay != null
-            ? DateTime(
-                dateTime.year,
-                dateTime.month,
-                dateTime.day,
-                timeOfDay.hour,
-                timeOfDay.minute,
-              )
-            : null,
-      ),
+      dueDate: Value(dateTime),
     );
   }
 
-  void changePriority(int value) {
+  void changePriority(Priority value) {
     state = state.copyWith(priority: value);
   }
 
@@ -68,15 +59,15 @@ class AddNewTaskProvider extends StateNotifier<Task> {
       id: uuid.v4(),
       title: "",
       description: "",
-      priority: Priority.low.index,
+      priority: Priority.low,
     );
   }
 }
 
 final deadlineChipTextProvider = Provider.autoDispose((ref) {
   final addNewTask = ref.watch(addNewTaskProvider);
-  final deadlineDate = addNewTask.deadlineDate;
-  final deadlineTime = addNewTask.deadlineTime;
+  final deadlineDate = addNewTask.dueDate;
+  final deadlineTime = addNewTask.dueDate;
   final now = DateTime.now();
   final tomorrow = DateTime.now().add(const Duration(days: 1));
   final dateFormat = DateFormat("yyyy-MM-dd");
@@ -95,17 +86,6 @@ final deadlineChipTextProvider = Provider.autoDispose((ref) {
     return "Deadline";
   }
 });
-
-enum Priority {
-  critical(Colors.red),
-  high(Colors.yellow),
-  medium(Colors.blue),
-  low(null);
-
-  final Color? color;
-
-  const Priority(this.color);
-}
 
 final addNewTaskProvider =
     StateNotifierProvider.autoDispose<AddNewTaskProvider, Task>((ref) {

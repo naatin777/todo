@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo/presentation/providers/home/screens/task/add_new_task_provider.dart';
+import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_menu_provider.dart';
 import 'package:todo/presentation/providers/home/screens/task/task_tile_provider.dart';
@@ -55,12 +55,12 @@ class TaskScreen extends ConsumerWidget {
                 return ListTile(
                   contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                   leading: Checkbox(
-                    value: task.done,
+                    value: task.isDone,
                     onChanged: (value) {
                       ref.read(taskTileProvider).changeDone(task, value);
                     },
                     fillColor: MaterialStateProperty.all(() {
-                      switch (Priority.values[task.priority]) {
+                      switch (task.priority) {
                         case Priority.critical:
                           return Colors.red;
                         case Priority.high:
