@@ -4,10 +4,10 @@ enum Priority {
   critical(1, Colors.red),
   high(2, Colors.yellow),
   medium(3, Colors.blue),
-  low(4, Colors.black);
+  low(4, null);
 
   final int number;
-  final Color color;
+  final Color? color;
 
   const Priority(this.number, this.color);
 }
