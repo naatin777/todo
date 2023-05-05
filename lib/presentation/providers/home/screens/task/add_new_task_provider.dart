@@ -6,6 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/database/daos/tasks_dao.dart';
 import 'package:todo/domain/enums/priority.dart';
+import 'package:todo/domain/models/due_date_model.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
 import 'package:todo/presentation/providers/tasks_provider.dart';
 import 'package:uuid/uuid.dart';
@@ -32,16 +33,19 @@ class AddNewTaskProvider extends StateNotifier<Task> {
             title: "",
             description: "",
             priority: Priority.low,
-            isAllDay: false));
+            isAllDay: true));
 
   void changeProject(String projectId) {
     state = state.copyWith(projectId: projectId);
   }
 
-  void changeDateTime(DateTime? dateTime, TimeOfDay? timeOfDay) {
-    state = state.copyWith(
-      dueDate: Value(dateTime),
-    );
+  void changeDueDate(DueDateModel? dueDate) {
+    if (dueDate != null) {
+      state = state.copyWith(
+        dueDate: Value(dueDate.dateTime),
+        isAllDay: dueDate.isAllDay,
+      );
+    }
   }
 
   void changePriority(Priority value) {
@@ -64,26 +68,20 @@ class AddNewTaskProvider extends StateNotifier<Task> {
   }
 }
 
-final deadlineChipTextProvider = Provider.autoDispose((ref) {
+final dueDateChipTextProvider = Provider.autoDispose((ref) {
   final addNewTask = ref.watch(addNewTaskProvider);
-  final deadlineDate = addNewTask.dueDate;
-  final deadlineTime = addNewTask.dueDate;
-  final now = DateTime.now();
-  final tomorrow = DateTime.now().add(const Duration(days: 1));
+  final dueDate = addNewTask.dueDate;
+  final isAllDay = addNewTask.isAllDay;
   final dateFormat = DateFormat("yyyy-MM-dd");
-  final time = deadlineTime == null
-      ? ""
-      : " ${deadlineTime.hour}:${deadlineTime.minute}";
-  if (deadlineDate != null) {
-    if (dateFormat.format(deadlineDate) == dateFormat.format(now)) {
-      return "Today$time";
-    } else if (dateFormat.format(deadlineDate) == dateFormat.format(tomorrow)) {
-      return "Tomorrow$time";
+  final dateTimeFormat = DateFormat("yyyy-MM-dd hh:mm");
+  if (dueDate != null) {
+    if (isAllDay) {
+      return dateFormat.format(dueDate);
     } else {
-      return "${dateFormat.format(deadlineDate)}$time";
+      return dateTimeFormat.format(dueDate);
     }
   } else {
-    return "Deadline";
+    return "Due Date";
   }
 });
 

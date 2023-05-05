@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/domain/enums/priority.dart';
+import 'package:todo/domain/models/due_date_model.dart';
+import 'package:todo/presentation/pages/home/screens/task/due_date_dialog.dart';
 import 'package:todo/presentation/providers/home/screens/task/add_new_task_provider.dart';
-import 'package:todo/presentation/providers/home/screens/task/deadline_provider.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
 import 'package:todo/presentation/providers/projects_provider.dart';
 
@@ -61,7 +61,7 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
         ref.watch(addNewTaskDescriptionFocusNodeProvider);
     final project =
         ref.watch(projectFromIdStreamProvider(addNewTask.projectId));
-    final deadlineChipText = ref.watch(deadlineChipTextProvider);
+    final dueDateChipText = ref.watch(dueDateChipTextProvider);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,15 +114,21 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Text(deadlineChipText),
+                        child: Text(dueDateChipText),
                       ),
                     ],
                   ),
-                  onPressed: () {
-                    showDialog(
+                  onPressed: () async {
+                    final DueDateModel? result = await showDialog(
                       context: context,
-                      builder: (context) => const DeadlineDialog(),
+                      builder: (context) => DueDateDialog(
+                        dueDate: DueDateModel(
+                          dateTime: addNewTask.dueDate,
+                          isAllDay: addNewTask.isAllDay,
+                        ),
+                      ),
                     );
+                    ref.read(addNewTaskProvider.notifier).changeDueDate(result);
                   },
                 ),
               ),
@@ -261,103 +267,6 @@ class ProjectSelectionBottomSheet extends ConsumerWidget {
       ),
       error: (error, stackTrace) => const SizedBox(),
       loading: () => const SizedBox(),
-    );
-  }
-}
-
-class DeadlineDialog extends ConsumerStatefulWidget {
-  const DeadlineDialog({super.key});
-
-  @override
-  ConsumerState<DeadlineDialog> createState() => _DeadlineDialogState();
-}
-
-class _DeadlineDialogState extends ConsumerState<DeadlineDialog> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final date =
-          ref.watch(addNewTaskProvider.select((value) => value.dueDate));
-      final time =
-          ref.watch(addNewTaskProvider.select((value) => value.dueDate));
-      ref.read(deadlineProvider.notifier).changeDateTime(date);
-      ref
-          .read(deadlineProvider.notifier)
-          .changeTimeOfDay(time != null ? TimeOfDay.fromDateTime(time) : null);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final deadline = ref.watch(deadlineProvider);
-    final dateTime = deadline.dateTime;
-    final timeOfDay = deadline.timeOfDay;
-    final dateFormat = DateFormat('yyyy-MM-dd');
-    return AlertDialog(
-      contentPadding: const EdgeInsets.symmetric(vertical: 24),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ListTile(
-            leading: const Icon(Icons.calendar_month),
-            title:
-                Text(dateTime != null ? dateFormat.format(dateTime) : "Date"),
-            onTap: () async {
-              final now = DateTime.now();
-              final result = await showDatePicker(
-                context: context,
-                initialDate: deadline.dateTime ?? now,
-                firstDate: DateTime(now.year - 100),
-                lastDate: DateTime(now.year + 100),
-              );
-              ref.read(deadlineProvider.notifier).changeDateTime(result);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.access_time),
-            title: Text(timeOfDay != null ? timeOfDay.format(context) : "Time"),
-            onTap: () async {
-              final now = TimeOfDay.now();
-              final result = await showTimePicker(
-                context: context,
-                initialTime: now,
-              );
-              ref.read(deadlineProvider.notifier).changeTimeOfDay(result);
-            },
-            enabled: deadline.dateTime != null,
-          ),
-        ],
-      ),
-      actionsAlignment: MainAxisAlignment.spaceBetween,
-      actions: [
-        TextButton(
-          onPressed: () {
-            ref.read(deadlineProvider.notifier).clear();
-          },
-          child: const Text("Clear"),
-        ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("Cancel"),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                ref
-                    .read(addNewTaskProvider.notifier)
-                    .changeDateTime(dateTime, timeOfDay);
-              },
-              child: const Text("OK"),
-            ),
-          ],
-        )
-      ],
     );
   }
 }
