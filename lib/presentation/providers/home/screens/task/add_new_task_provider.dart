@@ -9,13 +9,10 @@ import 'package:todo/domain/models/due_date_model.dart';
 import 'package:todo/domain/repositories/tasks_repository.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
 import 'package:todo/presentation/providers/tasks_provider.dart';
-import 'package:uuid/uuid.dart';
 
 part 'add_new_task_provider.g.dart';
 
 class AddNewTaskProvider extends StateNotifier<Task> {
-  static const uuid = Uuid();
-
   final TextEditingController titleController;
   final TextEditingController descriptionController;
 
@@ -26,14 +23,17 @@ class AddNewTaskProvider extends StateNotifier<Task> {
     required this.titleController,
     required this.descriptionController,
     required this.tasksRepository,
-  }) : super(Task(
-            id: uuid.v4(),
+  }) : super(
+          Task(
+            id: "",
             projectId: projectId,
             isDone: false,
             title: "",
             description: "",
             priority: Priority.low,
-            isAllDay: true));
+            isAllDay: true,
+          ),
+        );
 
   void changeProject(String? projectId) {
     if (projectId != null) {
@@ -63,12 +63,12 @@ class AddNewTaskProvider extends StateNotifier<Task> {
       titleController.text,
       descriptionController.text,
       state.priority,
-      state.isAllDay,
+      DueDateModel(dateTime: state.dueDate, isAllDay: state.isAllDay),
     );
     titleController.clear();
     descriptionController.clear();
     state = state.copyWith(
-      id: uuid.v4(),
+      id: "",
       title: "",
       description: "",
       priority: Priority.low,
@@ -76,29 +76,12 @@ class AddNewTaskProvider extends StateNotifier<Task> {
   }
 }
 
-final dueDateChipTextProvider = Provider.autoDispose((ref) {
-  final addNewTask = ref.watch(addNewTaskProvider);
-  final dueDate = addNewTask.dueDate;
-  final isAllDay = addNewTask.isAllDay;
-  final dateFormat = DateFormat("yyyy-MM-dd");
-  final dateTimeFormat = DateFormat("yyyy-MM-dd hh:mm");
-  if (dueDate != null) {
-    if (isAllDay) {
-      return dateFormat.format(dueDate);
-    } else {
-      return dateTimeFormat.format(dueDate);
-    }
-  } else {
-    return "Due Date";
-  }
-});
-
 final addNewTaskProvider =
     StateNotifierProvider.autoDispose<AddNewTaskProvider, Task>((ref) {
   final project = ref.watch(projectDrawerProvider);
   final TextEditingController titleController =
       ref.watch(addNewTaskTitleControllerProvider);
-  final descriptionController =
+  final TextEditingController descriptionController =
       ref.watch(addNewTaskDescriptionControllerProvider);
   final tasksRepository = ref.watch(tasksRepositoryProvider);
   return AddNewTaskProvider(
@@ -144,3 +127,20 @@ FocusNode addNewTaskDescriptionFocusNode(Ref ref) {
   });
   return descriptionFocusNode;
 }
+
+final dueDateChipTextProvider = Provider.autoDispose((ref) {
+  final addNewTask = ref.watch(addNewTaskProvider);
+  final dueDate = addNewTask.dueDate;
+  final isAllDay = addNewTask.isAllDay;
+  final dateFormat = DateFormat("yyyy-MM-dd");
+  final dateTimeFormat = DateFormat("yyyy-MM-dd hh:mm");
+  if (dueDate != null) {
+    if (isAllDay) {
+      return dateFormat.format(dueDate);
+    } else {
+      return dateTimeFormat.format(dueDate);
+    }
+  } else {
+    return "Due Date";
+  }
+});

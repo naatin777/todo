@@ -1,5 +1,6 @@
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/domain/enums/priority.dart';
+import 'package:todo/domain/models/due_date_model.dart';
 
 abstract class TasksRepository {
   Future<List<Task>> getTasksFromProject(String projectId);
@@ -12,7 +13,7 @@ abstract class TasksRepository {
     final String title,
     final String description,
     final Priority priority,
-    final bool isAllDay,
+    final DueDateModel dueDate,
   );
   Future<void> updateTask(final Task task);
   Future<void> deleteTask(final String id);
