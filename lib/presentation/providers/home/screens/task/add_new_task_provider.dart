@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo/data/database/app_database.dart';
-import 'package:todo/data/database/daos/tasks_dao.dart';
 import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/models/due_date_model.dart';
+import 'package:todo/domain/repositories/tasks_repository.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
 import 'package:todo/presentation/providers/tasks_provider.dart';
 import 'package:uuid/uuid.dart';
@@ -19,13 +19,13 @@ class AddNewTaskProvider extends StateNotifier<Task> {
   final TextEditingController titleController;
   final TextEditingController descriptionController;
 
-  final TasksDao tasksDao;
+  final TasksRepository tasksRepository;
 
   AddNewTaskProvider({
     required String projectId,
     required this.titleController,
     required this.descriptionController,
-    required this.tasksDao,
+    required this.tasksRepository,
   }) : super(Task(
             id: uuid.v4(),
             projectId: projectId,
@@ -57,11 +57,13 @@ class AddNewTaskProvider extends StateNotifier<Task> {
   }
 
   Future<void> saveTask() async {
-    await tasksDao.insertTask(
-      state.copyWith(
-        title: titleController.text,
-        description: descriptionController.text,
-      ),
+    await tasksRepository.createTask(
+      state.projectId,
+      false,
+      titleController.text,
+      descriptionController.text,
+      state.priority,
+      state.isAllDay,
     );
     titleController.clear();
     descriptionController.clear();
@@ -98,12 +100,12 @@ final addNewTaskProvider =
       ref.watch(addNewTaskTitleControllerProvider);
   final descriptionController =
       ref.watch(addNewTaskDescriptionControllerProvider);
-  final tasksDao = ref.watch(tasksProvider);
+  final tasksRepository = ref.watch(tasksRepositoryProvider);
   return AddNewTaskProvider(
     projectId: project.id,
     titleController: titleController,
     descriptionController: descriptionController,
-    tasksDao: tasksDao,
+    tasksRepository: tasksRepository,
   );
 });
 

@@ -1,20 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/data/database/app_database.dart';
-import 'package:todo/data/database/daos/projects_dao.dart';
+import 'package:todo/domain/repositories/projects_repository.dart';
 import 'package:todo/presentation/providers/projects_provider.dart';
 
 class ProjectMenuProvider {
-  ProjectMenuProvider(this.projectsDao);
-  final ProjectsDao projectsDao;
+  ProjectMenuProvider(this._projectsRepository);
+  final ProjectsRepository _projectsRepository;
 
   Future<void> deleteProject(Project project) async {
-    projectsDao.deleteProject(project.id);
+    _projectsRepository.deleteProject(project.id);
   }
 }
 
 final projectMenuProvider = Provider.autoDispose((ref) {
-  final projectsDao = ref.watch(projectsProvider);
-  return ProjectMenuProvider(projectsDao);
+  final projectsRepository = ref.watch(projectsRepositoryProvider);
+  return ProjectMenuProvider(projectsRepository);
 });
 
 enum ProjectMenuItem {

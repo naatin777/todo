@@ -16,6 +16,6 @@ final projectDrawerProvider =
         (ref) => ProjectDrawerProvider());
 
 final projectDrawerStreamProvider = StreamProvider.autoDispose((ref) {
-  final projectsDao = ref.watch(projectsProvider);
-  return projectsDao.watchAll();
+  final projectsRepository = ref.watch(projectsRepositoryProvider);
+  return projectsRepository.watchAllProjects();
 });

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/data/database/app_database.dart';
-import 'package:todo/data/database/daos/tasks_dao.dart';
+import 'package:todo/domain/repositories/tasks_repository.dart';
 import 'package:todo/presentation/providers/tasks_provider.dart';
 
 final detailTitleProvider = Provider.autoDispose.family(
@@ -25,16 +25,16 @@ final detailDescriptionProvider = Provider.autoDispose.family(
 );
 
 class DetailProvider {
-  DetailProvider({required this.tasksDao});
+  DetailProvider(this._tasksRepository);
 
-  final TasksDao tasksDao;
+  final TasksRepository _tasksRepository;
 
   Future<void> deleteTask(Task task) async {
-    await tasksDao.deleteTask(task.id);
+    await _tasksRepository.deleteTask(task.id);
   }
 }
 
 final detailProvider = Provider.autoDispose((ref) {
-  final tasksDao = ref.watch(tasksProvider);
-  return DetailProvider(tasksDao: tasksDao);
+  final tasksRepository = ref.watch(tasksRepositoryProvider);
+  return DetailProvider(tasksRepository);
 });

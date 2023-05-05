@@ -1,16 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/data/database/app_database.dart';
+import 'package:todo/data/repositories/projects_repository_impl.dart';
+import 'package:todo/domain/repositories/projects_repository.dart';
 
-final projectsProvider =
-    Provider.autoDispose((ref) => AppDatabase.getInstance().projectsDao);
+final projectsRepositoryProvider = Provider.autoDispose<ProjectsRepository>(
+    (ref) => ProjectsRepositoryImpl(AppDatabase.getInstance().projectsDao));
 
 final projectFromIdStreamProvider =
     StreamProvider.autoDispose.family((ref, String projectId) {
-  final projectsDao = ref.watch(projectsProvider);
-  return projectsDao.watchProject(projectId);
+  final projectsRepository = ref.watch(projectsRepositoryProvider);
+  return projectsRepository.watchProject(projectId);
 });
 
 final projectsStreamProvider = StreamProvider.autoDispose((ref) {
-  final projectsDao = ref.watch(projectsProvider);
-  return projectsDao.watchAll();
+  final projectsRepository = ref.watch(projectsRepositoryProvider);
+  return projectsRepository.watchAllProjects();
 });

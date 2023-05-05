@@ -1,17 +1,19 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/data/database/app_database.dart';
+import 'package:todo/data/repositories/tasks_repository_impl.dart';
+import 'package:todo/domain/repositories/tasks_repository.dart';
 
-final tasksProvider =
-    Provider.autoDispose((ref) => AppDatabase.getInstance().tasksDao);
+final tasksRepositoryProvider = Provider.autoDispose<TasksRepository>(
+    (ref) => TasksRepositoryImpl(AppDatabase.getInstance().tasksDao));
 
 final tasksFromProjectIdStreamProvider =
     StreamProvider.autoDispose.family((ref, String id) {
-  final tasksDao = ref.watch(tasksProvider);
-  return tasksDao.watchTasksFromProject(id);
+  final tasksRepository = ref.watch(tasksRepositoryProvider);
+  return tasksRepository.watchTasksFromProject(id);
 });
 
 final taskFromTaskIdStreamProvider =
     StreamProvider.autoDispose.family((ref, String taskId) {
-  final tasksDao = ref.watch(tasksProvider);
-  return tasksDao.watchTask(taskId);
+  final tasksRepository = ref.watch(tasksRepositoryProvider);
+  return tasksRepository.watchTask(taskId);
 });
