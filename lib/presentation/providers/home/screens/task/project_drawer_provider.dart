@@ -1,8 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo/constant.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/presentation/providers/projects_provider.dart';
-
-const inbox = Project(id: "inbox", title: "Inbox");
 
 class ProjectDrawerProvider extends StateNotifier<Project> {
   ProjectDrawerProvider() : super(inbox);

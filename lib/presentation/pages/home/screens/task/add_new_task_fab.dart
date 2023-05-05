@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/data/database/app_database.dart';
+import 'package:todo/constant.dart';
 import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/models/due_date_model.dart';
 import 'package:todo/presentation/pages/home/screens/task/due_date_dialog.dart';
 import 'package:todo/presentation/pages/home/screens/task/priority_selection_dialog.dart';
+import 'package:todo/presentation/pages/home/screens/task/project_selection_bottom_sheet.dart';
 import 'package:todo/presentation/providers/home/screens/task/add_new_task_provider.dart';
-import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
 import 'package:todo/presentation/providers/projects_provider.dart';
 
 class AddNewTaskFab extends StatelessWidget {
@@ -176,10 +176,12 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
             children: [
               TextButton(
                 onPressed: () async {
-                  await showModalBottomSheet(
+                  final String? result = await showModalBottomSheet(
                     context: context,
                     builder: (context) {
-                      return const ProjectSelectionBottomSheet();
+                      return ProjectSelectionBottomSheet(
+                        projectId: addNewTask.projectId,
+                      );
                     },
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
@@ -187,6 +189,7 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                       ),
                     ),
                   );
+                  ref.read(addNewTaskProvider.notifier).changeProject(result);
                 },
                 child: Row(
                   children: [
@@ -226,54 +229,6 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class ProjectSelectionBottomSheet extends ConsumerWidget {
-  const ProjectSelectionBottomSheet({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final addNewTask = ref.watch(addNewTaskProvider);
-    final projects = ref.watch(projectsStreamProvider);
-    return projects.when(
-      data: (data) => SafeArea(
-        child: Container(
-          margin: const EdgeInsets.only(top: 4.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                leading: const Icon(Icons.inbox),
-                title: Text(inbox.title),
-                onTap: () {
-                  ref.read(addNewTaskProvider.notifier).changeProject(inbox.id);
-                  Navigator.of(context).pop();
-                },
-                selected: addNewTask.projectId == inbox.id,
-              ),
-              const Divider(
-                height: 0,
-              ),
-              for (Project project in data)
-                ListTile(
-                  leading: const Icon(Icons.list),
-                  title: Text(project.title),
-                  onTap: () {
-                    ref
-                        .read(addNewTaskProvider.notifier)
-                        .changeProject(project.id);
-                    Navigator.of(context).pop();
-                  },
-                  selected: addNewTask.projectId == project.id,
-                ),
-            ],
-          ),
-        ),
-      ),
-      error: (error, stackTrace) => const SizedBox(),
-      loading: () => const SizedBox(),
     );
   }
 }

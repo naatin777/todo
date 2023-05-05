@@ -35,8 +35,10 @@ class AddNewTaskProvider extends StateNotifier<Task> {
             priority: Priority.low,
             isAllDay: true));
 
-  void changeProject(String projectId) {
-    state = state.copyWith(projectId: projectId);
+  void changeProject(String? projectId) {
+    if (projectId != null) {
+      state = state.copyWith(projectId: projectId);
+    }
   }
 
   void changeDueDate(DueDateModel? dueDate) {
