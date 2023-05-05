@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todo/presentation/pages/home/screens/task/add_new_task_bottom_sheet.dart';
+import 'package:todo/presentation/pages/home/screens/task/adding_new_task_bottom_sheet.dart';
 
-class AddNewTaskFab extends StatelessWidget {
-  const AddNewTaskFab({super.key});
+class AddingNewTaskFab extends StatelessWidget {
+  const AddingNewTaskFab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class AddNewTaskFab extends StatelessWidget {
                   top: 8,
                   bottom: viewInsets.bottom,
                 ),
-                child: const AddNewTaskBottomSheet(),
+                child: const AddingNewTaskBottomSheet(),
               ),
             );
           },

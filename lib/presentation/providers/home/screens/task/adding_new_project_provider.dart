@@ -4,8 +4,8 @@ import 'package:todo/domain/repositories/projects_repository.dart';
 import 'package:todo/presentation/providers/projects_provider.dart';
 import 'package:uuid/uuid.dart';
 
-class AddNewProjectProvider {
-  AddNewProjectProvider(this._titleController, this._projectsRepository);
+class AddingNewProjectProvider {
+  AddingNewProjectProvider(this._titleController, this._projectsRepository);
 
   final TextEditingController _titleController;
   final ProjectsRepository _projectsRepository;
@@ -18,13 +18,13 @@ class AddNewProjectProvider {
   }
 }
 
-final addNewProjectProvider = Provider.autoDispose((ref) {
-  final titleController = ref.watch(addNewProjectTitleProvider);
+final addingNewProjectProvider = Provider.autoDispose((ref) {
+  final titleController = ref.watch(addingNewProjectTitleProvider);
   final projectsRepository = ref.watch(projectsRepositoryProvider);
-  return AddNewProjectProvider(titleController, projectsRepository);
+  return AddingNewProjectProvider(titleController, projectsRepository);
 });
 
-final addNewProjectTitleProvider = Provider.autoDispose((ref) {
+final addingNewProjectTitleProvider = Provider.autoDispose((ref) {
   final titleController = TextEditingController();
   ref.onDispose(() {
     titleController.dispose();

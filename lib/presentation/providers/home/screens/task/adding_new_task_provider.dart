@@ -10,15 +10,15 @@ import 'package:todo/domain/repositories/tasks_repository.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
 import 'package:todo/presentation/providers/tasks_provider.dart';
 
-part 'add_new_task_provider.g.dart';
+part 'adding_new_task_provider.g.dart';
 
-class AddNewTaskProvider extends StateNotifier<Task> {
+class AddingNewTaskProvider extends StateNotifier<Task> {
   final TextEditingController titleController;
   final TextEditingController descriptionController;
 
   final TasksRepository tasksRepository;
 
-  AddNewTaskProvider({
+  AddingNewTaskProvider({
     required String projectId,
     required this.titleController,
     required this.descriptionController,
@@ -76,15 +76,15 @@ class AddNewTaskProvider extends StateNotifier<Task> {
   }
 }
 
-final addNewTaskProvider =
-    StateNotifierProvider.autoDispose<AddNewTaskProvider, Task>((ref) {
+final addingNewTaskProvider =
+    StateNotifierProvider.autoDispose<AddingNewTaskProvider, Task>((ref) {
   final project = ref.watch(projectDrawerProvider);
   final TextEditingController titleController =
-      ref.watch(addNewTaskTitleControllerProvider);
+      ref.watch(addingNewTaskTitleControllerProvider);
   final TextEditingController descriptionController =
-      ref.watch(addNewTaskDescriptionControllerProvider);
+      ref.watch(addingNewTaskDescriptionControllerProvider);
   final tasksRepository = ref.watch(tasksRepositoryProvider);
-  return AddNewTaskProvider(
+  return AddingNewTaskProvider(
     projectId: project.id,
     titleController: titleController,
     descriptionController: descriptionController,
@@ -93,7 +93,7 @@ final addNewTaskProvider =
 });
 
 @riverpod
-TextEditingController addNewTaskTitleController(Ref ref) {
+TextEditingController addingNewTaskTitleController(Ref ref) {
   final titleController = TextEditingController();
   ref.onDispose(() {
     titleController.dispose();
@@ -102,7 +102,7 @@ TextEditingController addNewTaskTitleController(Ref ref) {
 }
 
 @riverpod
-FocusNode addNewTaskTitleFocusNode(Ref ref) {
+FocusNode addingNewTaskTitleFocusNode(Ref ref) {
   final titleFocusNode = FocusNode();
   ref.onDispose(() {
     titleFocusNode.dispose();
@@ -111,7 +111,7 @@ FocusNode addNewTaskTitleFocusNode(Ref ref) {
 }
 
 @riverpod
-TextEditingController addNewTaskDescriptionController(Ref ref) {
+TextEditingController addingNewTaskDescriptionController(Ref ref) {
   final descriptionController = TextEditingController();
   ref.onDispose(() {
     descriptionController.dispose();
@@ -120,7 +120,7 @@ TextEditingController addNewTaskDescriptionController(Ref ref) {
 }
 
 @riverpod
-FocusNode addNewTaskDescriptionFocusNode(Ref ref) {
+FocusNode addingNewTaskDescriptionFocusNode(Ref ref) {
   final descriptionFocusNode = FocusNode();
   ref.onDispose(() {
     descriptionFocusNode.dispose();
@@ -129,9 +129,9 @@ FocusNode addNewTaskDescriptionFocusNode(Ref ref) {
 }
 
 final dueDateChipTextProvider = Provider.autoDispose((ref) {
-  final addNewTask = ref.watch(addNewTaskProvider);
-  final dueDate = addNewTask.dueDate;
-  final isAllDay = addNewTask.isAllDay;
+  final addingNewTask = ref.watch(addingNewTaskProvider);
+  final dueDate = addingNewTask.dueDate;
+  final isAllDay = addingNewTask.isAllDay;
   final dateFormat = DateFormat("yyyy-MM-dd");
   final dateTimeFormat = DateFormat("yyyy-MM-dd hh:mm");
   if (dueDate != null) {

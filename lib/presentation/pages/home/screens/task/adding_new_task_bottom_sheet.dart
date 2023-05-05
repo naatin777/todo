@@ -6,23 +6,23 @@ import 'package:todo/domain/models/due_date_model.dart';
 import 'package:todo/presentation/pages/home/screens/task/due_date_dialog.dart';
 import 'package:todo/presentation/pages/home/screens/task/priority_selection_dialog.dart';
 import 'package:todo/presentation/pages/home/screens/task/project_selection_bottom_sheet.dart';
-import 'package:todo/presentation/providers/home/screens/task/add_new_task_provider.dart';
+import 'package:todo/presentation/providers/home/screens/task/adding_new_task_provider.dart';
 import 'package:todo/presentation/providers/projects_provider.dart';
 
-class AddNewTaskBottomSheet extends ConsumerWidget {
-  const AddNewTaskBottomSheet({super.key});
+class AddingNewTaskBottomSheet extends ConsumerWidget {
+  const AddingNewTaskBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final addNewTask = ref.watch(addNewTaskProvider);
-    final titleController = ref.watch(addNewTaskTitleControllerProvider);
-    final titleFocusNode = ref.watch(addNewTaskTitleFocusNodeProvider);
+    final addingNewTask = ref.watch(addingNewTaskProvider);
+    final titleController = ref.watch(addingNewTaskTitleControllerProvider);
+    final titleFocusNode = ref.watch(addingNewTaskTitleFocusNodeProvider);
     final descriptionController =
-        ref.watch(addNewTaskDescriptionControllerProvider);
+        ref.watch(addingNewTaskDescriptionControllerProvider);
     final descriptionFocusNode =
-        ref.watch(addNewTaskDescriptionFocusNodeProvider);
+        ref.watch(addingNewTaskDescriptionFocusNodeProvider);
     final project =
-        ref.watch(projectFromIdStreamProvider(addNewTask.projectId));
+        ref.watch(projectFromIdStreamProvider(addingNewTask.projectId));
     final dueDateChipText = ref.watch(dueDateChipTextProvider);
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -43,7 +43,7 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
             autofocus: true,
             autocorrect: false,
             onEditingComplete: () {
-              ref.read(addNewTaskProvider.notifier).saveTask();
+              ref.read(addingNewTaskProvider.notifier).saveTask();
             },
           ),
         ),
@@ -85,12 +85,14 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                       context: context,
                       builder: (context) => DueDateDialog(
                         dueDate: DueDateModel(
-                          dateTime: addNewTask.dueDate,
-                          isAllDay: addNewTask.isAllDay,
+                          dateTime: addingNewTask.dueDate,
+                          isAllDay: addingNewTask.isAllDay,
                         ),
                       ),
                     );
-                    ref.read(addNewTaskProvider.notifier).changeDueDate(result);
+                    ref
+                        .read(addingNewTaskProvider.notifier)
+                        .changeDueDate(result);
                   },
                 ),
               ),
@@ -102,11 +104,11 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                     children: [
                       Icon(
                         Icons.priority_high,
-                        color: addNewTask.priority.color,
+                        color: addingNewTask.priority.color,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Text("P${addNewTask.priority.number}"),
+                        child: Text("P${addingNewTask.priority.number}"),
                       ),
                     ],
                   ),
@@ -114,11 +116,11 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                     final Priority? result = await showDialog(
                       context: context,
                       builder: (context) => PrioritySelectionDialog(
-                        priority: addNewTask.priority,
+                        priority: addingNewTask.priority,
                       ),
                     );
                     ref
-                        .read(addNewTaskProvider.notifier)
+                        .read(addingNewTaskProvider.notifier)
                         .changePriority(result);
                   },
                 ),
@@ -141,7 +143,7 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                     context: context,
                     builder: (context) {
                       return ProjectSelectionBottomSheet(
-                        projectId: addNewTask.projectId,
+                        projectId: addingNewTask.projectId,
                       );
                     },
                     shape: const RoundedRectangleBorder(
@@ -150,7 +152,9 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                       ),
                     ),
                   );
-                  ref.read(addNewTaskProvider.notifier).changeProject(result);
+                  ref
+                      .read(addingNewTaskProvider.notifier)
+                      .changeProject(result);
                 },
                 child: Row(
                   children: [
@@ -180,7 +184,7 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                     onPressed: value.text.isEmpty
                         ? null
                         : () {
-                            ref.read(addNewTaskProvider.notifier).saveTask();
+                            ref.read(addingNewTaskProvider.notifier).saveTask();
                           },
                     icon: const Icon(Icons.send),
                   );

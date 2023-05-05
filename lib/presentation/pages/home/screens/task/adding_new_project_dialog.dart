@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/presentation/providers/home/screens/task/add_new_project_provider.dart';
+import 'package:todo/presentation/providers/home/screens/task/adding_new_project_provider.dart';
 
-class AddNewProjectDialog extends ConsumerWidget {
-  const AddNewProjectDialog({super.key});
+class AddingNewProjectDialog extends ConsumerWidget {
+  const AddingNewProjectDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final titleController = ref.watch(addNewProjectTitleProvider);
+    final titleController = ref.watch(addingNewProjectTitleProvider);
     return AlertDialog(
       title: const Text("Add new project"),
       content: Column(
@@ -33,7 +33,7 @@ class AddNewProjectDialog extends ConsumerWidget {
         TextButton(
           onPressed: () async {
             Navigator.of(context).pop();
-            await ref.read(addNewProjectProvider).addNewProject();
+            await ref.read(addingNewProjectProvider).addNewProject();
           },
           child: const Text("Ok"),
         ),

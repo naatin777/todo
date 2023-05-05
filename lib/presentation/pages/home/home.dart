@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/presentation/pages/home/screens/settings/settings_screen.dart';
-import 'package:todo/presentation/pages/home/screens/task/add_new_task_fab.dart';
+import 'package:todo/presentation/pages/home/screens/task/adding_new_task_fab.dart';
 import 'package:todo/presentation/pages/home/screens/task/project_drawer.dart';
 import 'package:todo/presentation/pages/home/screens/task/task_screen.dart';
 import 'package:todo/presentation/providers/home/navigation_provider.dart';
@@ -26,7 +26,7 @@ class Home extends ConsumerWidget {
         const SettingsScreen(),
       ][navigation.index],
       floatingActionButton: [
-        const AddNewTaskFab(),
+        const AddingNewTaskFab(),
         null,
         null,
         null,
