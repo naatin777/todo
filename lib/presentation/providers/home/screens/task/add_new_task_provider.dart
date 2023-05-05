@@ -48,15 +48,19 @@ class AddNewTaskProvider extends StateNotifier<Task> {
     }
   }
 
-  void changePriority(Priority value) {
-    state = state.copyWith(priority: value);
+  void changePriority(Priority? value) {
+    if (value != null) {
+      state = state.copyWith(priority: value);
+    }
   }
 
   Future<void> saveTask() async {
-    await tasksDao.insertTask(state.copyWith(
-      title: titleController.text,
-      description: descriptionController.text,
-    ));
+    await tasksDao.insertTask(
+      state.copyWith(
+        title: titleController.text,
+        description: descriptionController.text,
+      ),
+    );
     titleController.clear();
     descriptionController.clear();
     state = state.copyWith(

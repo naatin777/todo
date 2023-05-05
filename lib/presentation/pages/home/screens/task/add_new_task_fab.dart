@@ -4,6 +4,7 @@ import 'package:todo/data/database/app_database.dart';
 import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/models/due_date_model.dart';
 import 'package:todo/presentation/pages/home/screens/task/due_date_dialog.dart';
+import 'package:todo/presentation/pages/home/screens/task/priority_selection_dialog.dart';
 import 'package:todo/presentation/providers/home/screens/task/add_new_task_provider.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
 import 'package:todo/presentation/providers/projects_provider.dart';
@@ -138,20 +139,26 @@ class AddNewTaskBottomSheet extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   label: Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.priority_high,
+                        color: addNewTask.priority.color,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Text("p${addNewTask.priority}"),
+                        child: Text("P${addNewTask.priority.number}"),
                       ),
                     ],
                   ),
-                  onPressed: () {
-                    showDialog(
+                  onPressed: () async {
+                    final Priority? result = await showDialog(
                       context: context,
-                      builder: (context) => const PrioritySelectionDialog(),
+                      builder: (context) => PrioritySelectionDialog(
+                        priority: addNewTask.priority,
+                      ),
                     );
+                    ref
+                        .read(addNewTaskProvider.notifier)
+                        .changePriority(result);
                   },
                 ),
               ),
@@ -267,42 +274,6 @@ class ProjectSelectionBottomSheet extends ConsumerWidget {
       ),
       error: (error, stackTrace) => const SizedBox(),
       loading: () => const SizedBox(),
-    );
-  }
-}
-
-class PrioritySelectionDialog extends ConsumerWidget {
-  const PrioritySelectionDialog({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final addNewTask = ref.watch(addNewTaskProvider);
-    return AlertDialog(
-      contentPadding: const EdgeInsets.symmetric(vertical: 24),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: Priority.values.map((e) {
-          return ListTile(
-            leading: Icon(
-              Icons.priority_high,
-              color: e.color,
-            ),
-            title: Text("P${(e.index + 1)}"),
-            trailing: Radio(
-              value: e,
-              groupValue: addNewTask.priority,
-              onChanged: (value) {
-                ref.read(addNewTaskProvider.notifier).changePriority(e);
-                Navigator.of(context).pop();
-              },
-            ),
-            onTap: () {
-              ref.read(addNewTaskProvider.notifier).changePriority(e);
-              Navigator.of(context).pop();
-            },
-          );
-        }).toList(),
-      ),
     );
   }
 }

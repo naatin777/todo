@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 enum Priority {
-  critical(Colors.red),
-  high(Colors.yellow),
-  medium(Colors.blue),
-  low(Colors.grey);
+  critical(1, Colors.red),
+  high(2, Colors.yellow),
+  medium(3, Colors.blue),
+  low(4, Colors.black);
 
+  final int number;
   final Color color;
 
-  const Priority(this.color);
+  const Priority(this.number, this.color);
 }
