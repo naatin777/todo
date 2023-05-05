@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo/domain/enums/navigation_item.dart';
 
 class NavigationProvider extends StateNotifier<NavigationItem> {
   NavigationProvider() : super(NavigationItem.task);
@@ -11,10 +12,3 @@ class NavigationProvider extends StateNotifier<NavigationItem> {
 final navigationProvider =
     StateNotifierProvider<NavigationProvider, NavigationItem>(
         (ref) => NavigationProvider());
-
-enum NavigationItem {
-  task,
-  search,
-  analytics,
-  settings,
-}
