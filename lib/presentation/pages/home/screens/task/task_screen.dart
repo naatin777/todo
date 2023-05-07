@@ -63,18 +63,15 @@ class TaskScreen extends ConsumerWidget {
                         ref.read(taskTileProvider).changeDone(task, value);
                       },
                       fillColor: MaterialStateColor.resolveWith((states) {
+                        print(Theme.of(context).colorScheme.onBackground);
                         if (states.contains(MaterialState.selected)) {
                           return Colors.transparent;
                         }
                         return task.priority.color ??
-                            (Theme.of(context).brightness == Brightness.light
-                                ? Colors.black
-                                : Colors.white);
+                            Theme.of(context).colorScheme.onBackground;
                       }),
                       checkColor: task.priority.color ??
-                          (Theme.of(context).brightness == Brightness.light
-                              ? Colors.black
-                              : Colors.white),
+                          Theme.of(context).colorScheme.onBackground,
                       shape: const CircleBorder(),
                     ),
                   ),

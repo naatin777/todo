@@ -67,16 +67,26 @@ class AddingNewTaskBottomSheet extends ConsumerWidget {
             children: [
               Container(
                 margin: const EdgeInsets.only(left: 12.0, right: 8.0),
-                child: ActionChip(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  label: Row(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.calendar_month,
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Text(dueDateChipText),
+                        child: Text(
+                          dueDateChipText,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -98,17 +108,27 @@ class AddingNewTaskBottomSheet extends ConsumerWidget {
               ),
               Container(
                 margin: const EdgeInsets.all(8.0),
-                child: ActionChip(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  label: Row(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Row(
                     children: [
                       Icon(
                         Icons.priority_high,
-                        color: addingNewTask.priority.color,
+                        color: addingNewTask.priority.color ??
+                            Theme.of(context).colorScheme.onBackground,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Text("P${addingNewTask.priority.number}"),
+                        child: Text(
+                          "P${addingNewTask.priority.number}",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
+                        ),
                       ),
                     ],
                   ),
