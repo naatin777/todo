@@ -55,23 +55,28 @@ class TaskScreen extends ConsumerWidget {
                 final task = data[index];
                 return ListTile(
                   contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  leading: Checkbox(
-                    value: task.isDone,
-                    onChanged: (value) {
-                      ref.read(taskTileProvider).changeDone(task, value);
-                    },
-                    fillColor: MaterialStateProperty.all(() {
-                      switch (task.priority) {
-                        case Priority.critical:
-                          return Colors.red;
-                        case Priority.high:
-                          return Colors.yellow;
-                        case Priority.medium:
-                          return Colors.blue;
-                        default:
-                          return Colors.grey;
-                      }
-                    }()),
+                  leading: Transform.scale(
+                    scale: 1.25,
+                    child: Checkbox(
+                      value: task.isDone,
+                      onChanged: (value) {
+                        ref.read(taskTileProvider).changeDone(task, value);
+                      },
+                      fillColor: MaterialStateColor.resolveWith((states) {
+                        if (states.contains(MaterialState.selected)) {
+                          return Colors.transparent;
+                        }
+                        return task.priority.color ??
+                            (Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white);
+                      }),
+                      checkColor: task.priority.color ??
+                          (Theme.of(context).brightness == Brightness.light
+                              ? Colors.black
+                              : Colors.white),
+                      shape: const CircleBorder(),
+                    ),
                   ),
                   title: Text(task.title),
                   subtitle:
