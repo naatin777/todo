@@ -63,7 +63,6 @@ class TaskScreen extends ConsumerWidget {
                         ref.read(taskTileProvider).changeDone(task, value);
                       },
                       fillColor: MaterialStateColor.resolveWith((states) {
-                        print(Theme.of(context).colorScheme.onBackground);
                         if (states.contains(MaterialState.selected)) {
                           return Colors.transparent;
                         }

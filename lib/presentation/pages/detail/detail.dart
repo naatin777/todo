@@ -57,7 +57,9 @@ class Detail extends ConsumerWidget {
                       ),
                       textInputAction: TextInputAction.done,
                       style: const TextStyle(fontSize: 24),
-                      onEditingComplete: () {},
+                      onSubmitted: (value) async {
+                        await ref.read(detailProvider).updateTitle(value, data);
+                      },
                     ),
                   ),
                   Container(
@@ -74,7 +76,11 @@ class Detail extends ConsumerWidget {
                       ),
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
-                      onEditingComplete: () {},
+                      onSubmitted: (value) async {
+                        await ref
+                            .read(detailProvider)
+                            .updateDescription(value, data);
+                      },
                     ),
                   ),
                 ],
