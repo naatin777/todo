@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/constant.dart';
-import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_menu_provider.dart';
 import 'package:todo/presentation/providers/home/screens/task/task_tile_provider.dart';

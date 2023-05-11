@@ -22,7 +22,7 @@ final routerProvider = Provider((ref) {
           return MaterialPage(
             key: state.pageKey,
             child: Detail(
-              id: state.params["id"],
+              id: state.pathParameters["id"],
             ),
           );
         },
