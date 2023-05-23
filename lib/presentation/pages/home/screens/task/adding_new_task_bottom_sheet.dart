@@ -67,28 +67,11 @@ class AddingNewTaskBottomSheet extends ConsumerWidget {
             children: [
               Container(
                 margin: const EdgeInsets.only(left: 12.0, right: 8.0),
-                child: OutlinedButton(
+                child: OutlinedButton.icon(
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.calendar_month,
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Text(
-                          dueDateChipText,
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.onBackground,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                   onPressed: () async {
                     final DueDateModel? result = await showDialog(
@@ -104,33 +87,25 @@ class AddingNewTaskBottomSheet extends ConsumerWidget {
                         .read(addingNewTaskProvider.notifier)
                         .changeDueDate(result);
                   },
+                  label: Text(
+                    dueDateChipText,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                  ),
+                  icon: Icon(
+                    Icons.calendar_month,
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
                 ),
               ),
               Container(
                 margin: const EdgeInsets.all(8.0),
-                child: OutlinedButton(
+                child: OutlinedButton.icon(
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.priority_high,
-                        color: addingNewTask.priority.color ??
-                            Theme.of(context).colorScheme.onBackground,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Text(
-                          "P${addingNewTask.priority.number}",
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.onBackground,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                   onPressed: () async {
                     final Priority? result = await showDialog(
@@ -143,6 +118,17 @@ class AddingNewTaskBottomSheet extends ConsumerWidget {
                         .read(addingNewTaskProvider.notifier)
                         .changePriority(result);
                   },
+                  label: Text(
+                    "P${addingNewTask.priority.number}",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                  ),
+                  icon: Icon(
+                    Icons.priority_high,
+                    color: addingNewTask.priority.color ??
+                        Theme.of(context).colorScheme.onBackground,
+                  ),
                 ),
               ),
             ],

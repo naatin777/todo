@@ -71,6 +71,11 @@ class TaskScreen extends ConsumerWidget {
                       checkColor: task.priority.color ??
                           Theme.of(context).colorScheme.onBackground,
                       shape: const CircleBorder(),
+                      side: BorderSide(
+                        width: 1.5,
+                        color: task.priority.color ??
+                            Theme.of(context).colorScheme.onBackground,
+                      ),
                     ),
                   ),
                   title: Text(task.title),
