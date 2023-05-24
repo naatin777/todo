@@ -35,11 +35,10 @@ class TaskScreen extends ConsumerWidget {
                 return [
                   const PopupMenuItem(
                     value: ProjectMenuItem.delete,
-                    child: ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      horizontalTitleGap: 0.0,
-                      title: Text("Delete project"),
-                      leading: Icon(Icons.delete),
+                    padding: EdgeInsets.symmetric(horizontal: 4.0),
+                    child: MenuItemButton(
+                      leadingIcon: Icon(Icons.delete),
+                      child: Text("Delete project"),
                     ),
                   ),
                 ];
