@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/constant.dart';
+import 'package:todo/domain/enums/project_menu_item.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
 import 'package:todo/presentation/providers/home/screens/task/project_menu_provider.dart';
 
@@ -15,22 +16,20 @@ class ProjectAppBar extends ConsumerWidget {
       pinned: true,
       actions: [
         PopupMenuButton<ProjectMenuItem>(
-          onSelected: (ProjectMenuItem value) {
-            switch (value) {
-              case ProjectMenuItem.delete:
-                ref.read(projectMenuProvider).deleteProject(project);
-                ref.read(projectDrawerProvider.notifier).changeProject(inbox);
-                break;
-            }
-          },
           itemBuilder: (BuildContext context) {
             return [
-              const PopupMenuItem(
+              PopupMenuItem(
+                padding: EdgeInsets.zero,
                 value: ProjectMenuItem.delete,
-                padding: EdgeInsets.symmetric(horizontal: 4.0),
                 child: MenuItemButton(
-                  leadingIcon: Icon(Icons.delete),
-                  child: Text("Delete project"),
+                  leadingIcon: const Icon(Icons.delete),
+                  child: const Text("Delete project"),
+                  onPressed: () {
+                    ref.read(projectMenuProvider).deleteProject(project);
+                    ref
+                        .read(projectDrawerProvider.notifier)
+                        .changeProject(inbox);
+                  },
                 ),
               ),
             ];

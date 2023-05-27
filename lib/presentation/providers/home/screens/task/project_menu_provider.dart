@@ -16,7 +16,3 @@ final projectMenuProvider = Provider.autoDispose((ref) {
   final projectsRepository = ref.watch(projectsRepositoryProvider);
   return ProjectMenuProvider(projectsRepository);
 });
-
-enum ProjectMenuItem {
-  delete,
-}
