@@ -5,14 +5,3 @@ import 'package:todo/domain/repositories/projects_repository.dart';
 
 final projectsRepositoryProvider = Provider.autoDispose<ProjectsRepository>(
     (ref) => ProjectsRepositoryImpl(AppDatabase.getInstance().projectsDao));
-
-final projectFromIdStreamProvider =
-    StreamProvider.autoDispose.family((ref, String projectId) {
-  final projectsRepository = ref.watch(projectsRepositoryProvider);
-  return projectsRepository.watchProject(projectId);
-});
-
-final projectsStreamProvider = StreamProvider.autoDispose((ref) {
-  final projectsRepository = ref.watch(projectsRepositoryProvider);
-  return projectsRepository.watchAllProjects();
-});

@@ -1,51 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo/constant.dart';
-import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
-import 'package:todo/presentation/providers/home/screens/task/project_menu_provider.dart';
+import 'package:todo/presentation/pages/home/screens/task/project_app_bar.dart';
+import 'package:todo/presentation/providers/home/screens/task/task_screen_provider.dart';
 import 'package:todo/presentation/providers/home/screens/task/task_tile_provider.dart';
-import 'package:todo/presentation/providers/tasks_provider.dart';
 
 class TaskScreen extends ConsumerWidget {
   const TaskScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final project = ref.watch(projectDrawerProvider);
-    final tasks = ref.watch(tasksFromProjectIdStreamProvider(project.id));
+    final tasks = ref.watch(tasksFromProjectIdStreamProvider);
     return CustomScrollView(
       slivers: [
-        SliverAppBar(
-          title: Text(project.title),
-          pinned: true,
-          actions: [
-            PopupMenuButton<ProjectMenuItem>(
-              onSelected: (ProjectMenuItem value) {
-                switch (value) {
-                  case ProjectMenuItem.delete:
-                    ref.read(projectMenuProvider).deleteProject(project);
-                    ref
-                        .read(projectDrawerProvider.notifier)
-                        .changeProject(inbox);
-                    break;
-                }
-              },
-              itemBuilder: (BuildContext context) {
-                return [
-                  const PopupMenuItem(
-                    value: ProjectMenuItem.delete,
-                    padding: EdgeInsets.symmetric(horizontal: 4.0),
-                    child: MenuItemButton(
-                      leadingIcon: Icon(Icons.delete),
-                      child: Text("Delete project"),
-                    ),
-                  ),
-                ];
-              },
-            ),
-          ],
-        ),
+        const ProjectAppBar(),
         tasks.when(
           data: (data) => SliverList(
             delegate: SliverChildBuilderDelegate(

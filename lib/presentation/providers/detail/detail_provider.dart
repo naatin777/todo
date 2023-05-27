@@ -24,6 +24,12 @@ final detailDescriptionProvider = Provider.autoDispose.family(
   },
 );
 
+final taskFromTaskIdStreamProvider =
+    StreamProvider.autoDispose.family((ref, String taskId) {
+  final tasksRepository = ref.watch(tasksRepositoryProvider);
+  return tasksRepository.watchTask(taskId);
+});
+
 class DetailProvider {
   DetailProvider(this._tasksRepository);
 

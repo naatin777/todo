@@ -7,7 +7,6 @@ import 'package:todo/presentation/pages/home/screens/task/due_date_dialog.dart';
 import 'package:todo/presentation/pages/home/screens/task/priority_selection_dialog.dart';
 import 'package:todo/presentation/pages/home/screens/task/project_selection_bottom_sheet.dart';
 import 'package:todo/presentation/providers/home/screens/task/adding_new_task_provider.dart';
-import 'package:todo/presentation/providers/projects_provider.dart';
 
 class AddingNewTaskBottomSheet extends ConsumerWidget {
   const AddingNewTaskBottomSheet({super.key});
