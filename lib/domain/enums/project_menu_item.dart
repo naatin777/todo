@@ -1,3 +1,4 @@
 enum ProjectMenuItem {
   delete,
+  edit,
 }
