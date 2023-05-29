@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo/data/database/app_database.dart';
 import 'package:todo/presentation/pages/home/screens/task/project_app_bar.dart';
 import 'package:todo/presentation/providers/home/screens/task/task_screen_provider.dart';
 import 'package:todo/presentation/providers/home/screens/task/task_tile_provider.dart';
@@ -19,39 +22,7 @@ class TaskScreen extends ConsumerWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 final task = data[index];
-                return ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  leading: Transform.scale(
-                    scale: 1.25,
-                    child: Checkbox(
-                      value: task.isDone,
-                      onChanged: (value) {
-                        ref.read(taskTileProvider).changeDone(task, value);
-                      },
-                      fillColor: MaterialStateColor.resolveWith((states) {
-                        if (states.contains(MaterialState.selected)) {
-                          return Colors.transparent;
-                        }
-                        return task.priority.color ??
-                            Theme.of(context).colorScheme.onBackground;
-                      }),
-                      checkColor: task.priority.color ??
-                          Theme.of(context).colorScheme.onBackground,
-                      shape: const CircleBorder(),
-                      side: BorderSide(
-                        width: 1.5,
-                        color: task.priority.color ??
-                            Theme.of(context).colorScheme.onBackground,
-                      ),
-                    ),
-                  ),
-                  title: Text(task.title),
-                  subtitle:
-                      task.description.isEmpty ? null : Text(task.description),
-                  onTap: () {
-                    GoRouter.of(context).push("/detail/${task.id}");
-                  },
-                );
+                return TaskListTile(task: task);
               },
               childCount: data.length,
             ),
@@ -67,6 +38,77 @@ class TaskScreen extends ConsumerWidget {
           padding: EdgeInsets.all(50),
         ),
       ],
+    );
+  }
+}
+
+class TaskListTile extends ConsumerStatefulWidget {
+  const TaskListTile({super.key, required this.task});
+  final Task task;
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _TaskListTileState();
+}
+
+class _TaskListTileState extends ConsumerState<TaskListTile> {
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(
+      const Duration(seconds: 1),
+      (Timer timer) {
+        setState(() {});
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final task = widget.task;
+    final now = DateTime.now();
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+      leading: Transform.scale(
+        scale: 1.25,
+        child: Checkbox(
+          value: task.isDone,
+          onChanged: (value) {
+            ref.read(taskTileProvider).changeDone(task, value);
+          },
+          fillColor: MaterialStateColor.resolveWith((states) {
+            if (states.contains(MaterialState.selected)) {
+              return Colors.transparent;
+            }
+            return task.priority.color ??
+                Theme.of(context).colorScheme.onBackground;
+          }),
+          checkColor:
+              task.priority.color ?? Theme.of(context).colorScheme.onBackground,
+          shape: const CircleBorder(),
+          side: BorderSide(
+            width: 1.5,
+            color: task.priority.color ??
+                Theme.of(context).colorScheme.onBackground,
+          ),
+        ),
+      ),
+      title: Text(task.title),
+      subtitle: task.description.isNotEmpty || task.dueDate != null
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (task.description.isNotEmpty) Text(task.description),
+                if (task.dueDate != null)
+                  Text(() {
+                    final difference = now.difference(task.dueDate!);
+                    return "${-difference.inHours}:${-difference.inMinutes.remainder(60)}:${(-difference.inSeconds.remainder(60))}";
+                  }()),
+              ],
+            )
+          : null,
+      onTap: () {
+        GoRouter.of(context).push("/detail/${task.id}");
+      },
     );
   }
 }
