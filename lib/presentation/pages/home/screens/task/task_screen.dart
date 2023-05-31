@@ -51,15 +51,23 @@ class TaskListTile extends ConsumerStatefulWidget {
 }
 
 class _TaskListTileState extends ConsumerState<TaskListTile> {
+  late final Timer timer;
+
   @override
   void initState() {
     super.initState();
-    Timer.periodic(
+    timer = Timer.periodic(
       const Duration(seconds: 1),
       (Timer timer) {
         setState(() {});
       },
     );
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override
