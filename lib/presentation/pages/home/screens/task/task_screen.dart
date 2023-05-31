@@ -74,29 +74,13 @@ class _TaskListTileState extends ConsumerState<TaskListTile> {
     final now = DateTime.now();
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-      leading: Transform.scale(
-        scale: 1.25,
-        child: Checkbox(
-          value: task.isDone,
-          onChanged: (value) {
-            ref.read(taskTileProvider).changeDone(task, value);
-          },
-          fillColor: MaterialStateColor.resolveWith((states) {
-            if (states.contains(MaterialState.selected)) {
-              return Colors.transparent;
-            }
-            return task.priority.color ??
-                Theme.of(context).colorScheme.onBackground;
-          }),
-          checkColor:
-              task.priority.color ?? Theme.of(context).colorScheme.onBackground,
-          shape: const CircleBorder(),
-          side: BorderSide(
-            width: 1.5,
-            color: task.priority.color ??
-                Theme.of(context).colorScheme.onBackground,
-          ),
-        ),
+      leading: Checkbox(
+        value: task.isDone,
+        onChanged: (value) {
+          ref.read(taskTileProvider).changeDone(task, value);
+        },
+        fillColor: MaterialStateProperty.all(
+            task.priority.color ?? Theme.of(context).colorScheme.onBackground),
       ),
       title: Text(task.title),
       subtitle: task.description.isNotEmpty || task.dueDate != null
