@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/data/database/app_database.dart';
-import 'package:todo/presentation/pages/home/screens/task/project_app_bar.dart';
 import 'package:todo/presentation/providers/home/screens/task/task_screen_provider.dart';
 import 'package:todo/presentation/providers/home/screens/task/task_tile_provider.dart';
 
@@ -16,7 +15,6 @@ class TaskScreen extends ConsumerWidget {
     final tasks = ref.watch(tasksFromProjectIdStreamProvider);
     return CustomScrollView(
       slivers: [
-        const ProjectAppBar(),
         tasks.when(
           data: (data) => SliverList(
             delegate: SliverChildBuilderDelegate(
