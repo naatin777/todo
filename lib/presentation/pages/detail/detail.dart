@@ -11,7 +11,6 @@ class Detail extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final task = ref.watch(taskFromTaskIdStreamProvider(id ?? ""));
-
     return task.when(
       data: (data) => Scaffold(
         appBar: AppBar(
@@ -88,6 +87,23 @@ class Detail extends ConsumerWidget {
               return Container();
             }
           },
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            children: [
+              TextButton(
+                onPressed: () async {
+                  GoRouter.of(context).pop();
+                  if (data != null) {
+                    await ref
+                        .read(detailProvider)
+                        .updateCheck(!data.isDone, data);
+                  }
+                },
+                child: Text(data?.isDone ?? true ? "Undone" : "Done"),
+              ),
+            ],
+          ),
         ),
       ),
       error: (error, stackTrace) => const SizedBox(),

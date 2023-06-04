@@ -43,6 +43,10 @@ class DetailProvider {
     await _tasksRepository.updateTask(task.copyWith(title: title));
   }
 
+  Future<void> updateCheck(bool check, Task task) async {
+    await _tasksRepository.updateTask(task.copyWith(isDone: check));
+  }
+
   Future<void> updateDescription(String description, Task task) async {
     await _tasksRepository.updateTask(task.copyWith(description: description));
   }
