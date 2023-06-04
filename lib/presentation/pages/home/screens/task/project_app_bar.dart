@@ -28,8 +28,9 @@ class ProjectAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 child: MenuItemButton(
                   leadingIcon: const Icon(Icons.delete),
                   child: const Text("Delete project"),
-                  onPressed: () {
-                    ref.read(projectMenuProvider).deleteProject(project);
+                  onPressed: () async {
+                    GoRouter.of(context).pop();
+                    await ref.read(projectMenuProvider).deleteProject(project);
                     ref
                         .read(projectDrawerProvider.notifier)
                         .changeProject(inbox);
