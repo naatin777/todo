@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo/presentation/pages/home/screens/settings/settings_app_bar.dart';
 import 'package:todo/presentation/pages/home/screens/settings/settings_screen.dart';
 import 'package:todo/presentation/pages/home/screens/task/adding_new_task_fab.dart';
 import 'package:todo/presentation/pages/home/screens/task/project_app_bar.dart';
@@ -18,7 +19,7 @@ class Home extends ConsumerWidget {
         ProjectAppBar(),
         null,
         null,
-        null,
+        SettingsAppBar(),
       ][navigation.index],
       drawer: [
         const ProjectDrawer(),

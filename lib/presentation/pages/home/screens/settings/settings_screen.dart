@@ -10,11 +10,6 @@ class SettingsScreen extends ConsumerWidget {
     final themeMode = ref.watch(themeProvider);
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(
-          title: Text("Settings"),
-          floating: true,
-          snap: true,
-        ),
         SliverToBoxAdapter(
           child: ListTile(
             title: const Text("Theme"),
