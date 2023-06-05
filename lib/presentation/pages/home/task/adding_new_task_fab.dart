@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/presentation/pages/home/screens/task/adding_new_task_bottom_sheet.dart';
+import 'package:todo/presentation/pages/home/task/adding_new_task_bottom_sheet.dart';
 
 class AddingNewTaskFab extends StatelessWidget {
   const AddingNewTaskFab({super.key});

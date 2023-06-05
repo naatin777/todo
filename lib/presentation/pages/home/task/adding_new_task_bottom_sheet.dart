@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/constant.dart';
 import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/models/due_date_model.dart';
-import 'package:todo/presentation/pages/home/screens/task/due_date_dialog.dart';
-import 'package:todo/presentation/pages/home/screens/task/priority_selection_dialog.dart';
-import 'package:todo/presentation/pages/home/screens/task/project_selection_bottom_sheet.dart';
-import 'package:todo/presentation/providers/home/screens/task/adding_new_task_provider.dart';
+import 'package:todo/presentation/pages/home/task/due_date_dialog.dart';
+import 'package:todo/presentation/pages/home/task/priority_selection_dialog.dart';
+import 'package:todo/presentation/pages/home/task/project_selection_bottom_sheet.dart';
+import 'package:todo/presentation/providers/home/task/adding_new_task_provider.dart';
 
 class AddingNewTaskBottomSheet extends ConsumerWidget {
   const AddingNewTaskBottomSheet({super.key});

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/provider_logger.dart';
 import 'package:todo/presentation/app.dart';
-import 'package:todo/presentation/providers/home/screens/settings/theme_provider.dart';
+import 'package:todo/presentation/providers/home/settings/theme_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

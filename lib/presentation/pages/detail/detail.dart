@@ -16,7 +16,11 @@ class Detail extends ConsumerWidget {
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
-              GoRouter.of(context).pop();
+              if (GoRouter.of(context).canPop()) {
+                GoRouter.of(context).pop();
+              } else {
+                GoRouter.of(context).go("/task");
+              }
             },
             icon: const Icon(Icons.arrow_back),
           ),

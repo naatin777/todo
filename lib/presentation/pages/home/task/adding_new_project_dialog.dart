@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/data/database/app_database.dart';
-import 'package:todo/presentation/providers/home/screens/task/editing_project_name.dart';
+import 'package:todo/presentation/providers/home/task/adding_new_project_provider.dart';
 
-class EditingProjectNameDialog extends ConsumerWidget {
-  const EditingProjectNameDialog({super.key, required this.project});
-
-  final Project project;
+class AddingNewProjectDialog extends ConsumerWidget {
+  const AddingNewProjectDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final titleController = ref.watch(editingProjectNameTitleProvider(project));
+    final titleController = ref.watch(addingNewProjectTitleProvider);
     return AlertDialog(
       title: const Text("Add new project"),
       content: Column(
@@ -36,9 +33,7 @@ class EditingProjectNameDialog extends ConsumerWidget {
         TextButton(
           onPressed: () async {
             Navigator.of(context).pop();
-            await ref
-                .read(editingProjectNameProvider(project))
-                .changeProjectName();
+            await ref.read(addingNewProjectProvider).addNewProject();
           },
           child: const Text("Ok"),
         ),

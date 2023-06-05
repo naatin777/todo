@@ -7,7 +7,7 @@ import 'package:todo/data/database/app_database.dart';
 import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/models/due_date_model.dart';
 import 'package:todo/domain/repositories/tasks_repository.dart';
-import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
+import 'package:todo/presentation/providers/home/task/project_drawer_provider.dart';
 import 'package:todo/presentation/providers/projects_provider.dart';
 import 'package:todo/presentation/providers/tasks_provider.dart';
 

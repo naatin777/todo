@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/constant.dart';
 import 'package:todo/domain/enums/project_menu_item.dart';
-import 'package:todo/presentation/pages/home/screens/task/editing_project_name_dialog.dart';
-import 'package:todo/presentation/providers/home/screens/task/project_drawer_provider.dart';
-import 'package:todo/presentation/providers/home/screens/task/project_menu_provider.dart';
+import 'package:todo/presentation/pages/home/task/editing_project_name_dialog.dart';
+import 'package:todo/presentation/providers/home/task/project_drawer_provider.dart';
+import 'package:todo/presentation/providers/home/task/project_menu_provider.dart';
 
 class ProjectAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const ProjectAppBar({super.key});

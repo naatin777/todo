@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:todo/data/database/app_database.dart';
-import 'package:todo/presentation/providers/home/screens/task/task_screen_provider.dart';
-import 'package:todo/presentation/providers/home/screens/task/task_tile_provider.dart';
+import 'package:todo/presentation/providers/home/task/task_screen_provider.dart';
+import 'package:todo/presentation/providers/home/task/task_tile_provider.dart';
+import 'package:todo/presentation/route/route.dart';
 
 class TaskScreen extends ConsumerWidget {
   const TaskScreen({super.key});
@@ -97,7 +97,7 @@ class _TaskListTileState extends ConsumerState<TaskListTile> {
             )
           : null,
       onTap: () {
-        GoRouter.of(context).push("/detail/${task.id}");
+        DetailsRoute(task.id).push(context);
       },
     );
   }

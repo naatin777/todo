@@ -1,46 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/presentation/pages/home/screens/settings/settings_app_bar.dart';
-import 'package:todo/presentation/pages/home/screens/settings/settings_screen.dart';
-import 'package:todo/presentation/pages/home/screens/task/adding_new_task_fab.dart';
-import 'package:todo/presentation/pages/home/screens/task/project_app_bar.dart';
-import 'package:todo/presentation/pages/home/screens/task/project_drawer.dart';
-import 'package:todo/presentation/pages/home/screens/task/task_screen.dart';
-import 'package:todo/presentation/providers/home/navigation_provider.dart';
+import 'package:todo/domain/enums/navigation_item.dart';
+import 'package:todo/presentation/pages/home/settings/settings_app_bar.dart';
+import 'package:todo/presentation/pages/home/settings/settings_screen.dart';
+import 'package:todo/presentation/pages/home/task/adding_new_task_fab.dart';
+import 'package:todo/presentation/pages/home/task/project_app_bar.dart';
+import 'package:todo/presentation/pages/home/task/project_drawer.dart';
+import 'package:todo/presentation/pages/home/task/task_screen.dart';
+import 'package:todo/presentation/route/route.dart';
 
 class Home extends ConsumerWidget {
-  const Home({super.key});
+  const Home({super.key, required this.nav});
+
+  final String nav;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final navigation = ref.watch(navigationProvider);
+    final navigationItem = NavigationItem.values.byName(nav);
     return Scaffold(
       appBar: const [
         ProjectAppBar(),
         null,
         null,
         SettingsAppBar(),
-      ][navigation.index],
+      ][navigationItem.index],
       drawer: [
         const ProjectDrawer(),
         null,
         null,
         null,
-      ][navigation.index],
+      ][navigationItem.index],
       body: [
         const TaskScreen(),
         null,
         null,
         const SettingsScreen(),
-      ][navigation.index],
+      ][navigationItem.index],
       floatingActionButton: [
         const AddingNewTaskFab(),
         null,
         null,
         null,
-      ][navigation.index],
+      ][navigationItem.index],
       bottomNavigationBar: NavigationBar(
-        selectedIndex: navigation.index,
+        selectedIndex: navigationItem.index,
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.check_box),
@@ -68,7 +71,7 @@ class Home extends ConsumerWidget {
           ),
         ],
         onDestinationSelected: (index) {
-          ref.read(navigationProvider.notifier).changeNavigation(index);
+          HomeRoute(NavigationItem.values[index].name).go(context);
         },
       ),
     );
