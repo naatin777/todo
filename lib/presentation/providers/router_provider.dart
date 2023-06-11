@@ -11,10 +11,10 @@ final routerProvider = Provider((ref) {
     routes: $appRoutes,
     redirect: (context, state) {
       if (state.location == "/") {
-        return "/${NavigationItems.task.name}?listId=${inbox.id}";
+        return "/${NavigationItems.task.name}?id=${inbox.id}";
       } else {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          final listId = state.queryParameters["listId"] ?? inbox.id;
+          final listId = state.queryParameters["id"] ?? inbox.id;
           ref.read(listIdProvider.notifier).changeListId(listId);
         });
         return null;

@@ -37,11 +37,10 @@ class TaskDrawer extends ConsumerWidget {
           } else {
             for (final e in data.asMap().entries) {
               if (e.key == index) {
-                HomeRoute(NavigationItems.task.name, listId: inbox.id)
-                    .go(context);
+                HomeRoute(NavigationItems.task.name, id: inbox.id).go(context);
               }
               if (e.key + 1 == index) {
-                HomeRoute(NavigationItems.task.name, listId: e.value.id)
+                HomeRoute(NavigationItems.task.name, id: e.value.id)
                     .go(context);
               }
             }

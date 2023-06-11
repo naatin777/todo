@@ -9,14 +9,14 @@ part 'route.g.dart';
   path: "/:nav",
 )
 class HomeRoute extends GoRouteData {
-  const HomeRoute(this.nav, {required this.listId});
+  const HomeRoute(this.nav, {required this.id});
 
   final String nav;
-  final String? listId;
+  final String? id;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return Home(nav: nav, listId: listId);
+    return Home(nav: nav, id: id);
   }
 }
 

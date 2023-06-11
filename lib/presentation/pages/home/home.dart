@@ -10,10 +10,10 @@ import 'package:todo/presentation/pages/home/task/task_screen.dart';
 import 'package:todo/presentation/route/route.dart';
 
 class Home extends ConsumerWidget {
-  const Home({super.key, required this.nav, required this.listId});
+  const Home({super.key, required this.nav, required this.id});
 
   final String nav;
-  final String? listId;
+  final String? id;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -74,7 +74,7 @@ class Home extends ConsumerWidget {
         onDestinationSelected: (index) {
           HomeRoute(
             NavigationItems.values[index].name,
-            listId: listId,
+            id: id,
           ).go(context);
         },
       ),
