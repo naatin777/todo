@@ -4,46 +4,47 @@ import 'package:todo/domain/enums/navigation_item.dart';
 import 'package:todo/presentation/pages/home/settings/settings_app_bar.dart';
 import 'package:todo/presentation/pages/home/settings/settings_screen.dart';
 import 'package:todo/presentation/pages/home/task/adding_new_task_fab.dart';
-import 'package:todo/presentation/pages/home/task/project_app_bar.dart';
-import 'package:todo/presentation/pages/home/task/project_drawer.dart';
+import 'package:todo/presentation/pages/home/task/task_app_bar.dart';
+import 'package:todo/presentation/pages/home/task/task_drawer.dart';
 import 'package:todo/presentation/pages/home/task/task_screen.dart';
 import 'package:todo/presentation/route/route.dart';
 
 class Home extends ConsumerWidget {
-  const Home({super.key, required this.nav});
+  const Home({super.key, required this.nav, required this.listId});
 
   final String nav;
+  final String? listId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final navigationItem = NavigationItem.values.byName(nav);
+    final navigationItems = NavigationItems.values.byName(nav);
     return Scaffold(
-      appBar: const [
-        ProjectAppBar(),
+      appBar: [
+        const TaskAppBar(),
         null,
         null,
-        SettingsAppBar(),
-      ][navigationItem.index],
+        const SettingsAppBar(),
+      ][navigationItems.index],
       drawer: [
-        const ProjectDrawer(),
+        const TaskDrawer(),
         null,
         null,
         null,
-      ][navigationItem.index],
+      ][navigationItems.index],
       body: [
         const TaskScreen(),
         null,
         null,
         const SettingsScreen(),
-      ][navigationItem.index],
+      ][navigationItems.index],
       floatingActionButton: [
         const AddingNewTaskFab(),
         null,
         null,
         null,
-      ][navigationItem.index],
+      ][navigationItems.index],
       bottomNavigationBar: NavigationBar(
-        selectedIndex: navigationItem.index,
+        selectedIndex: navigationItems.index,
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.check_box),
@@ -71,7 +72,10 @@ class Home extends ConsumerWidget {
           ),
         ],
         onDestinationSelected: (index) {
-          HomeRoute(NavigationItem.values[index].name).go(context);
+          HomeRoute(
+            NavigationItems.values[index].name,
+            listId: listId,
+          ).go(context);
         },
       ),
     );

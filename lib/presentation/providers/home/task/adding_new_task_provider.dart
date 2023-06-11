@@ -7,7 +7,7 @@ import 'package:todo/data/database/app_database.dart';
 import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/models/due_date_model.dart';
 import 'package:todo/domain/repositories/tasks_repository.dart';
-import 'package:todo/presentation/providers/home/task/project_drawer_provider.dart';
+import 'package:todo/presentation/providers/list_id_provider.dart';
 import 'package:todo/presentation/providers/projects_provider.dart';
 import 'package:todo/presentation/providers/tasks_provider.dart';
 
@@ -79,14 +79,14 @@ class AddingNewTaskProvider extends StateNotifier<Task> {
 
 final addingNewTaskProvider =
     StateNotifierProvider.autoDispose<AddingNewTaskProvider, Task>((ref) {
-  final project = ref.watch(projectDrawerProvider);
+  final listId = ref.watch(listIdProvider);
   final TextEditingController titleController =
       ref.watch(addingNewTaskTitleControllerProvider);
   final TextEditingController descriptionController =
       ref.watch(addingNewTaskDescriptionControllerProvider);
   final tasksRepository = ref.watch(tasksRepositoryProvider);
   return AddingNewTaskProvider(
-    projectId: project.id,
+    projectId: listId,
     titleController: titleController,
     descriptionController: descriptionController,
     tasksRepository: tasksRepository,
@@ -135,7 +135,7 @@ FocusNode addingNewTaskDescriptionFocusNode(Ref ref) {
   return descriptionFocusNode;
 }
 
-final dueDateChipTextProvider = Provider.autoDispose((ref) {
+final dueDateChipTextProvider = Provider.autoDispose.family((ref, String id) {
   final addingNewTask = ref.watch(addingNewTaskProvider);
   final dueDate = addingNewTask.dueDate;
   final isAllDay = addingNewTask.isAllDay;

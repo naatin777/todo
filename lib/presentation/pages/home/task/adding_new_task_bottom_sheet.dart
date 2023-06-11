@@ -7,12 +7,14 @@ import 'package:todo/presentation/pages/home/task/due_date_dialog.dart';
 import 'package:todo/presentation/pages/home/task/priority_selection_dialog.dart';
 import 'package:todo/presentation/pages/home/task/project_selection_bottom_sheet.dart';
 import 'package:todo/presentation/providers/home/task/adding_new_task_provider.dart';
+import 'package:todo/presentation/providers/list_id_provider.dart';
 
 class AddingNewTaskBottomSheet extends ConsumerWidget {
   const AddingNewTaskBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final listId = ref.watch(listIdProvider);
     final addingNewTask = ref.watch(addingNewTaskProvider);
     final titleController = ref.watch(addingNewTaskTitleControllerProvider);
     final titleFocusNode = ref.watch(addingNewTaskTitleFocusNodeProvider);
@@ -22,7 +24,7 @@ class AddingNewTaskBottomSheet extends ConsumerWidget {
         ref.watch(addingNewTaskDescriptionFocusNodeProvider);
     final project =
         ref.watch(projectFromIdStreamProvider(addingNewTask.projectId));
-    final dueDateChipText = ref.watch(dueDateChipTextProvider);
+    final dueDateChipText = ref.watch(dueDateChipTextProvider(listId));
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,

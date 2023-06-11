@@ -19,10 +19,14 @@ RouteBase get $homeRoute => GoRouteData.$route(
 extension $HomeRouteExtension on HomeRoute {
   static HomeRoute _fromState(GoRouterState state) => HomeRoute(
         state.pathParameters['nav']!,
+        listId: state.queryParameters['list-id'],
       );
 
   String get location => GoRouteData.$location(
         '/${Uri.encodeComponent(nav)}',
+        queryParams: {
+          if (listId != null) 'list-id': listId,
+        },
       );
 
   void go(BuildContext context) => context.go(location);

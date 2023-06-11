@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo/domain/enums/navigation_item.dart';
 import 'package:todo/presentation/pages/detail/detail.dart';
 import 'package:todo/presentation/pages/home/home.dart';
 
@@ -10,13 +9,14 @@ part 'route.g.dart';
   path: "/:nav",
 )
 class HomeRoute extends GoRouteData {
-  const HomeRoute(this.nav);
+  const HomeRoute(this.nav, {required this.listId});
 
   final String nav;
+  final String? listId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return Home(nav: nav);
+    return Home(nav: nav, listId: listId);
   }
 }
 

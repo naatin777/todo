@@ -1,4 +1,4 @@
-enum NavigationItem {
+enum NavigationItems {
   task,
   search,
   analytics,
