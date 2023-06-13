@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo/constant.dart';
+import 'package:todo/domain/enums/navigation_item.dart';
 import 'package:todo/domain/enums/project_menu_item.dart';
 import 'package:todo/presentation/pages/home/task/editing_project_name_dialog.dart';
 import 'package:todo/presentation/providers/home/task/project_menu_provider.dart';
 import 'package:todo/presentation/providers/home/task/task_app_bar_provider.dart';
+import 'package:todo/presentation/route/route.dart';
 
 class TaskAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const TaskAppBar({super.key});
@@ -32,6 +35,8 @@ class TaskAppBar extends ConsumerWidget implements PreferredSizeWidget {
                         child: const Text("Delete project"),
                         onPressed: () async {
                           GoRouter.of(context).pop();
+                          HomeRoute(NavigationItems.task.name, id: inbox.id)
+                              .go(context);
                           await ref
                               .read(projectMenuProvider)
                               .deleteProject(project);
