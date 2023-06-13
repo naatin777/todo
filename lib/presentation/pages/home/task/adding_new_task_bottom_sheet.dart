@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/constant.dart';
 import 'package:todo/domain/enums/priority.dart';
-import 'package:todo/domain/models/due_date_model.dart';
+import 'package:todo/domain/models/due_date.dart';
 import 'package:todo/presentation/pages/home/task/due_date_dialog.dart';
 import 'package:todo/presentation/pages/home/task/priority_selection_dialog.dart';
 import 'package:todo/presentation/pages/home/task/project_selection_bottom_sheet.dart';
@@ -75,10 +75,10 @@ class AddingNewTaskBottomSheet extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () async {
-                    final DueDateModel? result = await showDialog(
+                    final DueDate? result = await showDialog(
                       context: context,
                       builder: (context) => DueDateDialog(
-                        dueDate: DueDateModel(
+                        dueDate: DueDate(
                           dateTime: addingNewTask.dueDate,
                           isAllDay: addingNewTask.isAllDay,
                         ),
@@ -171,7 +171,7 @@ class AddingNewTaskBottomSheet extends ConsumerWidget {
                           maxWidth: MediaQuery.of(context).size.width - 104,
                         ),
                         child: Text(
-                          data?.title ?? inbox.title,
+                          data?.name ?? inbox.name,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),

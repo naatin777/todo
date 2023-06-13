@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:todo/domain/models/due_date_model.dart';
+import 'package:todo/domain/models/due_date.dart';
 
-class DueDateProvider extends StateNotifier<DueDateModel> {
-  DueDateProvider() : super(const DueDateModel(dateTime: null, isAllDay: true));
+class DueDateProvider extends StateNotifier<DueDate> {
+  DueDateProvider() : super(const DueDate(dateTime: null, isAllDay: true));
 
   void changeDate(DateTime? dateTime) {
     state = state.copyWith(dateTime: dateTime);
@@ -31,12 +31,12 @@ class DueDateProvider extends StateNotifier<DueDateModel> {
   }
 
   void clear() {
-    state = const DueDateModel(dateTime: null, isAllDay: true);
+    state = const DueDate(dateTime: null, isAllDay: true);
   }
 }
 
 final dueDateProvider =
-    StateNotifierProvider.autoDispose<DueDateProvider, DueDateModel>(
+    StateNotifierProvider.autoDispose<DueDateProvider, DueDate>(
         (ref) => DueDateProvider());
 
 final formattedDateProvider = Provider.autoDispose((ref) {

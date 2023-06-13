@@ -1,5 +1,5 @@
-import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/database/daos/projects_dao.dart';
+import 'package:todo/domain/models/task_list.dart';
 import 'package:todo/domain/repositories/projects_repository.dart';
 import 'package:uuid/uuid.dart';
 
@@ -11,22 +11,28 @@ class ProjectsRepositoryImpl implements ProjectsRepository {
 
   @override
   Future<List<Project>> getAllProjects() async {
-    return _projectsDao.selectAll();
+    final project = await _projectsDao.selectAll();
+    return project.map((e) => Project(id: e.id, name: e.name)).toList();
   }
 
   @override
   Stream<List<Project>> watchAllProjects() {
-    return _projectsDao.watchAll();
+    final project = _projectsDao.watchAll();
+    return project.map(
+        (event) => event.map((e) => Project(id: e.id, name: e.name)).toList());
   }
 
   @override
   Future<Project?> getProject(String id) async {
-    return _projectsDao.selectProject(id);
+    final project = await _projectsDao.selectProject(id);
+    return project != null ? Project(id: project.id, name: project.name) : null;
   }
 
   @override
   Stream<Project?> watchProject(String id) {
-    return _projectsDao.watchProject(id);
+    final project = _projectsDao.watchProject(id);
+    return project.map((event) =>
+        event != null ? Project(id: event.id, name: event.name) : null);
   }
 
   @override
@@ -34,7 +40,7 @@ class ProjectsRepositoryImpl implements ProjectsRepository {
     await _projectsDao.insertProject(
       Project(
         id: _uuid.v4(),
-        title: title,
+        name: title,
       ),
     );
   }

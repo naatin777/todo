@@ -428,7 +428,8 @@ class TasksCompanion extends UpdateCompanion<Task> {
   }
 }
 
-class $ProjectsTable extends Projects with TableInfo<$ProjectsTable, Project> {
+class $ProjectsTable extends Projects
+    with TableInfo<$ProjectsTable, ProjectTable> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -438,19 +439,19 @@ class $ProjectsTable extends Projects with TableInfo<$ProjectsTable, Project> {
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
-  late final GeneratedColumn<String> title = GeneratedColumn<String>(
-      'title', aliasedName, false,
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
   @override
-  List<GeneratedColumn> get $columns => [id, title];
+  List<GeneratedColumn> get $columns => [id, name];
   @override
   String get aliasedName => _alias ?? 'projects';
   @override
   String get actualTableName => 'projects';
   @override
-  VerificationContext validateIntegrity(Insertable<Project> instance,
+  VerificationContext validateIntegrity(Insertable<ProjectTable> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -459,11 +460,11 @@ class $ProjectsTable extends Projects with TableInfo<$ProjectsTable, Project> {
     } else if (isInserting) {
       context.missing(_idMeta);
     }
-    if (data.containsKey('title')) {
+    if (data.containsKey('name')) {
       context.handle(
-          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
-      context.missing(_titleMeta);
+      context.missing(_nameMeta);
     }
     return context;
   }
@@ -471,13 +472,13 @@ class $ProjectsTable extends Projects with TableInfo<$ProjectsTable, Project> {
   @override
   Set<GeneratedColumn> get $primaryKey => const {};
   @override
-  Project map(Map<String, dynamic> data, {String? tablePrefix}) {
+  ProjectTable map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Project(
+    return ProjectTable(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      title: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
     );
   }
 
@@ -487,31 +488,31 @@ class $ProjectsTable extends Projects with TableInfo<$ProjectsTable, Project> {
   }
 }
 
-class Project extends DataClass implements Insertable<Project> {
+class ProjectTable extends DataClass implements Insertable<ProjectTable> {
   final String id;
-  final String title;
-  const Project({required this.id, required this.title});
+  final String name;
+  const ProjectTable({required this.id, required this.name});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<String>(id);
-    map['title'] = Variable<String>(title);
+    map['name'] = Variable<String>(name);
     return map;
   }
 
   ProjectsCompanion toCompanion(bool nullToAbsent) {
     return ProjectsCompanion(
       id: Value(id),
-      title: Value(title),
+      name: Value(name),
     );
   }
 
-  factory Project.fromJson(Map<String, dynamic> json,
+  factory ProjectTable.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Project(
+    return ProjectTable(
       id: serializer.fromJson<String>(json['id']),
-      title: serializer.fromJson<String>(json['title']),
+      name: serializer.fromJson<String>(json['name']),
     );
   }
   @override
@@ -519,63 +520,63 @@ class Project extends DataClass implements Insertable<Project> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
-      'title': serializer.toJson<String>(title),
+      'name': serializer.toJson<String>(name),
     };
   }
 
-  Project copyWith({String? id, String? title}) => Project(
+  ProjectTable copyWith({String? id, String? name}) => ProjectTable(
         id: id ?? this.id,
-        title: title ?? this.title,
+        name: name ?? this.name,
       );
   @override
   String toString() {
-    return (StringBuffer('Project(')
+    return (StringBuffer('ProjectTable(')
           ..write('id: $id, ')
-          ..write('title: $title')
+          ..write('name: $name')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, title);
+  int get hashCode => Object.hash(id, name);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Project && other.id == this.id && other.title == this.title);
+      (other is ProjectTable && other.id == this.id && other.name == this.name);
 }
 
-class ProjectsCompanion extends UpdateCompanion<Project> {
+class ProjectsCompanion extends UpdateCompanion<ProjectTable> {
   final Value<String> id;
-  final Value<String> title;
+  final Value<String> name;
   final Value<int> rowid;
   const ProjectsCompanion({
     this.id = const Value.absent(),
-    this.title = const Value.absent(),
+    this.name = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   ProjectsCompanion.insert({
     required String id,
-    required String title,
+    required String name,
     this.rowid = const Value.absent(),
   })  : id = Value(id),
-        title = Value(title);
-  static Insertable<Project> custom({
+        name = Value(name);
+  static Insertable<ProjectTable> custom({
     Expression<String>? id,
-    Expression<String>? title,
+    Expression<String>? name,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (title != null) 'title': title,
+      if (name != null) 'name': name,
       if (rowid != null) 'rowid': rowid,
     });
   }
 
   ProjectsCompanion copyWith(
-      {Value<String>? id, Value<String>? title, Value<int>? rowid}) {
+      {Value<String>? id, Value<String>? name, Value<int>? rowid}) {
     return ProjectsCompanion(
       id: id ?? this.id,
-      title: title ?? this.title,
+      name: name ?? this.name,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -586,8 +587,8 @@ class ProjectsCompanion extends UpdateCompanion<Project> {
     if (id.present) {
       map['id'] = Variable<String>(id.value);
     }
-    if (title.present) {
-      map['title'] = Variable<String>(title.value);
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -599,7 +600,363 @@ class ProjectsCompanion extends UpdateCompanion<Project> {
   String toString() {
     return (StringBuffer('ProjectsCompanion(')
           ..write('id: $id, ')
-          ..write('title: $title, ')
+          ..write('name: $name, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LabelsTable extends Labels with TableInfo<$LabelsTable, LabelTable> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LabelsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, name];
+  @override
+  String get aliasedName => _alias ?? 'labels';
+  @override
+  String get actualTableName => 'labels';
+  @override
+  VerificationContext validateIntegrity(Insertable<LabelTable> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => const {};
+  @override
+  LabelTable map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LabelTable(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+    );
+  }
+
+  @override
+  $LabelsTable createAlias(String alias) {
+    return $LabelsTable(attachedDatabase, alias);
+  }
+}
+
+class LabelTable extends DataClass implements Insertable<LabelTable> {
+  final String id;
+  final String name;
+  const LabelTable({required this.id, required this.name});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['name'] = Variable<String>(name);
+    return map;
+  }
+
+  LabelsCompanion toCompanion(bool nullToAbsent) {
+    return LabelsCompanion(
+      id: Value(id),
+      name: Value(name),
+    );
+  }
+
+  factory LabelTable.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LabelTable(
+      id: serializer.fromJson<String>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  LabelTable copyWith({String? id, String? name}) => LabelTable(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('LabelTable(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LabelTable && other.id == this.id && other.name == this.name);
+}
+
+class LabelsCompanion extends UpdateCompanion<LabelTable> {
+  final Value<String> id;
+  final Value<String> name;
+  final Value<int> rowid;
+  const LabelsCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LabelsCompanion.insert({
+    required String id,
+    required String name,
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        name = Value(name);
+  static Insertable<LabelTable> custom({
+    Expression<String>? id,
+    Expression<String>? name,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LabelsCompanion copyWith(
+      {Value<String>? id, Value<String>? name, Value<int>? rowid}) {
+    return LabelsCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LabelsCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $FiltersTable extends Filters with TableInfo<$FiltersTable, FilterTable> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $FiltersTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, name];
+  @override
+  String get aliasedName => _alias ?? 'filters';
+  @override
+  String get actualTableName => 'filters';
+  @override
+  VerificationContext validateIntegrity(Insertable<FilterTable> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => const {};
+  @override
+  FilterTable map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return FilterTable(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+    );
+  }
+
+  @override
+  $FiltersTable createAlias(String alias) {
+    return $FiltersTable(attachedDatabase, alias);
+  }
+}
+
+class FilterTable extends DataClass implements Insertable<FilterTable> {
+  final String id;
+  final String name;
+  const FilterTable({required this.id, required this.name});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['name'] = Variable<String>(name);
+    return map;
+  }
+
+  FiltersCompanion toCompanion(bool nullToAbsent) {
+    return FiltersCompanion(
+      id: Value(id),
+      name: Value(name),
+    );
+  }
+
+  factory FilterTable.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return FilterTable(
+      id: serializer.fromJson<String>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  FilterTable copyWith({String? id, String? name}) => FilterTable(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('FilterTable(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is FilterTable && other.id == this.id && other.name == this.name);
+}
+
+class FiltersCompanion extends UpdateCompanion<FilterTable> {
+  final Value<String> id;
+  final Value<String> name;
+  final Value<int> rowid;
+  const FiltersCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  FiltersCompanion.insert({
+    required String id,
+    required String name,
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        name = Value(name);
+  static Insertable<FilterTable> custom({
+    Expression<String>? id,
+    Expression<String>? name,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  FiltersCompanion copyWith(
+      {Value<String>? id, Value<String>? name, Value<int>? rowid}) {
+    return FiltersCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('FiltersCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -610,11 +967,16 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   late final $TasksTable tasks = $TasksTable(this);
   late final $ProjectsTable projects = $ProjectsTable(this);
+  late final $LabelsTable labels = $LabelsTable(this);
+  late final $FiltersTable filters = $FiltersTable(this);
   late final TasksDao tasksDao = TasksDao(this as AppDatabase);
   late final ProjectsDao projectsDao = ProjectsDao(this as AppDatabase);
+  late final LabelsDao labelsDao = LabelsDao(this as AppDatabase);
+  late final FiltersDao filtersDao = FiltersDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [tasks, projects];
+  List<DatabaseSchemaEntity> get allSchemaEntities =>
+      [tasks, projects, labels, filters];
 }

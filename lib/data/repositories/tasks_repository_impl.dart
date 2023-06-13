@@ -1,7 +1,7 @@
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/database/daos/tasks_dao.dart';
 import 'package:todo/domain/enums/priority.dart';
-import 'package:todo/domain/models/due_date_model.dart';
+import 'package:todo/domain/models/due_date.dart';
 import 'package:todo/domain/repositories/tasks_repository.dart';
 import 'package:uuid/uuid.dart';
 
@@ -38,7 +38,7 @@ class TasksRepositoryImpl implements TasksRepository {
     final String title,
     final String description,
     final Priority priority,
-    final DueDateModel dueDate,
+    final DueDate dueDate,
   ) async {
     await _tasksDao.insertTask(
       Task(

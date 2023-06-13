@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/data/database/app_database.dart';
+import 'package:todo/domain/models/task_list.dart';
 import 'package:todo/presentation/providers/home/task/editing_project_name.dart';
 
 class EditingProjectNameDialog extends ConsumerWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/constant.dart';
-import 'package:todo/data/database/app_database.dart';
+import 'package:todo/domain/models/task_list.dart';
 import 'package:todo/presentation/providers/home/task/project_selection_provider.dart';
 
 class ProjectSelectionBottomSheet extends ConsumerWidget {
@@ -21,7 +21,7 @@ class ProjectSelectionBottomSheet extends ConsumerWidget {
             children: [
               ListTile(
                 leading: const Icon(Icons.inbox),
-                title: Text(inbox.title),
+                title: Text(inbox.name),
                 onTap: () {
                   Navigator.of(context).pop(inbox.id);
                 },
@@ -33,7 +33,7 @@ class ProjectSelectionBottomSheet extends ConsumerWidget {
               for (Project project in data)
                 ListTile(
                   leading: const Icon(Icons.list),
-                  title: Text(project.title),
+                  title: Text(project.name),
                   onTap: () {
                     Navigator.of(context).pop(project.id);
                   },

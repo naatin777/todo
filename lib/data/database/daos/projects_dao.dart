@@ -9,29 +9,29 @@ class ProjectsDao extends DatabaseAccessor<AppDatabase>
     with _$ProjectsDaoMixin {
   ProjectsDao(AppDatabase db) : super(db);
 
-  Future<List<Project>> selectAll() async {
+  Future<List<ProjectTable>> selectAll() async {
     return select(projects).get();
   }
 
-  Stream<List<Project>> watchAll() {
+  Stream<List<ProjectTable>> watchAll() {
     return select(projects).watch();
   }
 
-  Future<Project?> selectProject(String id) async {
+  Future<ProjectTable?> selectProject(String id) async {
     return (select(projects)..where((tbl) => tbl.id.equals(id)))
         .getSingleOrNull();
   }
 
-  Stream<Project?> watchProject(String id) {
+  Stream<ProjectTable?> watchProject(String id) {
     return (select(projects)..where((tbl) => tbl.id.equals(id)))
         .watchSingleOrNull();
   }
 
-  Future<int> insertProject(Project project) async {
+  Future<int> insertProject(ProjectTable project) async {
     return into(projects).insert(project);
   }
 
-  Future<int> updateProject(Project project) async {
+  Future<int> updateProject(ProjectTable project) async {
     return (update(projects)..where((tbl) => tbl.id.equals(project.id)))
         .write(project);
   }

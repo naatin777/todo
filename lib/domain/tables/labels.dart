@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 
-@DataClassName("ProjectTable")
-class Projects extends Table {
+@DataClassName("LabelTable")
+class Labels extends Table {
   TextColumn get id => text()();
   TextColumn get name => text()();
 }

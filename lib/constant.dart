@@ -1,3 +1,3 @@
-import 'package:todo/data/database/app_database.dart';
+import 'package:todo/domain/models/task_list.dart';
 
-const inbox = Project(id: "inbox", title: "Inbox");
+const inbox = Project(id: "inbox", name: "Inbox");

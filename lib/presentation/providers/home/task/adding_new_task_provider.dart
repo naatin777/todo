@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/domain/enums/priority.dart';
-import 'package:todo/domain/models/due_date_model.dart';
+import 'package:todo/domain/models/due_date.dart';
 import 'package:todo/domain/repositories/tasks_repository.dart';
 import 'package:todo/presentation/providers/list_id_provider.dart';
 import 'package:todo/presentation/providers/projects_provider.dart';
@@ -42,7 +42,7 @@ class AddingNewTaskProvider extends StateNotifier<Task> {
     }
   }
 
-  void changeDueDate(DueDateModel? dueDate) {
+  void changeDueDate(DueDate? dueDate) {
     if (dueDate != null) {
       state = state.copyWith(
         dueDate: Value(dueDate.dateTime),
@@ -64,7 +64,7 @@ class AddingNewTaskProvider extends StateNotifier<Task> {
       titleController.text,
       descriptionController.text,
       state.priority,
-      DueDateModel(dateTime: state.dueDate, isAllDay: state.isAllDay),
+      DueDate(dateTime: state.dueDate, isAllDay: state.isAllDay),
     );
     titleController.clear();
     descriptionController.clear();

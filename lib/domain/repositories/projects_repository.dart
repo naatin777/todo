@@ -1,4 +1,4 @@
-import 'package:todo/data/database/app_database.dart';
+import 'package:todo/domain/models/task_list.dart';
 
 abstract class ProjectsRepository {
   Future<List<Project>> getAllProjects();

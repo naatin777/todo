@@ -57,13 +57,13 @@ class TaskDrawer extends ConsumerWidget {
           ),
           NavigationDrawerDestination(
             icon: const Icon(Icons.inbox),
-            label: Text(inbox.title),
+            label: Text(inbox.name),
             selectedIcon: const Icon(Icons.inbox_outlined),
           ),
           for (final e in data)
             NavigationDrawerDestination(
               icon: const Icon(Icons.list),
-              label: Text(e.title),
+              label: Text(e.name),
               selectedIcon: const Icon(Icons.list_outlined),
             ),
           const Divider(),

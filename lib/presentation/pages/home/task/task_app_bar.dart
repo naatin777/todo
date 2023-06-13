@@ -22,7 +22,7 @@ class TaskAppBar extends ConsumerWidget implements PreferredSizeWidget {
       data: (project) {
         if (project != null) {
           return AppBar(
-            title: Text(project.title),
+            title: Text(project.name),
             actions: [
               PopupMenuButton<ProjectMenuItem>(
                 itemBuilder: (BuildContext context) {
