@@ -361,10 +361,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "9235e40f7a917c22830b64a8b3185dd4e0e2fd558b6394fa2d93dd1feb884c5c"
+      sha256: fe2d5f3e44fb243961edfc600a6198ecd67fc2c05b0a64d9fc09b51552071e36
       url: "https://pub.dev"
     source: hosted
-    version: "8.0.1"
+    version: "8.0.2"
   go_router_builder:
     dependency: "direct dev"
     description:
@@ -878,10 +878,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: f3743ca475e0c9ef71df4ba15eb2d7684eecd5c8ba20a462462e4e8b561b2e11
+      sha256: c620a6f783fa22436da68e42db7ebbf18b8c44b9a46ab911f666ff09ffd9153f
       url: "https://pub.dev"
     source: hosted
-    version: "11.6.0"
+    version: "11.7.1"
   watcher:
     dependency: transitive
     description:
