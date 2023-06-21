@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/data/database/app_database.dart';
+import 'package:todo/presentation/providers/home/task/task_screen.dart';
 import 'package:todo/presentation/route/route.dart';
 
 class TaskListTile extends ConsumerStatefulWidget {
@@ -42,7 +43,7 @@ class _TaskListTileState extends ConsumerState<TaskListTile> {
       leading: Checkbox(
         value: task.isDone,
         onChanged: (value) {
-          // ref.read(taskListTileProviderProvider).changeDone(task, value);
+          ref.read(taskScreenProvider.notifier).changeDone(task, value);
         },
         fillColor: MaterialStateProperty.all(
             task.priority.color ?? Theme.of(context).colorScheme.onBackground),

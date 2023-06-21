@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/presentation/pages/home/task/task_list_tile.dart';
-import 'package:todo/presentation/providers/home/task/task_screen_provider.dart';
+import 'package:todo/presentation/providers/home/task/task_screen.dart';
 
 class TaskScreen extends ConsumerWidget {
   const TaskScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tasks = ref.watch(tasksFromProjectIdStreamProvider);
+    final tasks = ref.watch(taskScreenProvider);
     return CustomScrollView(
       slivers: [
         tasks.when(
