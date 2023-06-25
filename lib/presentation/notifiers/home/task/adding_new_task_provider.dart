@@ -9,7 +9,7 @@ import 'package:todo/data/repositories/tasks_repository_impl.dart';
 import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/models/due_date.dart';
 import 'package:todo/domain/repositories/tasks_repository.dart';
-import 'package:todo/presentation/notifiers/home/task_list_id_provider.dart';
+import 'package:todo/presentation/notifiers/task_list_id_provider.dart';
 
 // part 'adding_new_task_provider.g.dart';
 

@@ -8,11 +8,12 @@ part of 'route.dart';
 
 List<RouteBase> get $appRoutes => [
       $homeRoute,
-      $detailsRoute,
+      $detailRoute,
     ];
 
 RouteBase get $homeRoute => GoRouteData.$route(
       path: '/:nav',
+      name: 'home',
       factory: $HomeRouteExtension._fromState,
     );
 
@@ -37,18 +38,19 @@ extension $HomeRouteExtension on HomeRoute {
       context.pushReplacement(location);
 }
 
-RouteBase get $detailsRoute => GoRouteData.$route(
-      path: '/details/:id',
-      factory: $DetailsRouteExtension._fromState,
+RouteBase get $detailRoute => GoRouteData.$route(
+      path: '/detail/:id',
+      name: 'detail',
+      factory: $DetailRouteExtension._fromState,
     );
 
-extension $DetailsRouteExtension on DetailsRoute {
-  static DetailsRoute _fromState(GoRouterState state) => DetailsRoute(
+extension $DetailRouteExtension on DetailRoute {
+  static DetailRoute _fromState(GoRouterState state) => DetailRoute(
         state.pathParameters['id']!,
       );
 
   String get location => GoRouteData.$location(
-        '/details/${Uri.encodeComponent(id)}',
+        '/detail/${Uri.encodeComponent(id)}',
       );
 
   void go(BuildContext context) => context.go(location);

@@ -63,7 +63,7 @@ class _TaskListTileState extends ConsumerState<TaskListTile> {
             )
           : null,
       onTap: () {
-        DetailsRoute(task.id).push(context);
+        DetailRoute(task.id).push(context);
       },
     );
   }

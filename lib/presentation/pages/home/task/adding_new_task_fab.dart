@@ -24,7 +24,7 @@ class AddingNewTaskFab extends StatelessWidget {
                   top: 8,
                   bottom: viewInsets.bottom,
                 ),
-                child: AddingNewTaskBottomSheet(),
+                child: const AddingNewTaskBottomSheet(),
               ),
             );
           },

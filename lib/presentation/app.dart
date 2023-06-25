@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:todo/presentation/notifiers/home/router_provider.dart';
+import 'package:todo/presentation/notifiers/router_provider.dart';
 import 'package:todo/presentation/notifiers/home/settings/theme_provider.dart';
 
 class App extends ConsumerWidget {

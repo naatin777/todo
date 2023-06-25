@@ -5,9 +5,7 @@ import 'package:todo/presentation/pages/home/home.dart';
 
 part 'route.g.dart';
 
-@TypedGoRoute<HomeRoute>(
-  path: "/:nav",
-)
+@TypedGoRoute<HomeRoute>(path: "/:nav", name: "home")
 class HomeRoute extends GoRouteData {
   const HomeRoute(this.nav, {required this.id});
 
@@ -20,11 +18,9 @@ class HomeRoute extends GoRouteData {
   }
 }
 
-@TypedGoRoute<DetailsRoute>(
-  path: "/details/:id",
-)
-class DetailsRoute extends GoRouteData {
-  const DetailsRoute(this.id);
+@TypedGoRoute<DetailRoute>(path: "/detail/:id", name: "detail")
+class DetailRoute extends GoRouteData {
+  const DetailRoute(this.id);
 
   final String id;
 

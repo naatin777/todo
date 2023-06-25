@@ -5,7 +5,7 @@ import 'package:todo/domain/enums/navigation_item.dart';
 import 'package:todo/presentation/pages/home/task/adding_new_project_dialog.dart';
 import 'package:todo/presentation/notifiers/home/task/task_drawer.dart';
 
-import 'package:todo/presentation/notifiers/home/task_list_id_provider.dart';
+import 'package:todo/presentation/notifiers/task_list_id_provider.dart';
 import 'package:todo/presentation/route/route.dart';
 
 class TaskDrawer extends ConsumerWidget {
@@ -36,7 +36,7 @@ class TaskDrawer extends ConsumerWidget {
           } else if (index == data.length + 1) {
             showDialog(
               context: context,
-              builder: (context) => AddingNewProjectDialog(),
+              builder: (context) => const AddingNewProjectDialog(),
             );
           }
         },
