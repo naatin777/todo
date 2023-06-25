@@ -1,16 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo/constant.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/database/daos/projects_dao.dart';
 import 'package:todo/domain/models/task_list.dart';
 import 'package:todo/domain/repositories/projects_repository.dart';
-import 'package:uuid/uuid.dart';
 
 final projectsRepositoryProvider = Provider.autoDispose<ProjectsRepository>(
     (ref) => ProjectsRepositoryImpl(AppDatabase.getInstance().projectsDao));
 
 class ProjectsRepositoryImpl implements ProjectsRepository {
   final ProjectsDao _projectsDao;
-  final Uuid _uuid = const Uuid();
 
   const ProjectsRepositoryImpl(this._projectsDao);
 
@@ -44,7 +43,7 @@ class ProjectsRepositoryImpl implements ProjectsRepository {
   Future<void> createProject(final String title) async {
     await _projectsDao.insertProject(
       Project(
-        id: _uuid.v4(),
+        id: uuid.v4(),
         name: title,
       ),
     );

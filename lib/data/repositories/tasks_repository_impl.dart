@@ -1,17 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo/constant.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/database/daos/tasks_dao.dart';
 import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/models/due_date.dart';
 import 'package:todo/domain/repositories/tasks_repository.dart';
-import 'package:uuid/uuid.dart';
 
 final tasksRepositoryProvider = Provider.autoDispose<TasksRepository>(
     (ref) => TasksRepositoryImpl(AppDatabase.getInstance().tasksDao));
 
 class TasksRepositoryImpl implements TasksRepository {
   final TasksDao _tasksDao;
-  final Uuid _uuid = const Uuid();
 
   const TasksRepositoryImpl(this._tasksDao);
 
@@ -46,7 +45,7 @@ class TasksRepositoryImpl implements TasksRepository {
   ) async {
     await _tasksDao.insertTask(
       Task(
-        id: _uuid.v4(),
+        id: uuid.v4(),
         projectId: projectId,
         isDone: isDone,
         title: title,

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/data/repositories/projects_repository_impl.dart';
 import 'package:todo/domain/models/task_list.dart';
 import 'package:todo/domain/repositories/projects_repository.dart';
-import 'package:uuid/uuid.dart';
 
 class EditingProjectNameProvider {
   EditingProjectNameProvider(
@@ -12,8 +11,6 @@ class EditingProjectNameProvider {
   final TextEditingController _titleController;
   final ProjectsRepository _projectsRepository;
   final Project _project;
-
-  final uuid = const Uuid();
 
   Future<void> changeProjectName() async {
     await _projectsRepository.updateProject(

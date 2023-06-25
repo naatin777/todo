@@ -1,16 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo/constant.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/database/daos/labels_dao.dart';
 import 'package:todo/domain/models/task_list.dart';
 import 'package:todo/domain/repositories/labels_repository.dart';
-import 'package:uuid/uuid.dart';
 
 final labelsRepositoryProvider = Provider.autoDispose<LabelsRepository>(
     (ref) => LabelsRepositoryImpl(AppDatabase.getInstance().labelsDao));
 
 class LabelsRepositoryImpl implements LabelsRepository {
   final LabelsDao _labelsDao;
-  final Uuid _uuid = const Uuid();
 
   const LabelsRepositoryImpl(this._labelsDao);
 
@@ -44,7 +43,7 @@ class LabelsRepositoryImpl implements LabelsRepository {
   Future<void> createLabel(final String title) async {
     await _labelsDao.insertLabel(
       Label(
-        id: _uuid.v4(),
+        id: uuid.v4(),
         name: title,
       ),
     );

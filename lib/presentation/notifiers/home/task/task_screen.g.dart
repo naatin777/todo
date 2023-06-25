@@ -11,7 +11,7 @@ String _$taskScreenHash() => r'e4c38f837ea0669e8546e4f61da498c633d8dff1';
 /// See also [TaskScreen].
 @ProviderFor(TaskScreen)
 final taskScreenProvider =
-    AutoDisposeAsyncNotifierProvider<TaskScreen, List<dynamic>>.internal(
+    AutoDisposeAsyncNotifierProvider<TaskScreen, List<Task>>.internal(
   TaskScreen.new,
   name: r'taskScreenProvider',
   debugGetCreateSourceHash:
@@ -20,5 +20,5 @@ final taskScreenProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$TaskScreen = AutoDisposeAsyncNotifier<List<dynamic>>;
+typedef _$TaskScreen = AutoDisposeAsyncNotifier<List<Task>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
