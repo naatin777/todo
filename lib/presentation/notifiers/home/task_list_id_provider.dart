@@ -1,9 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'list_id_provider.g.dart';
+part 'task_list_id_provider.g.dart';
 
 @riverpod
-class ListId extends _$ListId {
+class TaskListId extends _$TaskListId {
   @override
   String build() => "";
 

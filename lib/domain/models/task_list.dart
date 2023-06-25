@@ -1,6 +1,11 @@
 import 'package:todo/data/database/app_database.dart';
 
-sealed class TaskList {}
+sealed class TaskList {
+  final String id;
+  final String name;
+
+  TaskList(this.id, this.name);
+}
 
 class Project extends ProjectTable implements TaskList {
   const Project({required super.id, required super.name});

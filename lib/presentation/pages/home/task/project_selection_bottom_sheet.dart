@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/constant.dart';
 import 'package:todo/domain/models/task_list.dart';
-import 'package:todo/presentation/providers/home/task/project_selection_provider.dart';
+import 'package:todo/presentation/notifiers/home/task/project_selection_provider.dart';
 
 class ProjectSelectionBottomSheet extends ConsumerWidget {
   const ProjectSelectionBottomSheet({super.key, required this.projectId});

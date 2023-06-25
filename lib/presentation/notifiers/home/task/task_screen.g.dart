@@ -1,23 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'task_app_bar_provider.dart';
+part of 'task_screen.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$taskAppBarHash() => r'a0e2a8ae59c1bf40f9e54c2dbd9093f375190a3d';
+String _$taskScreenHash() => r'e4c38f837ea0669e8546e4f61da498c633d8dff1';
 
-/// See also [taskAppBar].
-@ProviderFor(taskAppBar)
-final taskAppBarProvider = AutoDisposeStreamProvider<Project?>.internal(
-  taskAppBar,
-  name: r'taskAppBarProvider',
+/// See also [TaskScreen].
+@ProviderFor(TaskScreen)
+final taskScreenProvider =
+    AutoDisposeAsyncNotifierProvider<TaskScreen, List<Task>>.internal(
+  TaskScreen.new,
+  name: r'taskScreenProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$taskAppBarHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$taskScreenHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef TaskAppBarRef = AutoDisposeStreamProviderRef<Project?>;
+typedef _$TaskScreen = AutoDisposeAsyncNotifier<List<Task>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

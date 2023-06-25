@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo/presentation/providers/detail/detail_provider.dart';
+import 'package:todo/presentation/notifiers/detail/detail_provider.dart';
 
 class Detail extends ConsumerWidget {
   const Detail({super.key, this.id});

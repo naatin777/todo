@@ -1,7 +1,12 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/database/daos/projects_dao.dart';
 import 'package:todo/domain/models/task_list.dart';
 import 'package:todo/domain/repositories/projects_repository.dart';
 import 'package:uuid/uuid.dart';
+
+final projectsRepositoryProvider = Provider.autoDispose<ProjectsRepository>(
+    (ref) => ProjectsRepositoryImpl(AppDatabase.getInstance().projectsDao));
 
 class ProjectsRepositoryImpl implements ProjectsRepository {
   final ProjectsDao _projectsDao;

@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo/data/database/app_database.dart';
+import 'package:todo/data/repositories/projects_repository_impl.dart';
+import 'package:todo/data/repositories/tasks_repository_impl.dart';
 import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/models/due_date.dart';
 import 'package:todo/domain/repositories/tasks_repository.dart';
-import 'package:todo/presentation/providers/list_id_provider.dart';
-import 'package:todo/presentation/providers/projects_provider.dart';
-import 'package:todo/presentation/providers/tasks_provider.dart';
+import 'package:todo/presentation/notifiers/home/task_list_id_provider.dart';
 
 part 'adding_new_task_provider.g.dart';
 
@@ -79,7 +79,7 @@ class AddingNewTaskProvider extends StateNotifier<Task> {
 
 final addingNewTaskProvider =
     StateNotifierProvider.autoDispose<AddingNewTaskProvider, Task>((ref) {
-  final listId = ref.watch(listIdProvider);
+  final listId = ref.watch(taskListIdProvider);
   final TextEditingController titleController =
       ref.watch(addingNewTaskTitleControllerProvider);
   final TextEditingController descriptionController =

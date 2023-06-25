@@ -5,8 +5,8 @@ import 'package:todo/constant.dart';
 import 'package:todo/domain/enums/navigation_item.dart';
 import 'package:todo/domain/enums/project_menu_item.dart';
 import 'package:todo/presentation/pages/home/task/editing_project_name_dialog.dart';
-import 'package:todo/presentation/providers/home/task/project_menu_provider.dart';
-import 'package:todo/presentation/providers/home/task/task_app_bar_provider.dart';
+import 'package:todo/presentation/notifiers/home/task/project_menu_provider.dart';
+import 'package:todo/presentation/notifiers/home/task/task_app_bar_provider.dart';
 import 'package:todo/presentation/route/route.dart';
 
 class TaskAppBar extends ConsumerWidget implements PreferredSizeWidget {
