@@ -3,17 +3,29 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/presentation/notifiers/detail/detail_provider.dart';
 
-class Detail extends ConsumerWidget {
-  Detail({super.key, this.id});
+class Detail extends ConsumerStatefulWidget {
+  const Detail({super.key, this.id});
 
   final String? id;
 
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _DetailState();
+}
+
+class _DetailState extends ConsumerState<Detail> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final task = ref.watch(taskFromTaskIdStreamProvider(id ?? ""));
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final task = ref.watch(taskFromTaskIdStreamProvider(widget.id ?? ""));
     return task.when(
       data: (data) => Scaffold(
         appBar: AppBar(

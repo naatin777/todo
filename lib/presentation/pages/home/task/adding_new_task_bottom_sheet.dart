@@ -9,13 +9,29 @@ import 'package:todo/presentation/pages/home/task/project_selection_bottom_sheet
 import 'package:todo/presentation/notifiers/home/task/adding_new_task_provider.dart';
 import 'package:todo/presentation/notifiers/home/task_list_id_provider.dart';
 
-class AddingNewTaskBottomSheet extends ConsumerWidget {
-  AddingNewTaskBottomSheet({super.key});
+class AddingNewTaskBottomSheet extends ConsumerStatefulWidget {
+  const AddingNewTaskBottomSheet({super.key});
 
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _AddingNewTaskBottomSheetState();
+}
+
+class _AddingNewTaskBottomSheetState
+    extends ConsumerState<AddingNewTaskBottomSheet> {
   final titleController = TextEditingController();
   final titleFocusNode = FocusNode();
   final descriptionController = TextEditingController();
   final descriptionFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    titleFocusNode.dispose();
+    descriptionController.dispose();
+    descriptionFocusNode.dispose();
+    super.dispose();
+  }
 
   void saveTask(WidgetRef ref) {
     ref.read(addingNewTaskProvider.notifier).saveTask(
@@ -27,7 +43,7 @@ class AddingNewTaskBottomSheet extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final listId = ref.watch(taskListIdProvider);
     final addingNewTask = ref.watch(addingNewTaskProvider);
     final project =

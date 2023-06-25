@@ -2,13 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/presentation/notifiers/home/task/adding_new_project_provider.dart';
 
-class AddingNewProjectDialog extends ConsumerWidget {
-  AddingNewProjectDialog({super.key});
+class AddingNewProjectDialog extends ConsumerStatefulWidget {
+  const AddingNewProjectDialog({super.key});
 
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _AddingNewProjectDialogState();
+}
+
+class _AddingNewProjectDialogState
+    extends ConsumerState<AddingNewProjectDialog> {
   final titleController = TextEditingController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    titleController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text("Add new project"),
       content: Column(
