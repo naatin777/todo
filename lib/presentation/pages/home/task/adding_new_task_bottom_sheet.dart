@@ -6,7 +6,7 @@ import 'package:todo/domain/models/due_date.dart';
 import 'package:todo/presentation/pages/home/task/due_date_dialog.dart';
 import 'package:todo/presentation/pages/home/task/priority_selection_dialog.dart';
 import 'package:todo/presentation/pages/home/task/project_selection_bottom_sheet.dart';
-import 'package:todo/presentation/notifiers/home/task/adding_new_task_provider.dart';
+import 'package:todo/presentation/notifiers/home/task/adding_new_task_notifier.dart';
 import 'package:todo/presentation/notifiers/task_list_id_provider.dart';
 
 class AddingNewTaskBottomSheet extends ConsumerStatefulWidget {
@@ -34,7 +34,7 @@ class _AddingNewTaskBottomSheetState
   }
 
   void saveTask(WidgetRef ref) {
-    ref.read(addingNewTaskProvider.notifier).saveTask(
+    ref.read(addingNewTaskNotifierProvider.notifier).saveTask(
           titleController.text,
           descriptionController.text,
         );
@@ -45,7 +45,7 @@ class _AddingNewTaskBottomSheetState
   @override
   Widget build(BuildContext context) {
     final listId = ref.watch(taskListIdProvider);
-    final addingNewTask = ref.watch(addingNewTaskProvider);
+    final addingNewTask = ref.watch(addingNewTaskNotifierProvider);
     final project =
         ref.watch(projectFromIdStreamProvider(addingNewTask.projectId));
     final dueDateChipText = ref.watch(dueDateChipTextProvider(listId));
@@ -108,9 +108,7 @@ class _AddingNewTaskBottomSheetState
                         ),
                       ),
                     );
-                    ref
-                        .read(addingNewTaskProvider.notifier)
-                        .changeDueDate(result);
+                    ref.read(addingNewTask.notifier).changeDueDate(result);
                   },
                   label: Text(
                     dueDateChipText,
@@ -139,9 +137,7 @@ class _AddingNewTaskBottomSheetState
                         priority: addingNewTask.priority,
                       ),
                     );
-                    ref
-                        .read(addingNewTaskProvider.notifier)
-                        .changePriority(result);
+                    ref.read(addingNewTask.notifier).changePriority(result);
                   },
                   label: Text(
                     "P${addingNewTask.priority.number}",
@@ -184,7 +180,7 @@ class _AddingNewTaskBottomSheetState
                     ),
                   );
                   ref
-                      .read(addingNewTaskProvider.notifier)
+                      .read(addingNewTaskNotifierProvider.notifier)
                       .changeProject(result);
                 },
                 child: Row(

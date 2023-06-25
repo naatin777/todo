@@ -1,6 +1,4 @@
 import 'package:drift/drift.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo/data/database/app_database.dart';
@@ -8,28 +6,25 @@ import 'package:todo/data/repositories/projects_repository_impl.dart';
 import 'package:todo/data/repositories/tasks_repository_impl.dart';
 import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/models/due_date.dart';
-import 'package:todo/domain/repositories/tasks_repository.dart';
 import 'package:todo/presentation/notifiers/task_list_id_provider.dart';
 
-// part 'adding_new_task_provider.g.dart';
+part 'adding_new_task_notifier.g.dart';
 
-class AddingNewTaskProvider extends StateNotifier<Task> {
-  final TasksRepository tasksRepository;
-
-  AddingNewTaskProvider({
-    required String projectId,
-    required this.tasksRepository,
-  }) : super(
-          Task(
-            id: "",
-            projectId: projectId,
-            isDone: false,
-            title: "",
-            description: "",
-            priority: Priority.low,
-            isAllDay: true,
-          ),
-        );
+@riverpod
+class AddingNewTaskNotifier extends _$AddingNewTaskNotifier {
+  @override
+  Task build() {
+    final projectId = ref.watch(taskListIdProvider);
+    return Task(
+      id: "",
+      projectId: projectId,
+      isDone: false,
+      title: "",
+      description: "",
+      priority: Priority.low,
+      isAllDay: true,
+    );
+  }
 
   void changeProject(String? projectId) {
     if (projectId != null) {
@@ -53,6 +48,7 @@ class AddingNewTaskProvider extends StateNotifier<Task> {
   }
 
   Future<void> saveTask(String title, String description) async {
+    final tasksRepository = ref.watch(tasksRepositoryProvider);
     await tasksRepository.createTask(
       state.projectId,
       false,
@@ -70,16 +66,6 @@ class AddingNewTaskProvider extends StateNotifier<Task> {
   }
 }
 
-final addingNewTaskProvider =
-    StateNotifierProvider.autoDispose<AddingNewTaskProvider, Task>((ref) {
-  final listId = ref.watch(taskListIdProvider);
-  final tasksRepository = ref.watch(tasksRepositoryProvider);
-  return AddingNewTaskProvider(
-    projectId: listId,
-    tasksRepository: tasksRepository,
-  );
-});
-
 final projectFromIdStreamProvider =
     StreamProvider.autoDispose.family((ref, String projectId) {
   final projectsRepository = ref.watch(projectsRepositoryProvider);
@@ -87,7 +73,7 @@ final projectFromIdStreamProvider =
 });
 
 final dueDateChipTextProvider = Provider.autoDispose.family((ref, String id) {
-  final addingNewTask = ref.watch(addingNewTaskProvider);
+  final addingNewTask = ref.watch(addingNewTaskNotifierProvider);
   final dueDate = addingNewTask.dueDate;
   final isAllDay = addingNewTask.isAllDay;
   final dateFormat = DateFormat("yyyy-MM-dd");
