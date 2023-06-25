@@ -3,11 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/presentation/notifiers/home/task/adding_new_project_provider.dart';
 
 class AddingNewProjectDialog extends ConsumerWidget {
-  const AddingNewProjectDialog({super.key});
+  AddingNewProjectDialog({super.key});
+
+  final titleController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final titleController = ref.watch(addingNewProjectTitleProvider);
     return AlertDialog(
       title: const Text("Add new project"),
       content: Column(
@@ -33,7 +34,9 @@ class AddingNewProjectDialog extends ConsumerWidget {
         TextButton(
           onPressed: () async {
             Navigator.of(context).pop();
-            await ref.read(addingNewProjectProvider).addNewProject();
+            await ref
+                .read(addingNewProjectProvider)
+                .addNewProject(titleController.text);
           },
           child: const Text("Ok"),
         ),

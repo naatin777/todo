@@ -10,18 +10,26 @@ import 'package:todo/presentation/notifiers/home/task/adding_new_task_provider.d
 import 'package:todo/presentation/notifiers/home/task_list_id_provider.dart';
 
 class AddingNewTaskBottomSheet extends ConsumerWidget {
-  const AddingNewTaskBottomSheet({super.key});
+  AddingNewTaskBottomSheet({super.key});
+
+  final titleController = TextEditingController();
+  final titleFocusNode = FocusNode();
+  final descriptionController = TextEditingController();
+  final descriptionFocusNode = FocusNode();
+
+  void saveTask(WidgetRef ref) {
+    ref.read(addingNewTaskProvider.notifier).saveTask(
+          titleController.text,
+          descriptionController.text,
+        );
+    titleController.clear();
+    descriptionController.clear();
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final listId = ref.watch(taskListIdProvider);
     final addingNewTask = ref.watch(addingNewTaskProvider);
-    final titleController = ref.watch(addingNewTaskTitleControllerProvider);
-    final titleFocusNode = ref.watch(addingNewTaskTitleFocusNodeProvider);
-    final descriptionController =
-        ref.watch(addingNewTaskDescriptionControllerProvider);
-    final descriptionFocusNode =
-        ref.watch(addingNewTaskDescriptionFocusNodeProvider);
     final project =
         ref.watch(projectFromIdStreamProvider(addingNewTask.projectId));
     final dueDateChipText = ref.watch(dueDateChipTextProvider(listId));
@@ -44,7 +52,7 @@ class AddingNewTaskBottomSheet extends ConsumerWidget {
             autofocus: true,
             autocorrect: false,
             onEditingComplete: () {
-              ref.read(addingNewTaskProvider.notifier).saveTask();
+              saveTask(ref);
             },
           ),
         ),
@@ -188,11 +196,7 @@ class AddingNewTaskBottomSheet extends ConsumerWidget {
                 valueListenable: titleController,
                 builder: (context, value, child) {
                   return IconButton(
-                    onPressed: value.text.isEmpty
-                        ? null
-                        : () {
-                            ref.read(addingNewTaskProvider.notifier).saveTask();
-                          },
+                    onPressed: value.text.isEmpty ? null : () => saveTask(ref),
                     icon: const Icon(Icons.send),
                   );
                 },

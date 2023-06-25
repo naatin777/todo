@@ -4,9 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:todo/presentation/notifiers/detail/detail_provider.dart';
 
 class Detail extends ConsumerWidget {
-  const Detail({super.key, this.id});
+  Detail({super.key, this.id});
 
   final String? id;
+
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,10 +42,6 @@ class Detail extends ConsumerWidget {
         body: Consumer(
           builder: (context, ref, child) {
             if (data != null) {
-              final titleController =
-                  ref.watch(detailTitleProvider(data.title));
-              final descriptionController =
-                  ref.watch(detailDescriptionProvider(data.description));
               return Column(
                 children: [
                   Container(

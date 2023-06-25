@@ -36,7 +36,7 @@ class TaskDrawer extends ConsumerWidget {
           } else if (index == data.length + 1) {
             showDialog(
               context: context,
-              builder: (context) => const AddingNewProjectDialog(),
+              builder: (context) => AddingNewProjectDialog(),
             );
           }
         },

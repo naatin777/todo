@@ -11,18 +11,13 @@ import 'package:todo/domain/models/due_date.dart';
 import 'package:todo/domain/repositories/tasks_repository.dart';
 import 'package:todo/presentation/notifiers/home/task_list_id_provider.dart';
 
-part 'adding_new_task_provider.g.dart';
+// part 'adding_new_task_provider.g.dart';
 
 class AddingNewTaskProvider extends StateNotifier<Task> {
-  final TextEditingController titleController;
-  final TextEditingController descriptionController;
-
   final TasksRepository tasksRepository;
 
   AddingNewTaskProvider({
     required String projectId,
-    required this.titleController,
-    required this.descriptionController,
     required this.tasksRepository,
   }) : super(
           Task(
@@ -57,17 +52,15 @@ class AddingNewTaskProvider extends StateNotifier<Task> {
     }
   }
 
-  Future<void> saveTask() async {
+  Future<void> saveTask(String title, String description) async {
     await tasksRepository.createTask(
       state.projectId,
       false,
-      titleController.text,
-      descriptionController.text,
+      title,
+      description,
       state.priority,
       DueDate(dateTime: state.dueDate, isAllDay: state.isAllDay),
     );
-    titleController.clear();
-    descriptionController.clear();
     state = state.copyWith(
       id: "",
       title: "",
@@ -80,15 +73,9 @@ class AddingNewTaskProvider extends StateNotifier<Task> {
 final addingNewTaskProvider =
     StateNotifierProvider.autoDispose<AddingNewTaskProvider, Task>((ref) {
   final listId = ref.watch(taskListIdProvider);
-  final TextEditingController titleController =
-      ref.watch(addingNewTaskTitleControllerProvider);
-  final TextEditingController descriptionController =
-      ref.watch(addingNewTaskDescriptionControllerProvider);
   final tasksRepository = ref.watch(tasksRepositoryProvider);
   return AddingNewTaskProvider(
     projectId: listId,
-    titleController: titleController,
-    descriptionController: descriptionController,
     tasksRepository: tasksRepository,
   );
 });
@@ -98,42 +85,6 @@ final projectFromIdStreamProvider =
   final projectsRepository = ref.watch(projectsRepositoryProvider);
   return projectsRepository.watchProject(projectId);
 });
-
-@riverpod
-TextEditingController addingNewTaskTitleController(Ref ref) {
-  final titleController = TextEditingController();
-  ref.onDispose(() {
-    titleController.dispose();
-  });
-  return titleController;
-}
-
-@riverpod
-FocusNode addingNewTaskTitleFocusNode(Ref ref) {
-  final titleFocusNode = FocusNode();
-  ref.onDispose(() {
-    titleFocusNode.dispose();
-  });
-  return titleFocusNode;
-}
-
-@riverpod
-TextEditingController addingNewTaskDescriptionController(Ref ref) {
-  final descriptionController = TextEditingController();
-  ref.onDispose(() {
-    descriptionController.dispose();
-  });
-  return descriptionController;
-}
-
-@riverpod
-FocusNode addingNewTaskDescriptionFocusNode(Ref ref) {
-  final descriptionFocusNode = FocusNode();
-  ref.onDispose(() {
-    descriptionFocusNode.dispose();
-  });
-  return descriptionFocusNode;
-}
 
 final dueDateChipTextProvider = Provider.autoDispose.family((ref, String id) {
   final addingNewTask = ref.watch(addingNewTaskProvider);

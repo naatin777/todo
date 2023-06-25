@@ -1,28 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/data/database/app_database.dart';
 import 'package:todo/data/repositories/tasks_repository_impl.dart';
 import 'package:todo/domain/repositories/tasks_repository.dart';
-
-final detailTitleProvider = Provider.autoDispose.family(
-  (ref, String arg) {
-    final titleProvider = TextEditingController(text: arg);
-    ref.onDispose(() {
-      titleProvider.dispose();
-    });
-    return titleProvider;
-  },
-);
-
-final detailDescriptionProvider = Provider.autoDispose.family(
-  (ref, String arg) {
-    final descriptionProvider = TextEditingController(text: arg);
-    ref.onDispose(() {
-      descriptionProvider.dispose();
-    });
-    return descriptionProvider;
-  },
-);
 
 final taskFromTaskIdStreamProvider =
     StreamProvider.autoDispose.family((ref, String taskId) {

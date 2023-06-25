@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../notifiers/home/task/task_drawer.dart';
+part of 'task_drawer.dart';
 
 // **************************************************************************
 // RiverpodGenerator
