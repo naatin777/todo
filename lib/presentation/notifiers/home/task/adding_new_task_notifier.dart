@@ -6,6 +6,7 @@ import 'package:todo/data/repositories/projects_repository_impl.dart';
 import 'package:todo/data/repositories/tasks_repository_impl.dart';
 import 'package:todo/domain/enums/priority.dart';
 import 'package:todo/domain/models/due_date.dart';
+import 'package:todo/domain/models/task_list.dart';
 import 'package:todo/presentation/notifiers/task_list_id_provider.dart';
 
 part 'adding_new_task_notifier.g.dart';
@@ -66,13 +67,15 @@ class AddingNewTaskNotifier extends _$AddingNewTaskNotifier {
   }
 }
 
-final projectFromIdStreamProvider =
-    StreamProvider.autoDispose.family((ref, String projectId) {
+@riverpod
+Stream<Project?> projectFromId(ProjectFromIdRef ref) {
+  final Task addingNewTask = ref.watch(addingNewTaskNotifierProvider);
   final projectsRepository = ref.watch(projectsRepositoryProvider);
-  return projectsRepository.watchProject(projectId);
-});
+  return projectsRepository.watchProject(addingNewTask.projectId);
+}
 
-final dueDateChipTextProvider = Provider.autoDispose.family((ref, String id) {
+@riverpod
+String dueDateChipText(ref) {
   final addingNewTask = ref.watch(addingNewTaskNotifierProvider);
   final dueDate = addingNewTask.dueDate;
   final isAllDay = addingNewTask.isAllDay;
@@ -87,4 +90,4 @@ final dueDateChipTextProvider = Provider.autoDispose.family((ref, String id) {
   } else {
     return "Due Date";
   }
-});
+}

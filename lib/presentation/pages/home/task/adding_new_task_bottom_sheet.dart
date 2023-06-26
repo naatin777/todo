@@ -7,7 +7,6 @@ import 'package:todo/presentation/pages/home/task/due_date_dialog.dart';
 import 'package:todo/presentation/pages/home/task/priority_selection_dialog.dart';
 import 'package:todo/presentation/pages/home/task/project_selection_bottom_sheet.dart';
 import 'package:todo/presentation/notifiers/home/task/adding_new_task_notifier.dart';
-import 'package:todo/presentation/notifiers/task_list_id_provider.dart';
 
 class AddingNewTaskBottomSheet extends ConsumerStatefulWidget {
   const AddingNewTaskBottomSheet({super.key});
@@ -44,11 +43,9 @@ class _AddingNewTaskBottomSheetState
 
   @override
   Widget build(BuildContext context) {
-    final listId = ref.watch(taskListIdProvider);
     final addingNewTask = ref.watch(addingNewTaskNotifierProvider);
-    final project =
-        ref.watch(projectFromIdStreamProvider(addingNewTask.projectId));
-    final dueDateChipText = ref.watch(dueDateChipTextProvider(listId));
+    final project = ref.watch(projectFromIdProvider);
+    final dueDateChipText = ref.watch(dueDateChipTextProvider);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +105,9 @@ class _AddingNewTaskBottomSheetState
                         ),
                       ),
                     );
-                    ref.read(addingNewTask.notifier).changeDueDate(result);
+                    ref
+                        .read(addingNewTaskNotifierProvider.notifier)
+                        .changeDueDate(result);
                   },
                   label: Text(
                     dueDateChipText,
@@ -137,7 +136,9 @@ class _AddingNewTaskBottomSheetState
                         priority: addingNewTask.priority,
                       ),
                     );
-                    ref.read(addingNewTask.notifier).changePriority(result);
+                    ref
+                        .read(addingNewTaskNotifierProvider.notifier)
+                        .changePriority(result);
                   },
                   label: Text(
                     "P${addingNewTask.priority.number}",

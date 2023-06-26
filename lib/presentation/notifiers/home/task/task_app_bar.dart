@@ -5,7 +5,7 @@ import 'package:todo/domain/models/task_list.dart';
 import 'package:todo/presentation/notifiers/task_list_id_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'task_app_bar_provider.g.dart';
+part 'task_app_bar.g.dart';
 
 @riverpod
 Stream<Project?> taskAppBar(AutoDisposeRef ref) {

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo/constant.dart';
 import 'package:todo/domain/enums/navigation_item.dart';
 import 'package:todo/presentation/notifiers/task_id_notifier.dart';
 import 'package:todo/presentation/notifiers/task_list_id_provider.dart';
 import 'package:todo/presentation/route/route.dart';
 
-final routerProvider = Provider((ref) {
+part 'router.g.dart';
+
+@riverpod
+GoRouter router(ref) {
   return GoRouter(
     routes: $appRoutes,
     redirect: (context, state) {
@@ -27,4 +30,4 @@ final routerProvider = Provider((ref) {
       }
     },
   );
-});
+}

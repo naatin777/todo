@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/domain/models/due_date.dart';
-import 'package:todo/presentation/notifiers/home/task/due_date_provider.dart';
+import 'package:todo/presentation/notifiers/home/task/due_date_notifier.dart';
 
 class DueDateDialog extends ConsumerStatefulWidget {
   const DueDateDialog({super.key, required this.dueDate});
@@ -16,14 +16,18 @@ class _DueDateDialogState extends ConsumerState<DueDateDialog> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(dueDateProvider.notifier).changeDate(widget.dueDate.dateTime);
-      ref.read(dueDateProvider.notifier).toggleAllDay(widget.dueDate.isAllDay);
+      ref
+          .read(dueDateNotifierProvider.notifier)
+          .changeDate(widget.dueDate.dateTime);
+      ref
+          .read(dueDateNotifierProvider.notifier)
+          .toggleAllDay(widget.dueDate.isAllDay);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final dueDate = ref.watch(dueDateProvider);
+    final dueDate = ref.watch(dueDateNotifierProvider);
     final formattedDate = ref.watch(formattedDateProvider);
     final formattedTime = ref.watch(formattedTimeProvider);
     return AlertDialog(
@@ -42,7 +46,7 @@ class _DueDateDialogState extends ConsumerState<DueDateDialog> {
                 firstDate: DateTime(now.year - 100),
                 lastDate: DateTime(now.year + 100),
               );
-              ref.read(dueDateProvider.notifier).changeDate(result);
+              ref.read(dueDateNotifierProvider.notifier).changeDate(result);
             },
           ),
           ListTile(
@@ -54,7 +58,7 @@ class _DueDateDialogState extends ConsumerState<DueDateDialog> {
                 context: context,
                 initialTime: now,
               );
-              ref.read(dueDateProvider.notifier).changeTime(result);
+              ref.read(dueDateNotifierProvider.notifier).changeTime(result);
             },
             enabled: dueDate.dateTime != null,
           ),
@@ -64,7 +68,7 @@ class _DueDateDialogState extends ConsumerState<DueDateDialog> {
       actions: [
         TextButton(
           onPressed: () {
-            ref.read(dueDateProvider.notifier).clear();
+            ref.read(dueDateNotifierProvider.notifier).clear();
           },
           child: const Text("Clear"),
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/presentation/notifiers/home/task/adding_new_project_provider.dart';
+import 'package:todo/presentation/notifiers/home/task/adding_new_project_notifier.dart';
 
 class AddingNewProjectDialog extends ConsumerStatefulWidget {
   const AddingNewProjectDialog({super.key});
@@ -48,7 +48,7 @@ class _AddingNewProjectDialogState
           onPressed: () async {
             Navigator.of(context).pop();
             await ref
-                .read(addingNewProjectProvider)
+                .read(addingNewProjectNotifierProvider.notifier)
                 .addNewProject(titleController.text);
           },
           child: const Text("Ok"),

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo/domain/models/due_date.dart';
 
-class DueDateProvider extends StateNotifier<DueDate> {
-  DueDateProvider() : super(const DueDate(dateTime: null, isAllDay: true));
+part 'due_date_notifier.g.dart';
+
+@riverpod
+class DueDateNotifier extends _$DueDateNotifier {
+  @override
+  DueDate build() {
+    return const DueDate(dateTime: null, isAllDay: true);
+  }
 
   void changeDate(DateTime? dateTime) {
     state = state.copyWith(dateTime: dateTime);
@@ -35,26 +41,24 @@ class DueDateProvider extends StateNotifier<DueDate> {
   }
 }
 
-final dueDateProvider =
-    StateNotifierProvider.autoDispose<DueDateProvider, DueDate>(
-        (ref) => DueDateProvider());
-
-final formattedDateProvider = Provider.autoDispose((ref) {
-  final dueDate = ref.watch(dueDateProvider);
+@riverpod
+String formattedDate(FormattedDateRef ref) {
+  final dueDate = ref.watch(dueDateNotifierProvider);
   final dateTime = dueDate.dateTime;
   if (dateTime != null) {
     return DateFormat('yyyy-MM-dd').format(dateTime);
   } else {
     return "Date";
   }
-});
+}
 
-final formattedTimeProvider = Provider.autoDispose((ref) {
-  final dueDate = ref.watch(dueDateProvider);
+@riverpod
+String formattedTime(FormattedTimeRef ref) {
+  final dueDate = ref.watch(dueDateNotifierProvider);
   final dateTime = dueDate.dateTime;
   if (!dueDate.isAllDay && dateTime != null) {
     return DateFormat('hh:mm').format(dateTime);
   } else {
     return "Time";
   }
-});
+}

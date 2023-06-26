@@ -1,24 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'task_drawer.dart';
+part of 'project_selection.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$taskDrawerHash() => r'80af9f47266c0ca688064349a542da1e7db7216b';
+String _$projectsHash() => r'9176a634564c4e6185afb2f60e5b817b69954207';
 
-/// See also [TaskDrawer].
-@ProviderFor(TaskDrawer)
-final taskDrawerProvider =
-    AutoDisposeAsyncNotifierProvider<TaskDrawer, List<TaskList>>.internal(
-  TaskDrawer.new,
-  name: r'taskDrawerProvider',
+/// See also [projects].
+@ProviderFor(projects)
+final projectsProvider = AutoDisposeStreamProvider<List<Project>>.internal(
+  projects,
+  name: r'projectsProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$taskDrawerHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$projectsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$TaskDrawer = AutoDisposeAsyncNotifier<List<TaskList>>;
+typedef ProjectsRef = AutoDisposeStreamProviderRef<List<Project>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
