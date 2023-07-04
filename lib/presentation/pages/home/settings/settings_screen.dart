@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/presentation/notifiers/home/settings/theme_provider.dart';
+import 'package:todo/presentation/notifiers/home/settings/theme_notifier.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeProvider);
+    final themeMode = ref.watch(themeNotifierProvider);
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
@@ -31,7 +31,7 @@ class SettingsScreen extends ConsumerWidget {
                                 onChanged: (value) async {
                                   Navigator.of(context).pop();
                                   await ref
-                                      .watch(themeProvider.notifier)
+                                      .read(themeNotifierProvider.notifier)
                                       .changeThemeMode(e);
                                 },
                               ),
@@ -39,7 +39,7 @@ class SettingsScreen extends ConsumerWidget {
                               onTap: () async {
                                 Navigator.of(context).pop();
                                 await ref
-                                    .watch(themeProvider.notifier)
+                                    .read(themeNotifierProvider.notifier)
                                     .changeThemeMode(e);
                               },
                               horizontalTitleGap: 0.0,

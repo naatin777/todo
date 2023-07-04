@@ -6,7 +6,7 @@ part of 'adding_new_task_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$projectFromIdHash() => r'6c4f815579c2d4d6dafeb009ce06c731eb94e653';
+String _$projectFromIdHash() => r'c41f2c89caffb6769a40935936f9c40de03f40a8';
 
 /// See also [projectFromId].
 @ProviderFor(projectFromId)

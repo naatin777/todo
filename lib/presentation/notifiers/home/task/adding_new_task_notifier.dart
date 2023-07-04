@@ -69,7 +69,7 @@ class AddingNewTaskNotifier extends _$AddingNewTaskNotifier {
 
 @riverpod
 Stream<Project?> projectFromId(ProjectFromIdRef ref) {
-  final Task addingNewTask = ref.watch(addingNewTaskNotifierProvider);
+  final addingNewTask = ref.watch(addingNewTaskNotifierProvider);
   final projectsRepository = ref.watch(projectsRepositoryProvider);
   return projectsRepository.watchProject(addingNewTask.projectId);
 }

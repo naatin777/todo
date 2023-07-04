@@ -36,6 +36,8 @@ extension $HomeRouteExtension on HomeRoute {
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 RouteBase get $detailRoute => GoRouteData.$route(
@@ -59,4 +61,6 @@ extension $DetailRouteExtension on DetailRoute {
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
