@@ -7,7 +7,7 @@ part of 'task_screen_notifier.dart';
 // **************************************************************************
 
 String _$taskScreenNotifierHash() =>
-    r'5888b33b9ec1916bf76b2f5887d6d1f4627379d3';
+    r'fd408b6006a7490416125c3ad6dcf905580eacd8';
 
 /// See also [TaskScreenNotifier].
 @ProviderFor(TaskScreenNotifier)

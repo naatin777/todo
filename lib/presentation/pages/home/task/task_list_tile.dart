@@ -43,7 +43,9 @@ class _TaskListTileState extends ConsumerState<TaskListTile> {
       leading: Checkbox(
         value: task.isDone,
         onChanged: (value) {
-          ref.read(taskScreenNotifierProvider.notifier).changeDone(task, value);
+          ref
+              .read(taskScreenNotifierProvider.notifier)
+              .changeCheck(task, value);
         },
         fillColor: MaterialStateProperty.all(
             task.priority.color ?? Theme.of(context).colorScheme.onBackground),

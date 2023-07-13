@@ -14,15 +14,11 @@ class TaskScreenNotifier extends _$TaskScreenNotifier {
     return tasksRepository.getTasksFromProject(listId);
   }
 
-  Future<void> changeDone(Task task, bool? isDone) async {
-    state = state.whenData((value) {
-      return value.map((e) {
-        if (e.id == task.id) {
-          return task.copyWith(isDone: isDone);
-        } else {
-          return e;
-        }
-      }).toList();
-    });
+  Future<void> changeCheck(Task task, bool? isDone) async {
+    final tasksRepository = ref.watch(tasksRepositoryProvider);
+    final changedTask = task.copyWith(isDone: isDone);
+    await tasksRepository.updateTask(changedTask);
+    state =
+        AsyncData(await tasksRepository.getTasksFromProject(task.projectId));
   }
 }
