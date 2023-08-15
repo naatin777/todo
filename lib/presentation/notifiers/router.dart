@@ -14,15 +14,16 @@ GoRouter router(ref) {
   return GoRouter(
     routes: $appRoutes,
     redirect: (context, state) {
-      if (state.location == "/") {
+      final location = state.uri.toString();
+      if (location == "/") {
         return "/${NavigationItems.task.name}?id=${inbox.id}";
       } else {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (state.location.contains("/detail/")) {
-            final taskId = state.location.replaceAll("/detail/", "");
+          if (location.contains("/detail/")) {
+            final taskId = location.replaceAll("/detail/", "");
             ref.read(taskIdNotifierProvider.notifier).changeTaskId(taskId);
           } else {
-            final listId = state.queryParameters["id"] ?? inbox.id;
+            final listId = state.uri.queryParameters["id"] ?? inbox.id;
             ref.read(taskListIdProvider.notifier).changeListId(listId);
           }
         });

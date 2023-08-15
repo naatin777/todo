@@ -7,7 +7,7 @@ part of 'task_screen_notifier.dart';
 // **************************************************************************
 
 String _$taskScreenNotifierHash() =>
-    r'fd408b6006a7490416125c3ad6dcf905580eacd8';
+    r'f4f05d12493dd1b86d599afaa0de6a89129f93ce';
 
 /// See also [TaskScreenNotifier].
 @ProviderFor(TaskScreenNotifier)
@@ -23,4 +23,5 @@ final taskScreenNotifierProvider = AutoDisposeAsyncNotifierProvider<
 );
 
 typedef _$TaskScreenNotifier = AutoDisposeAsyncNotifier<List<dynamic>>;
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

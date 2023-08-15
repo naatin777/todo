@@ -42,7 +42,7 @@ String _$addingNewTaskNotifierHash() =>
 /// See also [AddingNewTaskNotifier].
 @ProviderFor(AddingNewTaskNotifier)
 final addingNewTaskNotifierProvider =
-    AutoDisposeNotifierProvider<AddingNewTaskNotifier, Task>.internal(
+    AutoDisposeNotifierProvider<AddingNewTaskNotifier, dynamic>.internal(
   AddingNewTaskNotifier.new,
   name: r'addingNewTaskNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -52,5 +52,6 @@ final addingNewTaskNotifierProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$AddingNewTaskNotifier = AutoDisposeNotifier<Task>;
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+typedef _$AddingNewTaskNotifier = AutoDisposeNotifier<dynamic>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

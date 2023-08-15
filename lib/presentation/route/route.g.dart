@@ -20,7 +20,7 @@ RouteBase get $homeRoute => GoRouteData.$route(
 extension $HomeRouteExtension on HomeRoute {
   static HomeRoute _fromState(GoRouterState state) => HomeRoute(
         state.pathParameters['nav']!,
-        id: state.queryParameters['id'],
+        id: state.uri.queryParameters['id'],
       );
 
   String get location => GoRouteData.$location(

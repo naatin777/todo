@@ -21,15 +21,12 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
       type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _isDoneMeta = const VerificationMeta('isDone');
   @override
-  late final GeneratedColumn<bool> isDone =
-      GeneratedColumn<bool>('is_done', aliasedName, false,
-          type: DriftSqlType.bool,
-          requiredDuringInsert: true,
-          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
-            SqlDialect.sqlite: 'CHECK ("is_done" IN (0, 1))',
-            SqlDialect.mysql: '',
-            SqlDialect.postgres: '',
-          }));
+  late final GeneratedColumn<bool> isDone = GeneratedColumn<bool>(
+      'is_done', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_done" IN (0, 1))'));
   static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
@@ -57,15 +54,12 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   static const VerificationMeta _isAllDayMeta =
       const VerificationMeta('isAllDay');
   @override
-  late final GeneratedColumn<bool> isAllDay =
-      GeneratedColumn<bool>('is_all_day', aliasedName, false,
-          type: DriftSqlType.bool,
-          requiredDuringInsert: true,
-          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
-            SqlDialect.sqlite: 'CHECK ("is_all_day" IN (0, 1))',
-            SqlDialect.mysql: '',
-            SqlDialect.postgres: '',
-          }));
+  late final GeneratedColumn<bool> isAllDay = GeneratedColumn<bool>(
+      'is_all_day', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_all_day" IN (0, 1))'));
   @override
   List<GeneratedColumn> get $columns =>
       [id, projectId, isDone, title, description, priority, dueDate, isAllDay];
