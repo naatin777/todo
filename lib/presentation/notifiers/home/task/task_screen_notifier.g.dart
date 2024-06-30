@@ -11,8 +11,8 @@ String _$taskScreenNotifierHash() =>
 
 /// See also [TaskScreenNotifier].
 @ProviderFor(TaskScreenNotifier)
-final taskScreenNotifierProvider = AutoDisposeAsyncNotifierProvider<
-    TaskScreenNotifier, List<dynamic>>.internal(
+final taskScreenNotifierProvider =
+    AutoDisposeAsyncNotifierProvider<TaskScreenNotifier, List<Task>>.internal(
   TaskScreenNotifier.new,
   name: r'taskScreenNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final taskScreenNotifierProvider = AutoDisposeAsyncNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$TaskScreenNotifier = AutoDisposeAsyncNotifier<List<dynamic>>;
+typedef _$TaskScreenNotifier = AutoDisposeAsyncNotifier<List<Task>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

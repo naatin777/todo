@@ -47,8 +47,8 @@ class _TaskListTileState extends ConsumerState<TaskListTile> {
               .read(taskScreenNotifierProvider.notifier)
               .changeCheck(task, value);
         },
-        fillColor: MaterialStateProperty.all(
-            task.priority.color ?? Theme.of(context).colorScheme.onBackground),
+        fillColor: WidgetStateProperty.all(
+            task.priority.color ?? Theme.of(context).colorScheme.onSurface),
       ),
       title: Text(task.title),
       subtitle: task.description.isNotEmpty || task.dueDate != null

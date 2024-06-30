@@ -17,7 +17,7 @@ class PrioritySelectionDialog extends ConsumerWidget {
           return ListTile(
             leading: Icon(
               Icons.priority_high,
-              color: e.color ?? Theme.of(context).colorScheme.onBackground,
+              color: e.color ?? Theme.of(context).colorScheme.onSurface,
             ),
             title: Text("P${e.number} ${e.name}"),
             trailing: Radio(

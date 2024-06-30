@@ -12,7 +12,7 @@ part of 'due_date.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DueDate {
@@ -61,20 +61,21 @@ class _$DueDateCopyWithImpl<$Res, $Val extends DueDate>
 }
 
 /// @nodoc
-abstract class _$$_DueDateCopyWith<$Res> implements $DueDateCopyWith<$Res> {
-  factory _$$_DueDateCopyWith(
-          _$_DueDate value, $Res Function(_$_DueDate) then) =
-      __$$_DueDateCopyWithImpl<$Res>;
+abstract class _$$DueDateImplCopyWith<$Res> implements $DueDateCopyWith<$Res> {
+  factory _$$DueDateImplCopyWith(
+          _$DueDateImpl value, $Res Function(_$DueDateImpl) then) =
+      __$$DueDateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({DateTime? dateTime, bool isAllDay});
 }
 
 /// @nodoc
-class __$$_DueDateCopyWithImpl<$Res>
-    extends _$DueDateCopyWithImpl<$Res, _$_DueDate>
-    implements _$$_DueDateCopyWith<$Res> {
-  __$$_DueDateCopyWithImpl(_$_DueDate _value, $Res Function(_$_DueDate) _then)
+class __$$DueDateImplCopyWithImpl<$Res>
+    extends _$DueDateCopyWithImpl<$Res, _$DueDateImpl>
+    implements _$$DueDateImplCopyWith<$Res> {
+  __$$DueDateImplCopyWithImpl(
+      _$DueDateImpl _value, $Res Function(_$DueDateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -83,7 +84,7 @@ class __$$_DueDateCopyWithImpl<$Res>
     Object? dateTime = freezed,
     Object? isAllDay = null,
   }) {
-    return _then(_$_DueDate(
+    return _then(_$DueDateImpl(
       dateTime: freezed == dateTime
           ? _value.dateTime
           : dateTime // ignore: cast_nullable_to_non_nullable
@@ -98,8 +99,8 @@ class __$$_DueDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DueDate implements _DueDate {
-  const _$_DueDate({required this.dateTime, required this.isAllDay});
+class _$DueDateImpl implements _DueDate {
+  const _$DueDateImpl({required this.dateTime, required this.isAllDay});
 
   @override
   final DateTime? dateTime;
@@ -112,10 +113,10 @@ class _$_DueDate implements _DueDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DueDate &&
+            other is _$DueDateImpl &&
             (identical(other.dateTime, dateTime) ||
                 other.dateTime == dateTime) &&
             (identical(other.isAllDay, isAllDay) ||
@@ -128,14 +129,14 @@ class _$_DueDate implements _DueDate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DueDateCopyWith<_$_DueDate> get copyWith =>
-      __$$_DueDateCopyWithImpl<_$_DueDate>(this, _$identity);
+  _$$DueDateImplCopyWith<_$DueDateImpl> get copyWith =>
+      __$$DueDateImplCopyWithImpl<_$DueDateImpl>(this, _$identity);
 }
 
 abstract class _DueDate implements DueDate {
   const factory _DueDate(
       {required final DateTime? dateTime,
-      required final bool isAllDay}) = _$_DueDate;
+      required final bool isAllDay}) = _$DueDateImpl;
 
   @override
   DateTime? get dateTime;
@@ -143,6 +144,6 @@ abstract class _DueDate implements DueDate {
   bool get isAllDay;
   @override
   @JsonKey(ignore: true)
-  _$$_DueDateCopyWith<_$_DueDate> get copyWith =>
+  _$$DueDateImplCopyWith<_$DueDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

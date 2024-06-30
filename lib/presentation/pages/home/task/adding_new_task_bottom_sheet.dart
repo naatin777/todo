@@ -112,12 +112,12 @@ class _AddingNewTaskBottomSheetState
                   label: Text(
                     dueDateChipText,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   icon: Icon(
                     Icons.calendar_month,
-                    color: Theme.of(context).colorScheme.onBackground,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ),
@@ -143,13 +143,13 @@ class _AddingNewTaskBottomSheetState
                   label: Text(
                     "P${addingNewTask.priority.number}",
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   icon: Icon(
                     Icons.priority_high,
                     color: addingNewTask.priority.color ??
-                        Theme.of(context).colorScheme.onBackground,
+                        Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ),
