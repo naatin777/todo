@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/constant.dart';
-import 'package:todo/data/database/app_database.dart';
-import 'package:todo/data/database/daos/labels_dao.dart';
-import 'package:todo/domain/models/task_list.dart';
-import 'package:todo/domain/repositories/labels_repository.dart';
+import 'package:behavior/constant.dart';
+import 'package:behavior/data/database/app_database.dart';
+import 'package:behavior/data/database/daos/labels_dao.dart';
+import 'package:behavior/domain/models/task_list.dart';
+import 'package:behavior/domain/repositories/labels_repository.dart';
 
 final labelsRepositoryProvider = Provider.autoDispose<LabelsRepository>(
     (ref) => LabelsRepositoryImpl(AppDatabase.getInstance().labelsDao));

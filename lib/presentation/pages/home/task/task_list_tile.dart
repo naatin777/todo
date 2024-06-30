@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/data/database/app_database.dart';
-import 'package:todo/presentation/notifiers/home/task/task_screen_notifier.dart';
-import 'package:todo/presentation/route/route.dart';
+import 'package:behavior/data/database/app_database.dart';
+import 'package:behavior/presentation/notifiers/home/task/task_screen_notifier.dart';
+import 'package:behavior/presentation/route/route.dart';
 
 class TaskListTile extends ConsumerStatefulWidget {
   const TaskListTile({super.key, required this.task});

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo/constant.dart';
-import 'package:todo/domain/enums/navigation_item.dart';
-import 'package:todo/presentation/notifiers/task_id_notifier.dart';
-import 'package:todo/presentation/notifiers/task_list_id_provider.dart';
-import 'package:todo/presentation/route/route.dart';
+import 'package:behavior/constant.dart';
+import 'package:behavior/domain/enums/navigation_item.dart';
+import 'package:behavior/presentation/notifiers/task_id_notifier.dart';
+import 'package:behavior/presentation/notifiers/task_list_id_provider.dart';
+import 'package:behavior/presentation/route/route.dart';
 
 part 'router.g.dart';
 

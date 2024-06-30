@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo/data/database/app_database.dart';
-import 'package:todo/data/repositories/tasks_repository_impl.dart';
-import 'package:todo/presentation/notifiers/task_id_notifier.dart';
+import 'package:behavior/data/database/app_database.dart';
+import 'package:behavior/data/repositories/tasks_repository_impl.dart';
+import 'package:behavior/presentation/notifiers/task_id_notifier.dart';
 
 part 'detail_notifier.g.dart';
 

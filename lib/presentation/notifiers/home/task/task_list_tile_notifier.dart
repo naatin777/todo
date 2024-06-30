@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo/data/database/app_database.dart';
-import 'package:todo/data/repositories/tasks_repository_impl.dart';
+import 'package:behavior/data/database/app_database.dart';
+import 'package:behavior/data/repositories/tasks_repository_impl.dart';
 
 part 'task_list_tile_notifier.g.dart';
 

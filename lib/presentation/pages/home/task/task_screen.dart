@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/presentation/pages/home/task/task_list_tile.dart';
-import 'package:todo/presentation/notifiers/home/task/task_screen_notifier.dart';
+import 'package:behavior/presentation/pages/home/task/task_list_tile.dart';
+import 'package:behavior/presentation/notifiers/home/task/task_screen_notifier.dart';
 
 class TaskScreen extends ConsumerWidget {
   const TaskScreen({super.key});

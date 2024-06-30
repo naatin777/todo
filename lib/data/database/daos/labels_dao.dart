@@ -1,12 +1,12 @@
 import 'package:drift/drift.dart';
-import 'package:todo/data/database/app_database.dart';
-import 'package:todo/domain/tables/labels.dart';
+import 'package:behavior/data/database/app_database.dart';
+import 'package:behavior/domain/tables/labels.dart';
 
 part 'labels_dao.g.dart';
 
 @DriftAccessor(tables: [Labels])
 class LabelsDao extends DatabaseAccessor<AppDatabase> with _$LabelsDaoMixin {
-  LabelsDao(AppDatabase db) : super(db);
+  LabelsDao(super.db);
 
   Future<List<LabelTable>> selectAll() async {
     return select(labels).get();

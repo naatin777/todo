@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/domain/enums/navigation_item.dart';
-import 'package:todo/presentation/pages/home/settings/settings_app_bar.dart';
-import 'package:todo/presentation/pages/home/settings/settings_screen.dart';
-import 'package:todo/presentation/pages/home/task/adding_new_task_fab.dart';
-import 'package:todo/presentation/pages/home/task/task_app_bar.dart';
-import 'package:todo/presentation/pages/home/task/task_drawer.dart';
-import 'package:todo/presentation/pages/home/task/task_screen.dart';
-import 'package:todo/presentation/route/route.dart';
+import 'package:behavior/domain/enums/navigation_item.dart';
+import 'package:behavior/presentation/pages/home/settings/settings_app_bar.dart';
+import 'package:behavior/presentation/pages/home/settings/settings_screen.dart';
+import 'package:behavior/presentation/pages/home/task/adding_new_task_fab.dart';
+import 'package:behavior/presentation/pages/home/task/task_app_bar.dart';
+import 'package:behavior/presentation/pages/home/task/task_drawer.dart';
+import 'package:behavior/presentation/pages/home/task/task_screen.dart';
+import 'package:behavior/presentation/route/route.dart';
 
 class Home extends ConsumerWidget {
   const Home({super.key, required this.nav, required this.id});

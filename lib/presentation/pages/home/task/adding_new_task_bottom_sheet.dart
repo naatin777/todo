@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/constant.dart';
-import 'package:todo/domain/enums/priority.dart';
-import 'package:todo/domain/models/due_date.dart';
-import 'package:todo/presentation/pages/home/task/due_date_dialog.dart';
-import 'package:todo/presentation/pages/home/task/priority_selection_dialog.dart';
-import 'package:todo/presentation/pages/home/task/project_selection_bottom_sheet.dart';
-import 'package:todo/presentation/notifiers/home/task/adding_new_task_notifier.dart';
+import 'package:behavior/constant.dart';
+import 'package:behavior/domain/enums/priority.dart';
+import 'package:behavior/domain/models/due_date.dart';
+import 'package:behavior/presentation/pages/home/task/due_date_dialog.dart';
+import 'package:behavior/presentation/pages/home/task/priority_selection_dialog.dart';
+import 'package:behavior/presentation/pages/home/task/project_selection_bottom_sheet.dart';
+import 'package:behavior/presentation/notifiers/home/task/adding_new_task_notifier.dart';
 
 class AddingNewTaskBottomSheet extends ConsumerStatefulWidget {
   const AddingNewTaskBottomSheet({super.key});

@@ -1,13 +1,13 @@
 import 'package:drift/drift.dart';
-import 'package:todo/data/database/app_database.dart';
-import 'package:todo/domain/tables/projects.dart';
+import 'package:behavior/data/database/app_database.dart';
+import 'package:behavior/domain/tables/projects.dart';
 
 part 'projects_dao.g.dart';
 
 @DriftAccessor(tables: [Projects])
 class ProjectsDao extends DatabaseAccessor<AppDatabase>
     with _$ProjectsDaoMixin {
-  ProjectsDao(AppDatabase db) : super(db);
+  ProjectsDao(super.db);
 
   Future<List<ProjectTable>> selectAll() async {
     return select(projects).get();

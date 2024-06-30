@@ -1,4 +1,4 @@
-import 'package:todo/data/database/app_database.dart';
+import 'package:behavior/data/database/app_database.dart';
 
 sealed class TaskList {
   final String id;

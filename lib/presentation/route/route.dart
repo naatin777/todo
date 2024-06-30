@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo/presentation/pages/detail/detail.dart';
-import 'package:todo/presentation/pages/home/home.dart';
+import 'package:behavior/presentation/pages/detail/detail.dart';
+import 'package:behavior/presentation/pages/home/home.dart';
 
 part 'route.g.dart';
 

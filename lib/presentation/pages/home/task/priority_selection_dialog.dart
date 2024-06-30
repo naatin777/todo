@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/domain/enums/priority.dart';
+import 'package:behavior/domain/enums/priority.dart';
 
 class PrioritySelectionDialog extends ConsumerWidget {
   const PrioritySelectionDialog({super.key, required this.priority});

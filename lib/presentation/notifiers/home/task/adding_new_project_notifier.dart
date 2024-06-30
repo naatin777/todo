@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo/data/repositories/projects_repository_impl.dart';
+import 'package:behavior/data/repositories/projects_repository_impl.dart';
 
 part 'adding_new_project_notifier.g.dart';
 

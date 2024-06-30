@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/constant.dart';
-import 'package:todo/data/database/app_database.dart';
-import 'package:todo/domain/models/task_list.dart';
-import 'package:todo/data/database/daos/filters_dao.dart';
-import 'package:todo/domain/repositories/filters_repository.dart';
+import 'package:behavior/constant.dart';
+import 'package:behavior/data/database/app_database.dart';
+import 'package:behavior/domain/models/task_list.dart';
+import 'package:behavior/data/database/daos/filters_dao.dart';
+import 'package:behavior/domain/repositories/filters_repository.dart';
 
 final filtersRepositoryProvider = Provider.autoDispose<FiltersRepository>(
     (ref) => FiltersRepositoryImpl(AppDatabase.getInstance().filtersDao));

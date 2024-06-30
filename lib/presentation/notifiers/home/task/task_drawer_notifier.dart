@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo/domain/models/task_list.dart';
-import 'package:todo/domain/usecases/task_list_usecase.dart';
+import 'package:behavior/domain/models/task_list.dart';
+import 'package:behavior/domain/usecases/task_list_usecase.dart';
 
 part 'task_drawer_notifier.g.dart';
 

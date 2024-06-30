@@ -1,12 +1,12 @@
 import 'package:drift/drift.dart';
-import 'package:todo/data/database/app_database.dart';
-import 'package:todo/domain/tables/filters.dart';
+import 'package:behavior/data/database/app_database.dart';
+import 'package:behavior/domain/tables/filters.dart';
 
 part 'filters_dao.g.dart';
 
 @DriftAccessor(tables: [Filters])
 class FiltersDao extends DatabaseAccessor<AppDatabase> with _$FiltersDaoMixin {
-  FiltersDao(AppDatabase db) : super(db);
+  FiltersDao(super.db);
 
   Future<List<FilterTable>> selectAll() async {
     return select(filters).get();

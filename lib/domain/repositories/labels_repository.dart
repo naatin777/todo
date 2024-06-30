@@ -1,4 +1,4 @@
-import 'package:todo/domain/models/task_list.dart';
+import 'package:behavior/domain/models/task_list.dart';
 
 abstract class LabelsRepository {
   Future<List<Label>> getAllLabels();

@@ -1,6 +1,6 @@
-import 'package:todo/data/database/app_database.dart';
-import 'package:todo/domain/enums/priority.dart';
-import 'package:todo/domain/models/due_date.dart';
+import 'package:behavior/data/database/app_database.dart';
+import 'package:behavior/domain/enums/priority.dart';
+import 'package:behavior/domain/models/due_date.dart';
 
 abstract class TasksRepository {
   Future<List<Task>> getTasksFromProject(String projectId);
