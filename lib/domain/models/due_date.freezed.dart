@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,114 +10,26 @@ part of 'due_date.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DueDate {
-  DateTime? get dateTime => throw _privateConstructorUsedError;
-  bool get isAllDay => throw _privateConstructorUsedError;
+  DateTime? get dateTime;
+  bool get isAllDay;
 
-  @JsonKey(ignore: true)
-  $DueDateCopyWith<DueDate> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DueDateCopyWith<$Res> {
-  factory $DueDateCopyWith(DueDate value, $Res Function(DueDate) then) =
-      _$DueDateCopyWithImpl<$Res, DueDate>;
-  @useResult
-  $Res call({DateTime? dateTime, bool isAllDay});
-}
-
-/// @nodoc
-class _$DueDateCopyWithImpl<$Res, $Val extends DueDate>
-    implements $DueDateCopyWith<$Res> {
-  _$DueDateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of DueDate
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? dateTime = freezed,
-    Object? isAllDay = null,
-  }) {
-    return _then(_value.copyWith(
-      dateTime: freezed == dateTime
-          ? _value.dateTime
-          : dateTime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      isAllDay: null == isAllDay
-          ? _value.isAllDay
-          : isAllDay // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$DueDateImplCopyWith<$Res> implements $DueDateCopyWith<$Res> {
-  factory _$$DueDateImplCopyWith(
-          _$DueDateImpl value, $Res Function(_$DueDateImpl) then) =
-      __$$DueDateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({DateTime? dateTime, bool isAllDay});
-}
-
-/// @nodoc
-class __$$DueDateImplCopyWithImpl<$Res>
-    extends _$DueDateCopyWithImpl<$Res, _$DueDateImpl>
-    implements _$$DueDateImplCopyWith<$Res> {
-  __$$DueDateImplCopyWithImpl(
-      _$DueDateImpl _value, $Res Function(_$DueDateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? dateTime = freezed,
-    Object? isAllDay = null,
-  }) {
-    return _then(_$DueDateImpl(
-      dateTime: freezed == dateTime
-          ? _value.dateTime
-          : dateTime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      isAllDay: null == isAllDay
-          ? _value.isAllDay
-          : isAllDay // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DueDateImpl implements _DueDate {
-  const _$DueDateImpl({required this.dateTime, required this.isAllDay});
-
-  @override
-  final DateTime? dateTime;
-  @override
-  final bool isAllDay;
-
-  @override
-  String toString() {
-    return 'DueDate(dateTime: $dateTime, isAllDay: $isAllDay)';
-  }
+  $DueDateCopyWith<DueDate> get copyWith =>
+      _$DueDateCopyWithImpl<DueDate>(this as DueDate, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DueDateImpl &&
+            other is DueDate &&
             (identical(other.dateTime, dateTime) ||
                 other.dateTime == dateTime) &&
             (identical(other.isAllDay, isAllDay) ||
@@ -126,24 +39,121 @@ class _$DueDateImpl implements _DueDate {
   @override
   int get hashCode => Object.hash(runtimeType, dateTime, isAllDay);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'DueDate(dateTime: $dateTime, isAllDay: $isAllDay)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $DueDateCopyWith<$Res> {
+  factory $DueDateCopyWith(DueDate value, $Res Function(DueDate) _then) =
+      _$DueDateCopyWithImpl;
+  @useResult
+  $Res call({DateTime? dateTime, bool isAllDay});
+}
+
+/// @nodoc
+class _$DueDateCopyWithImpl<$Res> implements $DueDateCopyWith<$Res> {
+  _$DueDateCopyWithImpl(this._self, this._then);
+
+  final DueDate _self;
+  final $Res Function(DueDate) _then;
+
+  /// Create a copy of DueDate
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? dateTime = freezed,
+    Object? isAllDay = null,
+  }) {
+    return _then(_self.copyWith(
+      dateTime: freezed == dateTime
+          ? _self.dateTime
+          : dateTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isAllDay: null == isAllDay
+          ? _self.isAllDay
+          : isAllDay // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _DueDate implements DueDate {
+  const _DueDate({required this.dateTime, required this.isAllDay});
+
+  @override
+  final DateTime? dateTime;
+  @override
+  final bool isAllDay;
+
+  /// Create a copy of DueDate
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DueDateCopyWith<_DueDate> get copyWith =>
+      __$DueDateCopyWithImpl<_DueDate>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DueDate &&
+            (identical(other.dateTime, dateTime) ||
+                other.dateTime == dateTime) &&
+            (identical(other.isAllDay, isAllDay) ||
+                other.isAllDay == isAllDay));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, dateTime, isAllDay);
+
+  @override
+  String toString() {
+    return 'DueDate(dateTime: $dateTime, isAllDay: $isAllDay)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DueDateCopyWith<$Res> implements $DueDateCopyWith<$Res> {
+  factory _$DueDateCopyWith(_DueDate value, $Res Function(_DueDate) _then) =
+      __$DueDateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({DateTime? dateTime, bool isAllDay});
+}
+
+/// @nodoc
+class __$DueDateCopyWithImpl<$Res> implements _$DueDateCopyWith<$Res> {
+  __$DueDateCopyWithImpl(this._self, this._then);
+
+  final _DueDate _self;
+  final $Res Function(_DueDate) _then;
+
+  /// Create a copy of DueDate
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$DueDateImplCopyWith<_$DueDateImpl> get copyWith =>
-      __$$DueDateImplCopyWithImpl<_$DueDateImpl>(this, _$identity);
+  $Res call({
+    Object? dateTime = freezed,
+    Object? isAllDay = null,
+  }) {
+    return _then(_DueDate(
+      dateTime: freezed == dateTime
+          ? _self.dateTime
+          : dateTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isAllDay: null == isAllDay
+          ? _self.isAllDay
+          : isAllDay // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
-abstract class _DueDate implements DueDate {
-  const factory _DueDate(
-      {required final DateTime? dateTime,
-      required final bool isAllDay}) = _$DueDateImpl;
-
-  @override
-  DateTime? get dateTime;
-  @override
-  bool get isAllDay;
-  @override
-  @JsonKey(ignore: true)
-  _$$DueDateImplCopyWith<_$DueDateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

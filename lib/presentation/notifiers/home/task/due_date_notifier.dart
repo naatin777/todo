@@ -9,7 +9,7 @@ part 'due_date_notifier.g.dart';
 class DueDateNotifier extends _$DueDateNotifier {
   @override
   DueDate build() {
-    return const DueDate(dateTime: null, isAllDay: true);
+    return DueDate(dateTime: null, isAllDay: true);
   }
 
   void changeDate(DateTime? dateTime) {
@@ -37,7 +37,7 @@ class DueDateNotifier extends _$DueDateNotifier {
   }
 
   void clear() {
-    state = const DueDate(dateTime: null, isAllDay: true);
+    state = DueDate(dateTime: null, isAllDay: true);
   }
 }
 

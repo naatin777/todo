@@ -20,6 +20,8 @@ final projectFromIdProvider = AutoDisposeStreamProvider<Project?>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ProjectFromIdRef = AutoDisposeStreamProviderRef<Project?>;
 String _$dueDateChipTextHash() => r'd04a15aa69e5a347c4e9c409a6184981b82dc773';
 
@@ -35,6 +37,8 @@ final dueDateChipTextProvider = AutoDisposeProvider<String>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef DueDateChipTextRef = AutoDisposeProviderRef<String>;
 String _$addingNewTaskNotifierHash() =>
     r'80e6ce244a52fce9ca6608ef45e21ae5cbc8e093';
@@ -54,4 +58,4 @@ final addingNewTaskNotifierProvider =
 
 typedef _$AddingNewTaskNotifier = AutoDisposeNotifier<Task>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

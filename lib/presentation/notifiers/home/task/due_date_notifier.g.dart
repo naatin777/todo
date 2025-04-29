@@ -20,6 +20,8 @@ final formattedDateProvider = AutoDisposeProvider<String>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef FormattedDateRef = AutoDisposeProviderRef<String>;
 String _$formattedTimeHash() => r'ae044762e1a5b8d38b5c091e068d936035be2d52';
 
@@ -35,8 +37,10 @@ final formattedTimeProvider = AutoDisposeProvider<String>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef FormattedTimeRef = AutoDisposeProviderRef<String>;
-String _$dueDateNotifierHash() => r'5882a3250bb599f0885c6436551c92178204ce6d';
+String _$dueDateNotifierHash() => r'58e2b974157eeeebfdc0b73e197da149844a09c4';
 
 /// See also [DueDateNotifier].
 @ProviderFor(DueDateNotifier)
@@ -53,4 +57,4 @@ final dueDateNotifierProvider =
 
 typedef _$DueDateNotifier = AutoDisposeNotifier<DueDate>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
