@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:behavior/presentation/notifiers/home/task/adding_new_project_notifier.dart';
+import 'package:morph_todo/presentation/notifiers/home/task/adding_new_project_notifier.dart';
 
 class AddingNewProjectDialog extends ConsumerStatefulWidget {
   const AddingNewProjectDialog({super.key});

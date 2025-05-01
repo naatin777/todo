@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:behavior/data/database/app_database.dart';
-import 'package:behavior/data/repositories/tasks_repository_impl.dart';
-import 'package:behavior/presentation/notifiers/task_list_id_provider.dart';
+import 'package:morph_todo/data/database/app_database.dart';
+import 'package:morph_todo/data/repositories/tasks_repository_impl.dart';
+import 'package:morph_todo/presentation/notifiers/task_list_id_provider.dart';
 
 part 'task_screen_notifier.g.dart';
 
@@ -18,7 +18,8 @@ class TaskScreenNotifier extends _$TaskScreenNotifier {
     final tasksRepository = ref.watch(tasksRepositoryProvider);
     final changedTask = task.copyWith(isDone: isDone);
     await tasksRepository.updateTask(changedTask);
-    state =
-        AsyncData(await tasksRepository.getTasksFromProject(task.projectId));
+    state = AsyncData(
+      await tasksRepository.getTasksFromProject(task.projectId),
+    );
   }
 }

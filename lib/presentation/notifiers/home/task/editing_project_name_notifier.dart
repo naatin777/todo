@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:behavior/data/repositories/projects_repository_impl.dart';
-import 'package:behavior/domain/models/task_list.dart';
+import 'package:morph_todo/data/repositories/projects_repository_impl.dart';
+import 'package:morph_todo/domain/models/task_list.dart';
 
 part 'editing_project_name_notifier.g.dart';
 
@@ -11,8 +11,6 @@ class EditingProjectNameNotifier extends _$EditingProjectNameNotifier {
 
   Future<void> changeProjectName(Project project, String name) async {
     final projectsRepository = ref.watch(projectsRepositoryProvider);
-    await projectsRepository.updateProject(
-      project.copyWith(name: name),
-    );
+    await projectsRepository.updateProject(project.copyWith(name: name));
   }
 }

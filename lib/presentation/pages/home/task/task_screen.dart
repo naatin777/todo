@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:behavior/presentation/pages/home/task/task_list_tile.dart';
-import 'package:behavior/presentation/notifiers/home/task/task_screen_notifier.dart';
+import 'package:morph_todo/presentation/pages/home/task/task_list_tile.dart';
+import 'package:morph_todo/presentation/notifiers/home/task/task_screen_notifier.dart';
 
 class TaskScreen extends ConsumerWidget {
   const TaskScreen({super.key});
@@ -12,25 +12,19 @@ class TaskScreen extends ConsumerWidget {
     return CustomScrollView(
       slivers: [
         tasks.when(
-          data: (data) => SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final task = data[index];
-                return TaskListTile(task: task);
-              },
-              childCount: data.length,
-            ),
-          ),
-          loading: () => const SliverPadding(
-            padding: EdgeInsets.all(0),
-          ),
-          error: (error, stackTrace) => const SliverPadding(
-            padding: EdgeInsets.all(0),
-          ),
+          data:
+              (data) => SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final task = data[index];
+                  return TaskListTile(task: task);
+                }, childCount: data.length),
+              ),
+          loading: () => const SliverPadding(padding: EdgeInsets.all(0)),
+          error:
+              (error, stackTrace) =>
+                  const SliverPadding(padding: EdgeInsets.all(0)),
         ),
-        const SliverPadding(
-          padding: EdgeInsets.all(50),
-        ),
+        const SliverPadding(padding: EdgeInsets.all(50)),
       ],
     );
   }

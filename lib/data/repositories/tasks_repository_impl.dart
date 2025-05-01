@@ -1,13 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:behavior/constant.dart';
-import 'package:behavior/data/database/app_database.dart';
-import 'package:behavior/data/database/daos/tasks_dao.dart';
-import 'package:behavior/domain/enums/priority.dart';
-import 'package:behavior/domain/models/due_date.dart';
-import 'package:behavior/domain/repositories/tasks_repository.dart';
+import 'package:morph_todo/constant.dart';
+import 'package:morph_todo/data/database/app_database.dart';
+import 'package:morph_todo/data/database/daos/tasks_dao.dart';
+import 'package:morph_todo/domain/enums/priority.dart';
+import 'package:morph_todo/domain/models/due_date.dart';
+import 'package:morph_todo/domain/repositories/tasks_repository.dart';
 
 final tasksRepositoryProvider = Provider.autoDispose<TasksRepository>(
-    (ref) => TasksRepositoryImpl(AppDatabase.getInstance().tasksDao));
+  (ref) => TasksRepositoryImpl(AppDatabase.getInstance().tasksDao),
+);
 
 class TasksRepositoryImpl implements TasksRepository {
   final TasksDao _tasksDao;

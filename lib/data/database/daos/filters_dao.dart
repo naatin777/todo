@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
-import 'package:behavior/data/database/app_database.dart';
-import 'package:behavior/domain/tables/filters.dart';
+import 'package:morph_todo/data/database/app_database.dart';
+import 'package:morph_todo/domain/tables/filters.dart';
 
 part 'filters_dao.g.dart';
 
@@ -17,13 +17,13 @@ class FiltersDao extends DatabaseAccessor<AppDatabase> with _$FiltersDaoMixin {
   }
 
   Future<FilterTable?> selectFilter(String id) async {
-    return (select(filters)..where((tbl) => tbl.id.equals(id)))
-        .getSingleOrNull();
+    return (select(filters)
+      ..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
   }
 
   Stream<FilterTable?> watchFilter(String id) {
-    return (select(filters)..where((tbl) => tbl.id.equals(id)))
-        .watchSingleOrNull();
+    return (select(filters)
+      ..where((tbl) => tbl.id.equals(id))).watchSingleOrNull();
   }
 
   Future<int> insertFilter(FilterTable filter) async {
@@ -31,8 +31,8 @@ class FiltersDao extends DatabaseAccessor<AppDatabase> with _$FiltersDaoMixin {
   }
 
   Future<int> updateFilter(FilterTable filter) async {
-    return (update(filters)..where((tbl) => tbl.id.equals(filter.id)))
-        .write(filter);
+    return (update(filters)
+      ..where((tbl) => tbl.id.equals(filter.id))).write(filter);
   }
 
   Future<int> deleteFilter(String id) async {

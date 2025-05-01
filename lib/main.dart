@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:behavior/data/preference/share_preferences_instance.dart';
-import 'package:behavior/presentation/app.dart';
+import 'package:morph_todo/data/preference/share_preferences_instance.dart';
+import 'package:morph_todo/presentation/app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,9 +11,5 @@ Future<void> main() async {
     const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent),
   );
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-  runApp(
-    const ProviderScope(
-      child: App(),
-    ),
-  );
+  runApp(const ProviderScope(child: App()));
 }

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:behavior/data/database/app_database.dart';
-import 'package:behavior/presentation/notifiers/home/task/task_screen_notifier.dart';
-import 'package:behavior/presentation/route/route.dart';
+import 'package:morph_todo/data/database/app_database.dart';
+import 'package:morph_todo/presentation/notifiers/home/task/task_screen_notifier.dart';
+import 'package:morph_todo/presentation/route/route.dart';
 
 class TaskListTile extends ConsumerStatefulWidget {
   const TaskListTile({super.key, required this.task});
@@ -20,12 +20,9 @@ class _TaskListTileState extends ConsumerState<TaskListTile> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(
-      const Duration(seconds: 1),
-      (Timer timer) {
-        setState(() {});
-      },
-    );
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      setState(() {});
+    });
   }
 
   @override
@@ -48,22 +45,24 @@ class _TaskListTileState extends ConsumerState<TaskListTile> {
               .changeCheck(task, value);
         },
         fillColor: WidgetStateProperty.all(
-            task.priority.color ?? Theme.of(context).colorScheme.onSurface),
+          task.priority.color ?? Theme.of(context).colorScheme.onSurface,
+        ),
       ),
       title: Text(task.title),
-      subtitle: task.description.isNotEmpty || task.dueDate != null
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (task.description.isNotEmpty) Text(task.description),
-                if (task.dueDate != null)
-                  Text(() {
-                    final difference = now.difference(task.dueDate!);
-                    return "${-difference.inHours}:${-difference.inMinutes.remainder(60)}:${(-difference.inSeconds.remainder(60))}";
-                  }()),
-              ],
-            )
-          : null,
+      subtitle:
+          task.description.isNotEmpty || task.dueDate != null
+              ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (task.description.isNotEmpty) Text(task.description),
+                  if (task.dueDate != null)
+                    Text(() {
+                      final difference = now.difference(task.dueDate!);
+                      return "${-difference.inHours}:${-difference.inMinutes.remainder(60)}:${(-difference.inSeconds.remainder(60))}";
+                    }()),
+                ],
+              )
+              : null,
       onTap: () {
         DetailRoute(task.id).push(context);
       },

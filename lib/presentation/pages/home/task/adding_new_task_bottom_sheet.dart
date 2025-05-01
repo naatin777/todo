@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:behavior/constant.dart';
-import 'package:behavior/domain/enums/priority.dart';
-import 'package:behavior/domain/models/due_date.dart';
-import 'package:behavior/presentation/pages/home/task/due_date_dialog.dart';
-import 'package:behavior/presentation/pages/home/task/priority_selection_dialog.dart';
-import 'package:behavior/presentation/pages/home/task/project_selection_bottom_sheet.dart';
-import 'package:behavior/presentation/notifiers/home/task/adding_new_task_notifier.dart';
+import 'package:morph_todo/constant.dart';
+import 'package:morph_todo/domain/enums/priority.dart';
+import 'package:morph_todo/domain/models/due_date.dart';
+import 'package:morph_todo/presentation/pages/home/task/due_date_dialog.dart';
+import 'package:morph_todo/presentation/pages/home/task/priority_selection_dialog.dart';
+import 'package:morph_todo/presentation/pages/home/task/project_selection_bottom_sheet.dart';
+import 'package:morph_todo/presentation/notifiers/home/task/adding_new_task_notifier.dart';
 
 class AddingNewTaskBottomSheet extends ConsumerStatefulWidget {
   const AddingNewTaskBottomSheet({super.key});
@@ -33,10 +33,9 @@ class _AddingNewTaskBottomSheetState
   }
 
   void saveTask(WidgetRef ref) {
-    ref.read(addingNewTaskNotifierProvider.notifier).saveTask(
-          titleController.text,
-          descriptionController.text,
-        );
+    ref
+        .read(addingNewTaskNotifierProvider.notifier)
+        .saveTask(titleController.text, descriptionController.text);
     titleController.clear();
     descriptionController.clear();
   }
@@ -98,12 +97,13 @@ class _AddingNewTaskBottomSheetState
                   onPressed: () async {
                     final DueDate? result = await showDialog(
                       context: context,
-                      builder: (context) => DueDateDialog(
-                        dueDate: DueDate(
-                          dateTime: addingNewTask.dueDate,
-                          isAllDay: addingNewTask.isAllDay,
-                        ),
-                      ),
+                      builder:
+                          (context) => DueDateDialog(
+                            dueDate: DueDate(
+                              dateTime: addingNewTask.dueDate,
+                              isAllDay: addingNewTask.isAllDay,
+                            ),
+                          ),
                     );
                     ref
                         .read(addingNewTaskNotifierProvider.notifier)
@@ -132,9 +132,10 @@ class _AddingNewTaskBottomSheetState
                   onPressed: () async {
                     final Priority? result = await showDialog(
                       context: context,
-                      builder: (context) => PrioritySelectionDialog(
-                        priority: addingNewTask.priority,
-                      ),
+                      builder:
+                          (context) => PrioritySelectionDialog(
+                            priority: addingNewTask.priority,
+                          ),
                     );
                     ref
                         .read(addingNewTaskNotifierProvider.notifier)
@@ -148,7 +149,8 @@ class _AddingNewTaskBottomSheetState
                   ),
                   icon: Icon(
                     Icons.priority_high,
-                    color: addingNewTask.priority.color ??
+                    color:
+                        addingNewTask.priority.color ??
                         Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
@@ -187,21 +189,20 @@ class _AddingNewTaskBottomSheetState
                 child: Row(
                   children: [
                     project.when(
-                      data: (data) => ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width - 104,
-                        ),
-                        child: Text(
-                          data?.name ?? inbox.name,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
+                      data:
+                          (data) => ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxWidth: MediaQuery.of(context).size.width - 104,
+                            ),
+                            child: Text(
+                              data?.name ?? inbox.name,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
                       loading: () => const SizedBox(),
                       error: (error, stackTrace) => const SizedBox(),
                     ),
-                    const Icon(
-                      Icons.arrow_drop_down,
-                    ),
+                    const Icon(Icons.arrow_drop_down),
                   ],
                 ),
               ),

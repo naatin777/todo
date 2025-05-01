@@ -1,14 +1,14 @@
 import 'package:drift/drift.dart';
-import 'package:behavior/data/database/daos/filters_dao.dart';
-import 'package:behavior/data/database/daos/labels_dao.dart';
-import 'package:behavior/data/database/daos/projects_dao.dart';
-import 'package:behavior/data/database/daos/tasks_dao.dart';
-import 'package:behavior/data/database/shared.dart';
-import 'package:behavior/domain/enums/priority.dart';
-import 'package:behavior/domain/tables/filters.dart';
-import 'package:behavior/domain/tables/labels.dart';
-import 'package:behavior/domain/tables/projects.dart';
-import 'package:behavior/domain/tables/tasks.dart';
+import 'package:morph_todo/data/database/daos/filters_dao.dart';
+import 'package:morph_todo/data/database/daos/labels_dao.dart';
+import 'package:morph_todo/data/database/daos/projects_dao.dart';
+import 'package:morph_todo/data/database/daos/tasks_dao.dart';
+import 'package:morph_todo/data/database/shared.dart';
+import 'package:morph_todo/domain/enums/priority.dart';
+import 'package:morph_todo/domain/tables/filters.dart';
+import 'package:morph_todo/domain/tables/labels.dart';
+import 'package:morph_todo/domain/tables/projects.dart';
+import 'package:morph_todo/domain/tables/tasks.dart';
 
 part 'app_database.g.dart';
 

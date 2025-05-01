@@ -1,6 +1,6 @@
 {
-    "name": "behavior",
-    "short_name": "behavior",
+    "name": "MorphTodo",
+    "short_name": "MorphTodo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

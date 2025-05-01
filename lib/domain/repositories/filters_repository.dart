@@ -1,4 +1,4 @@
-import 'package:behavior/domain/models/task_list.dart';
+import 'package:morph_todo/domain/models/task_list.dart';
 
 abstract class FiltersRepository {
   Future<List<Filter>> getAllFilters();

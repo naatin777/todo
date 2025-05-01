@@ -1,12 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:behavior/constant.dart';
-import 'package:behavior/data/database/app_database.dart';
-import 'package:behavior/data/database/daos/labels_dao.dart';
-import 'package:behavior/domain/models/task_list.dart';
-import 'package:behavior/domain/repositories/labels_repository.dart';
+import 'package:morph_todo/constant.dart';
+import 'package:morph_todo/data/database/app_database.dart';
+import 'package:morph_todo/data/database/daos/labels_dao.dart';
+import 'package:morph_todo/domain/models/task_list.dart';
+import 'package:morph_todo/domain/repositories/labels_repository.dart';
 
 final labelsRepositoryProvider = Provider.autoDispose<LabelsRepository>(
-    (ref) => LabelsRepositoryImpl(AppDatabase.getInstance().labelsDao));
+  (ref) => LabelsRepositoryImpl(AppDatabase.getInstance().labelsDao),
+);
 
 class LabelsRepositoryImpl implements LabelsRepository {
   final LabelsDao _labelsDao;
@@ -23,7 +24,8 @@ class LabelsRepositoryImpl implements LabelsRepository {
   Stream<List<Label>> watchAllLabels() {
     final label = _labelsDao.watchAll();
     return label.map(
-        (event) => event.map((e) => Label(id: e.id, name: e.name)).toList());
+      (event) => event.map((e) => Label(id: e.id, name: e.name)).toList(),
+    );
   }
 
   @override
@@ -35,18 +37,14 @@ class LabelsRepositoryImpl implements LabelsRepository {
   @override
   Stream<Label?> watchLabel(String id) {
     final label = _labelsDao.watchLabel(id);
-    return label.map((event) =>
-        event != null ? Label(id: event.id, name: event.name) : null);
+    return label.map(
+      (event) => event != null ? Label(id: event.id, name: event.name) : null,
+    );
   }
 
   @override
   Future<void> createLabel(final String title) async {
-    await _labelsDao.insertLabel(
-      Label(
-        id: uuid.v4(),
-        name: title,
-      ),
-    );
+    await _labelsDao.insertLabel(Label(id: uuid.v4(), name: title));
   }
 
   @override

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:behavior/constant.dart';
-import 'package:behavior/domain/enums/navigation_item.dart';
-import 'package:behavior/domain/enums/project_menu_item.dart';
-import 'package:behavior/presentation/pages/home/task/editing_project_name_dialog.dart';
-import 'package:behavior/presentation/notifiers/home/task/project_menu_notifier.dart';
-import 'package:behavior/presentation/notifiers/home/task/task_app_bar.dart';
-import 'package:behavior/presentation/route/route.dart';
+import 'package:morph_todo/constant.dart';
+import 'package:morph_todo/domain/enums/navigation_item.dart';
+import 'package:morph_todo/domain/enums/project_menu_item.dart';
+import 'package:morph_todo/presentation/pages/home/task/editing_project_name_dialog.dart';
+import 'package:morph_todo/presentation/notifiers/home/task/project_menu_notifier.dart';
+import 'package:morph_todo/presentation/notifiers/home/task/task_app_bar.dart';
+import 'package:morph_todo/presentation/route/route.dart';
 
 class TaskAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const TaskAppBar({super.key});
@@ -35,8 +35,10 @@ class TaskAppBar extends ConsumerWidget implements PreferredSizeWidget {
                         child: const Text("Delete project"),
                         onPressed: () async {
                           GoRouter.of(context).pop();
-                          HomeRoute(NavigationItems.task.name, id: inbox.id)
-                              .go(context);
+                          HomeRoute(
+                            NavigationItems.task.name,
+                            id: inbox.id,
+                          ).go(context);
                           await ref
                               .read(projectMenuNotifierProvider.notifier)
                               .deleteProject(project);

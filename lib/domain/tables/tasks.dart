@@ -1,5 +1,5 @@
 import 'package:drift/drift.dart';
-import 'package:behavior/domain/enums/priority.dart';
+import 'package:morph_todo/domain/enums/priority.dart';
 
 class Tasks extends Table {
   TextColumn get id => text()();

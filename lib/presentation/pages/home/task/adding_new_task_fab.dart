@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:behavior/presentation/pages/home/task/adding_new_task_bottom_sheet.dart';
+import 'package:morph_todo/presentation/pages/home/task/adding_new_task_bottom_sheet.dart';
 
 class AddingNewTaskFab extends StatelessWidget {
   const AddingNewTaskFab({super.key});
@@ -20,18 +20,13 @@ class AddingNewTaskFab extends StatelessWidget {
                 maxHeight: size.height - preferredSize.height,
               ),
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(
-                  top: 8,
-                  bottom: viewInsets.bottom,
-                ),
+                padding: EdgeInsets.only(top: 8, bottom: viewInsets.bottom),
                 child: const AddingNewTaskBottomSheet(),
               ),
             );
           },
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(8),
-            ),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
           ),
           isScrollControlled: true,
         );

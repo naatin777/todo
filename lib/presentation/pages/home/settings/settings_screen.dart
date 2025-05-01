@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:behavior/presentation/notifiers/home/settings/theme_notifier.dart';
+import 'package:morph_todo/presentation/notifiers/home/settings/theme_notifier.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -22,30 +22,31 @@ class SettingsScreen extends ConsumerWidget {
                     title: const Text("Choose theme"),
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
-                      children: ThemeMode.values
-                          .map(
-                            (e) => ListTile(
-                              leading: Radio<ThemeMode>(
-                                value: e,
-                                groupValue: themeMode,
-                                onChanged: (value) async {
-                                  Navigator.of(context).pop();
-                                  await ref
-                                      .read(themeNotifierProvider.notifier)
-                                      .changeThemeMode(e);
-                                },
-                              ),
-                              title: Text(e.title),
-                              onTap: () async {
-                                Navigator.of(context).pop();
-                                await ref
-                                    .read(themeNotifierProvider.notifier)
-                                    .changeThemeMode(e);
-                              },
-                              horizontalTitleGap: 0.0,
-                            ),
-                          )
-                          .toList(),
+                      children:
+                          ThemeMode.values
+                              .map(
+                                (e) => ListTile(
+                                  leading: Radio<ThemeMode>(
+                                    value: e,
+                                    groupValue: themeMode,
+                                    onChanged: (value) async {
+                                      Navigator.of(context).pop();
+                                      await ref
+                                          .read(themeNotifierProvider.notifier)
+                                          .changeThemeMode(e);
+                                    },
+                                  ),
+                                  title: Text(e.title),
+                                  onTap: () async {
+                                    Navigator.of(context).pop();
+                                    await ref
+                                        .read(themeNotifierProvider.notifier)
+                                        .changeThemeMode(e);
+                                  },
+                                  horizontalTitleGap: 0.0,
+                                ),
+                              )
+                              .toList(),
                     ),
                     contentPadding: EdgeInsets.only(
                       left: 0.0,

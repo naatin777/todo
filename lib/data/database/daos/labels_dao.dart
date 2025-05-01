@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
-import 'package:behavior/data/database/app_database.dart';
-import 'package:behavior/domain/tables/labels.dart';
+import 'package:morph_todo/data/database/app_database.dart';
+import 'package:morph_todo/domain/tables/labels.dart';
 
 part 'labels_dao.g.dart';
 
@@ -17,13 +17,13 @@ class LabelsDao extends DatabaseAccessor<AppDatabase> with _$LabelsDaoMixin {
   }
 
   Future<LabelTable?> selectLabel(String id) async {
-    return (select(labels)..where((tbl) => tbl.id.equals(id)))
-        .getSingleOrNull();
+    return (select(labels)
+      ..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
   }
 
   Stream<LabelTable?> watchLabel(String id) {
-    return (select(labels)..where((tbl) => tbl.id.equals(id)))
-        .watchSingleOrNull();
+    return (select(labels)
+      ..where((tbl) => tbl.id.equals(id))).watchSingleOrNull();
   }
 
   Future<int> insertLabel(LabelTable label) async {
@@ -31,8 +31,8 @@ class LabelsDao extends DatabaseAccessor<AppDatabase> with _$LabelsDaoMixin {
   }
 
   Future<int> updateLabel(LabelTable label) async {
-    return (update(labels)..where((tbl) => tbl.id.equals(label.id)))
-        .write(label);
+    return (update(labels)
+      ..where((tbl) => tbl.id.equals(label.id))).write(label);
   }
 
   Future<int> deleteLabel(String id) async {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:behavior/domain/enums/navigation_item.dart';
-import 'package:behavior/presentation/pages/home/settings/settings_app_bar.dart';
-import 'package:behavior/presentation/pages/home/settings/settings_screen.dart';
-import 'package:behavior/presentation/pages/home/task/adding_new_task_fab.dart';
-import 'package:behavior/presentation/pages/home/task/task_app_bar.dart';
-import 'package:behavior/presentation/pages/home/task/task_drawer.dart';
-import 'package:behavior/presentation/pages/home/task/task_screen.dart';
-import 'package:behavior/presentation/route/route.dart';
+import 'package:morph_todo/domain/enums/navigation_item.dart';
+import 'package:morph_todo/presentation/pages/home/settings/settings_app_bar.dart';
+import 'package:morph_todo/presentation/pages/home/settings/settings_screen.dart';
+import 'package:morph_todo/presentation/pages/home/task/adding_new_task_fab.dart';
+import 'package:morph_todo/presentation/pages/home/task/task_app_bar.dart';
+import 'package:morph_todo/presentation/pages/home/task/task_drawer.dart';
+import 'package:morph_todo/presentation/pages/home/task/task_screen.dart';
+import 'package:morph_todo/presentation/route/route.dart';
 
 class Home extends ConsumerWidget {
   const Home({super.key, required this.nav, required this.id});
@@ -19,30 +19,23 @@ class Home extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final navigationItems = NavigationItems.values.byName(nav);
     return Scaffold(
-      appBar: [
-        const TaskAppBar(),
-        null,
-        null,
-        const SettingsAppBar(),
-      ][navigationItems.index],
-      drawer: [
-        const TaskDrawer(),
-        null,
-        null,
-        null,
-      ][navigationItems.index],
-      body: [
-        const TaskScreen(),
-        null,
-        null,
-        const SettingsScreen(),
-      ][navigationItems.index],
-      floatingActionButton: [
-        const AddingNewTaskFab(),
-        null,
-        null,
-        null,
-      ][navigationItems.index],
+      appBar:
+          [
+            const TaskAppBar(),
+            null,
+            null,
+            const SettingsAppBar(),
+          ][navigationItems.index],
+      drawer: [const TaskDrawer(), null, null, null][navigationItems.index],
+      body:
+          [
+            const TaskScreen(),
+            null,
+            null,
+            const SettingsScreen(),
+          ][navigationItems.index],
+      floatingActionButton:
+          [const AddingNewTaskFab(), null, null, null][navigationItems.index],
       bottomNavigationBar: NavigationBar(
         selectedIndex: navigationItems.index,
         destinations: const [
@@ -72,10 +65,7 @@ class Home extends ConsumerWidget {
           ),
         ],
         onDestinationSelected: (index) {
-          HomeRoute(
-            NavigationItems.values[index].name,
-            id: id,
-          ).go(context);
+          HomeRoute(NavigationItems.values[index].name, id: id).go(context);
         },
       ),
     );

@@ -1,12 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:behavior/constant.dart';
-import 'package:behavior/data/database/app_database.dart';
-import 'package:behavior/domain/models/task_list.dart';
-import 'package:behavior/data/database/daos/filters_dao.dart';
-import 'package:behavior/domain/repositories/filters_repository.dart';
+import 'package:morph_todo/constant.dart';
+import 'package:morph_todo/data/database/app_database.dart';
+import 'package:morph_todo/domain/models/task_list.dart';
+import 'package:morph_todo/data/database/daos/filters_dao.dart';
+import 'package:morph_todo/domain/repositories/filters_repository.dart';
 
 final filtersRepositoryProvider = Provider.autoDispose<FiltersRepository>(
-    (ref) => FiltersRepositoryImpl(AppDatabase.getInstance().filtersDao));
+  (ref) => FiltersRepositoryImpl(AppDatabase.getInstance().filtersDao),
+);
 
 class FiltersRepositoryImpl implements FiltersRepository {
   final FiltersDao _filtersDao;
@@ -23,7 +24,8 @@ class FiltersRepositoryImpl implements FiltersRepository {
   Stream<List<Filter>> watchAllFilters() {
     final filter = _filtersDao.watchAll();
     return filter.map(
-        (event) => event.map((e) => Filter(id: e.id, name: e.name)).toList());
+      (event) => event.map((e) => Filter(id: e.id, name: e.name)).toList(),
+    );
   }
 
   @override
@@ -35,18 +37,14 @@ class FiltersRepositoryImpl implements FiltersRepository {
   @override
   Stream<Filter?> watchFilter(String id) {
     final filter = _filtersDao.watchFilter(id);
-    return filter.map((event) =>
-        event != null ? Filter(id: event.id, name: event.name) : null);
+    return filter.map(
+      (event) => event != null ? Filter(id: event.id, name: event.name) : null,
+    );
   }
 
   @override
   Future<void> createFilter(final String title) async {
-    await _filtersDao.insertFilter(
-      Filter(
-        id: uuid.v4(),
-        name: title,
-      ),
-    );
+    await _filtersDao.insertFilter(Filter(id: uuid.v4(), name: title));
   }
 
   @override
