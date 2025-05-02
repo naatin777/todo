@@ -8,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'task_app_bar.g.dart';
 
 @riverpod
-Stream<Project?> taskAppBar(AutoDisposeRef ref) {
+Stream<Project?> taskAppBar(Ref ref) {
   final listId = ref.watch(taskListIdProvider);
   if (listId == inbox.id) {
     return Stream.value(inbox);

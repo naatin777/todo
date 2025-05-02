@@ -6,16 +6,17 @@ part of 'task_list_usecase.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$taskListUseCaseHash() => r'516746ebd8309ef56c8cacf206353344bd4d749c';
+String _$taskListUseCaseHash() => r'40d2244361d4fb3ea13f8a6fdcd1a402a57baf37';
 
 /// See also [taskListUseCase].
 @ProviderFor(taskListUseCase)
 final taskListUseCaseProvider = AutoDisposeProvider<TaskListUseCase>.internal(
   taskListUseCase,
   name: r'taskListUseCaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$taskListUseCaseHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$taskListUseCaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

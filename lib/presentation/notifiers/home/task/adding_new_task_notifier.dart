@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:morph_todo/data/database/app_database.dart';
 import 'package:morph_todo/data/repositories/projects_repository_impl.dart';
 import 'package:morph_todo/data/repositories/tasks_repository_impl.dart';
@@ -8,6 +8,7 @@ import 'package:morph_todo/domain/enums/priority.dart';
 import 'package:morph_todo/domain/models/due_date.dart';
 import 'package:morph_todo/domain/models/task_list.dart';
 import 'package:morph_todo/presentation/notifiers/task_list_id_provider.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'adding_new_task_notifier.g.dart';
 
@@ -68,7 +69,7 @@ class AddingNewTaskNotifier extends _$AddingNewTaskNotifier {
 }
 
 @riverpod
-Stream<Project?> projectFromId(ProjectFromIdRef ref) {
+Stream<Project?> projectFromId(Ref ref) {
   final addingNewTask = ref.watch(addingNewTaskNotifierProvider);
   final projectsRepository = ref.watch(projectsRepositoryProvider);
   return projectsRepository.watchProject(addingNewTask.projectId);

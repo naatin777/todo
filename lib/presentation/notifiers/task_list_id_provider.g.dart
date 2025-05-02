@@ -12,13 +12,15 @@ String _$taskListIdHash() => r'4457dbff41867fe4a1847fffdfecc0bbbb41c3db';
 @ProviderFor(TaskListId)
 final taskListIdProvider =
     AutoDisposeNotifierProvider<TaskListId, String>.internal(
-  TaskListId.new,
-  name: r'taskListIdProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$taskListIdHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      TaskListId.new,
+      name: r'taskListIdProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$taskListIdHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$TaskListId = AutoDisposeNotifier<String>;
 // ignore_for_file: type=lint

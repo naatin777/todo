@@ -5,9 +5,12 @@ import 'package:morph_todo/data/database/daos/projects_dao.dart';
 import 'package:morph_todo/domain/models/task_list.dart';
 import 'package:morph_todo/domain/repositories/projects_repository.dart';
 
-final projectsRepositoryProvider = Provider.autoDispose<ProjectsRepository>(
-  (ref) => ProjectsRepositoryImpl(AppDatabase.getInstance().projectsDao),
-);
+final projectsRepositoryProvider = Provider.autoDispose<ProjectsRepository>((
+  ref,
+) {
+  final database = ref.watch(AppDatabase.provider);
+  return ProjectsRepositoryImpl(database.projectsDao);
+});
 
 class ProjectsRepositoryImpl implements ProjectsRepository {
   final ProjectsDao _projectsDao;

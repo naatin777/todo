@@ -12,14 +12,15 @@ String _$detailNotifierHash() => r'1407e6ce27b9038613d99593cfbc04ab3fb6e2ea';
 @ProviderFor(DetailNotifier)
 final detailNotifierProvider =
     AutoDisposeAsyncNotifierProvider<DetailNotifier, Task?>.internal(
-  DetailNotifier.new,
-  name: r'detailNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$detailNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      DetailNotifier.new,
+      name: r'detailNotifierProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$detailNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$DetailNotifier = AutoDisposeAsyncNotifier<Task?>;
 // ignore_for_file: type=lint

@@ -13,14 +13,15 @@ String _$editingProjectNameNotifierHash() =>
 @ProviderFor(EditingProjectNameNotifier)
 final editingProjectNameNotifierProvider =
     AutoDisposeNotifierProvider<EditingProjectNameNotifier, void>.internal(
-  EditingProjectNameNotifier.new,
-  name: r'editingProjectNameNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$editingProjectNameNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      EditingProjectNameNotifier.new,
+      name: r'editingProjectNameNotifierProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$editingProjectNameNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$EditingProjectNameNotifier = AutoDisposeNotifier<void>;
 // ignore_for_file: type=lint

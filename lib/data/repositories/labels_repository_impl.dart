@@ -5,9 +5,10 @@ import 'package:morph_todo/data/database/daos/labels_dao.dart';
 import 'package:morph_todo/domain/models/task_list.dart';
 import 'package:morph_todo/domain/repositories/labels_repository.dart';
 
-final labelsRepositoryProvider = Provider.autoDispose<LabelsRepository>(
-  (ref) => LabelsRepositoryImpl(AppDatabase.getInstance().labelsDao),
-);
+final labelsRepositoryProvider = Provider.autoDispose<LabelsRepository>((ref) {
+  final database = ref.watch(AppDatabase.provider);
+  return LabelsRepositoryImpl(database.labelsDao);
+});
 
 class LabelsRepositoryImpl implements LabelsRepository {
   final LabelsDao _labelsDao;

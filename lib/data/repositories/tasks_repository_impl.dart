@@ -6,9 +6,10 @@ import 'package:morph_todo/domain/enums/priority.dart';
 import 'package:morph_todo/domain/models/due_date.dart';
 import 'package:morph_todo/domain/repositories/tasks_repository.dart';
 
-final tasksRepositoryProvider = Provider.autoDispose<TasksRepository>(
-  (ref) => TasksRepositoryImpl(AppDatabase.getInstance().tasksDao),
-);
+final tasksRepositoryProvider = Provider.autoDispose<TasksRepository>((ref) {
+  final database = ref.watch(AppDatabase.provider);
+  return TasksRepositoryImpl(database.tasksDao);
+});
 
 class TasksRepositoryImpl implements TasksRepository {
   final TasksDao _tasksDao;

@@ -1,13 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:morph_todo/constant.dart';
 import 'package:morph_todo/data/database/app_database.dart';
-import 'package:morph_todo/domain/models/task_list.dart';
 import 'package:morph_todo/data/database/daos/filters_dao.dart';
+import 'package:morph_todo/domain/models/task_list.dart';
 import 'package:morph_todo/domain/repositories/filters_repository.dart';
 
-final filtersRepositoryProvider = Provider.autoDispose<FiltersRepository>(
-  (ref) => FiltersRepositoryImpl(AppDatabase.getInstance().filtersDao),
-);
+final filtersRepositoryProvider = Provider.autoDispose<FiltersRepository>((
+  ref,
+) {
+  final database = ref.watch(AppDatabase.provider);
+  return FiltersRepositoryImpl(database.filtersDao);
+});
 
 class FiltersRepositoryImpl implements FiltersRepository {
   final FiltersDao _filtersDao;

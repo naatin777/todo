@@ -1,4 +1,4 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:morph_todo/data/repositories/filters_repository_impl.dart';
 import 'package:morph_todo/data/repositories/labels_repository_impl.dart';
 import 'package:morph_todo/data/repositories/projects_repository_impl.dart';
@@ -6,11 +6,12 @@ import 'package:morph_todo/domain/models/task_list.dart';
 import 'package:morph_todo/domain/repositories/filters_repository.dart';
 import 'package:morph_todo/domain/repositories/labels_repository.dart';
 import 'package:morph_todo/domain/repositories/projects_repository.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'task_list_usecase.g.dart';
 
 @riverpod
-TaskListUseCase taskListUseCase(TaskListUseCaseRef ref) {
+TaskListUseCase taskListUseCase(Ref ref) {
   final projectsRepository = ref.watch(projectsRepositoryProvider);
   final labelsRepository = ref.watch(labelsRepositoryProvider);
   final filtersRepository = ref.watch(filtersRepositoryProvider);

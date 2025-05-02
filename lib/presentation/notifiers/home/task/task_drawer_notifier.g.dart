@@ -12,12 +12,15 @@ String _$taskDrawerNotifierHash() =>
 /// See also [TaskDrawerNotifier].
 @ProviderFor(TaskDrawerNotifier)
 final taskDrawerNotifierProvider = AutoDisposeAsyncNotifierProvider<
-    TaskDrawerNotifier, List<TaskList>>.internal(
+  TaskDrawerNotifier,
+  List<TaskList>
+>.internal(
   TaskDrawerNotifier.new,
   name: r'taskDrawerNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$taskDrawerNotifierHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$taskDrawerNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

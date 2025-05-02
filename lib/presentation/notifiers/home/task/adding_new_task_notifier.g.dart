@@ -6,16 +6,17 @@ part of 'adding_new_task_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$projectFromIdHash() => r'c41f2c89caffb6769a40935936f9c40de03f40a8';
+String _$projectFromIdHash() => r'6279e938eb1f24036f3de7625f46315d80bcdc51';
 
 /// See also [projectFromId].
 @ProviderFor(projectFromId)
 final projectFromIdProvider = AutoDisposeStreamProvider<Project?>.internal(
   projectFromId,
   name: r'projectFromIdProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$projectFromIdHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$projectFromIdHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -30,9 +31,10 @@ String _$dueDateChipTextHash() => r'd04a15aa69e5a347c4e9c409a6184981b82dc773';
 final dueDateChipTextProvider = AutoDisposeProvider<String>.internal(
   dueDateChipText,
   name: r'dueDateChipTextProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$dueDateChipTextHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$dueDateChipTextHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -47,14 +49,15 @@ String _$addingNewTaskNotifierHash() =>
 @ProviderFor(AddingNewTaskNotifier)
 final addingNewTaskNotifierProvider =
     AutoDisposeNotifierProvider<AddingNewTaskNotifier, Task>.internal(
-  AddingNewTaskNotifier.new,
-  name: r'addingNewTaskNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$addingNewTaskNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      AddingNewTaskNotifier.new,
+      name: r'addingNewTaskNotifierProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$addingNewTaskNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$AddingNewTaskNotifier = AutoDisposeNotifier<Task>;
 // ignore_for_file: type=lint

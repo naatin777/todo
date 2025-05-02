@@ -13,14 +13,15 @@ String _$taskScreenNotifierHash() =>
 @ProviderFor(TaskScreenNotifier)
 final taskScreenNotifierProvider =
     AutoDisposeAsyncNotifierProvider<TaskScreenNotifier, List<Task>>.internal(
-  TaskScreenNotifier.new,
-  name: r'taskScreenNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$taskScreenNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      TaskScreenNotifier.new,
+      name: r'taskScreenNotifierProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$taskScreenNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$TaskScreenNotifier = AutoDisposeAsyncNotifier<List<Task>>;
 // ignore_for_file: type=lint

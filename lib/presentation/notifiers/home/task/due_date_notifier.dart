@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:morph_todo/domain/models/due_date.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'due_date_notifier.g.dart';
 
@@ -42,7 +43,7 @@ class DueDateNotifier extends _$DueDateNotifier {
 }
 
 @riverpod
-String formattedDate(FormattedDateRef ref) {
+String formattedDate(Ref ref) {
   final dueDate = ref.watch(dueDateNotifierProvider);
   final dateTime = dueDate.dateTime;
   if (dateTime != null) {
@@ -53,7 +54,7 @@ String formattedDate(FormattedDateRef ref) {
 }
 
 @riverpod
-String formattedTime(FormattedTimeRef ref) {
+String formattedTime(Ref ref) {
   final dueDate = ref.watch(dueDateNotifierProvider);
   final dateTime = dueDate.dateTime;
   if (!dueDate.isAllDay && dateTime != null) {

@@ -13,14 +13,15 @@ String _$projectMenuNotifierHash() =>
 @ProviderFor(ProjectMenuNotifier)
 final projectMenuNotifierProvider =
     AutoDisposeNotifierProvider<ProjectMenuNotifier, void>.internal(
-  ProjectMenuNotifier.new,
-  name: r'projectMenuNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$projectMenuNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      ProjectMenuNotifier.new,
+      name: r'projectMenuNotifierProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$projectMenuNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$ProjectMenuNotifier = AutoDisposeNotifier<void>;
 // ignore_for_file: type=lint

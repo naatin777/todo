@@ -13,14 +13,15 @@ String _$taskListTileNotifierHash() =>
 @ProviderFor(TaskListTileNotifier)
 final taskListTileNotifierProvider =
     AutoDisposeNotifierProvider<TaskListTileNotifier, void>.internal(
-  TaskListTileNotifier.new,
-  name: r'taskListTileNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$taskListTileNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      TaskListTileNotifier.new,
+      name: r'taskListTileNotifierProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$taskListTileNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$TaskListTileNotifier = AutoDisposeNotifier<void>;
 // ignore_for_file: type=lint

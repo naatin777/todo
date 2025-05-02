@@ -6,7 +6,7 @@ part of 'task_app_bar.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$taskAppBarHash() => r'ec764e4c209618cc2877c42667d16ea1077bd2c5';
+String _$taskAppBarHash() => r'd1d9304f460b71c8e2cff04c1558621504f694ff';
 
 /// See also [taskAppBar].
 @ProviderFor(taskAppBar)
