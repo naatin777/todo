@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:morph_todo/constant.dart';
 import 'package:morph_todo/domain/enums/priority.dart';
 import 'package:morph_todo/domain/models/due_date.dart';
-import 'package:morph_todo/presentation/pages/home/task/due_date_dialog.dart';
-import 'package:morph_todo/presentation/pages/home/task/priority_selection_dialog.dart';
-import 'package:morph_todo/presentation/pages/home/task/project_selection_bottom_sheet.dart';
 import 'package:morph_todo/presentation/notifiers/home/task/adding_new_task_notifier.dart';
+import 'package:morph_todo/presentation/pages/home/tasks/due_date_dialog.dart';
+import 'package:morph_todo/presentation/pages/home/tasks/priority_selection_dialog.dart';
+import 'package:morph_todo/presentation/pages/home/tasks/project_selection_bottom_sheet.dart';
 
 class AddingNewTaskBottomSheet extends ConsumerStatefulWidget {
   const AddingNewTaskBottomSheet({super.key});

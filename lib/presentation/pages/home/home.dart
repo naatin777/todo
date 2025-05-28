@@ -1,73 +1,154 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:morph_todo/domain/enums/navigation_item.dart';
-import 'package:morph_todo/presentation/pages/home/settings/settings_app_bar.dart';
-import 'package:morph_todo/presentation/pages/home/settings/settings_screen.dart';
-import 'package:morph_todo/presentation/pages/home/task/adding_new_task_fab.dart';
-import 'package:morph_todo/presentation/pages/home/task/task_app_bar.dart';
-import 'package:morph_todo/presentation/pages/home/task/task_drawer.dart';
-import 'package:morph_todo/presentation/pages/home/task/task_screen.dart';
-import 'package:morph_todo/presentation/route/route.dart';
+import 'package:go_router/go_router.dart';
+import 'package:morph_todo/presentation/pages/home/tasks/adding_new_task_fab.dart';
+
+class AnimatedBranchContainer extends StatelessWidget {
+  /// Creates a AnimatedBranchContainer
+  const AnimatedBranchContainer({
+    super.key,
+    required this.currentIndex,
+    required this.children,
+  });
+
+  /// The index (in [children]) of the branch Navigator to display.
+  final int currentIndex;
+
+  /// The children (branch Navigators) to display in this container.
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children:
+          children.asMap().entries.map((navigator) {
+            return AnimatedScale(
+              scale: navigator.key == currentIndex ? 1 : 1.0,
+              duration: const Duration(milliseconds: 200),
+              child: AnimatedOpacity(
+                opacity: navigator.key == currentIndex ? 1 : 0,
+                duration: const Duration(milliseconds: 200),
+                child: _branchNavigatorWrapper(navigator.key, navigator.value),
+              ),
+            );
+          }).toList(),
+    );
+  }
+
+  Widget _branchNavigatorWrapper(int index, Widget navigator) => IgnorePointer(
+    ignoring: index != currentIndex,
+    child: TickerMode(enabled: index == currentIndex, child: navigator),
+  );
+}
 
 class Home extends ConsumerWidget {
-  const Home({super.key, required this.nav, required this.id});
+  const Home({
+    super.key,
+    required this.navigationShell,
+    required this.id,
+    required this.children,
+  });
 
-  final String nav;
+  final StatefulNavigationShell navigationShell;
+  final List<Widget> children;
   final String? id;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final navigationItems = NavigationItems.values.byName(nav);
-    return Scaffold(
-      appBar:
-          [
-            const TaskAppBar(),
-            null,
-            null,
-            const SettingsAppBar(),
-          ][navigationItems.index],
-      drawer: [const TaskDrawer(), null, null, null][navigationItems.index],
-      body:
-          [
-            const TaskScreen(),
-            null,
-            null,
-            const SettingsScreen(),
-          ][navigationItems.index],
-      floatingActionButton:
-          [const AddingNewTaskFab(), null, null, null][navigationItems.index],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: navigationItems.index,
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.check_box),
-            selectedIcon: Icon(Icons.check_box_outlined),
-            label: "Task",
-            tooltip: "Task",
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.search),
-            selectedIcon: Icon(Icons.search_outlined),
-            label: "Search",
-            tooltip: "Search",
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.analytics),
-            selectedIcon: Icon(Icons.analytics_outlined),
-            label: "Analytics",
-            tooltip: "Analytics",
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.settings),
-            selectedIcon: Icon(Icons.settings_outlined),
-            label: "Settings",
-            tooltip: "Settings",
-          ),
-        ],
-        onDestinationSelected: (index) {
-          HomeRoute(NavigationItems.values[index].name, id: id).go(context);
-        },
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 600) {
+          return Scaffold(
+            body: AnimatedBranchContainer(
+              currentIndex: navigationShell.currentIndex,
+              children: children,
+            ),
+            // body: navigationShell.,
+            floatingActionButton: AddingNewTaskFab(),
+            bottomNavigationBar: NavigationBar(
+              selectedIndex: navigationShell.currentIndex,
+              destinations: [
+                NavigationDestination(
+                  icon: Icon(Icons.task_alt),
+                  selectedIcon: Icon(Icons.task_alt_outlined),
+                  label: "Tasks",
+                  tooltip: "Tasks",
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.event_note),
+                  selectedIcon: Icon(Icons.event_note_outlined),
+                  label: "Schedule",
+                  tooltip: "Schedule",
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.analytics),
+                  selectedIcon: Icon(Icons.analytics_outlined),
+                  label: "Analytics",
+                  tooltip: "Analytics",
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.hub),
+                  selectedIcon: Icon(Icons.hub_outlined),
+                  label: "Hub",
+                  tooltip: "Hub",
+                ),
+              ],
+              onDestinationSelected: (index) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  navigationShell.goBranch(
+                    index,
+                    initialLocation: index == navigationShell.currentIndex,
+                  );
+                });
+              },
+            ),
+          );
+        } else {
+          return Scaffold(
+            body: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                NavigationRail(
+                  labelType: NavigationRailLabelType.all,
+                  leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
+                  destinations: [
+                    NavigationRailDestination(
+                      icon: Icon(Icons.task_alt),
+                      selectedIcon: Icon(Icons.task_alt_outlined),
+                      label: Text("Tasks"),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.event_note),
+                      selectedIcon: Icon(Icons.event_note_outlined),
+                      label: Text("Schedule"),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.analytics),
+                      selectedIcon: Icon(Icons.analytics_outlined),
+                      label: Text("Analytics"),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.hub),
+                      selectedIcon: Icon(Icons.hub_outlined),
+                      label: Text("Hub"),
+                    ),
+                  ],
+                  selectedIndex: navigationShell.currentIndex,
+                  onDestinationSelected: (index) {
+                    navigationShell.goBranch(index);
+                  },
+                ),
+                Expanded(
+                  child: AnimatedBranchContainer(
+                    currentIndex: navigationShell.currentIndex,
+                    children: children,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 }

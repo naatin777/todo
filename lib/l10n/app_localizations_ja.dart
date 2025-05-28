@@ -8,5 +8,6 @@ import 'app_localizations.dart';
 class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
-
+  @override
+  String get appName => 'MorphTodo';
 }

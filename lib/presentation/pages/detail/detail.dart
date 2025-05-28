@@ -35,21 +35,21 @@ class _DetailState extends ConsumerState<Detail> {
             appBar: AppBar(
               leading: IconButton(
                 onPressed: () {
-                  if (GoRouter.of(context).canPop()) {
-                    GoRouter.of(context).pop();
-                  } else {
-                    GoRouter.of(context).go("/task");
-                  }
+                  // if (GoRouter.of(context).canPop()) {
+                  //   GoRouter.of(context).pop();
+                  // } else {
+                  //   GoRouter.of(context).go("/task");
+                  // }
                 },
                 icon: const Icon(Icons.arrow_back),
               ),
               actions: [
                 IconButton(
                   onPressed: () async {
-                    GoRouter.of(context).pop();
-                    await ref
-                        .read(detailNotifierProvider.notifier)
-                        .deleteTask(data);
+                    // GoRouter.of(context).pop();
+                    // await ref
+                    //     .read(detailNotifierProvider.notifier)
+                    //     .deleteTask(data);
                   },
                   icon: const Icon(Icons.delete),
                 ),

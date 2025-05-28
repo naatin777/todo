@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:morph_todo/data/database/app_database.dart';
 import 'package:morph_todo/presentation/notifiers/home/task/task_screen_notifier.dart';
-import 'package:morph_todo/presentation/route/route.dart';
 
 class TaskListTile extends ConsumerStatefulWidget {
   const TaskListTile({super.key, required this.task});
@@ -37,17 +36,18 @@ class _TaskListTileState extends ConsumerState<TaskListTile> {
     final now = DateTime.now();
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-      leading: Checkbox(
-        value: task.isDone,
-        onChanged: (value) {
+      leading: IconButton(
+        onPressed: () {
           ref
               .read(taskScreenNotifierProvider.notifier)
-              .changeCheck(task, value);
+              .changeCheck(task, !task.isDone);
         },
-        fillColor: WidgetStateProperty.all(
-          task.priority.color ?? Theme.of(context).colorScheme.onSurface,
-        ),
+        icon:
+            task.isDone
+                ? Icon(Icons.check_box_outline_blank)
+                : Icon(Icons.check),
       ),
+
       title: Text(task.title),
       subtitle:
           task.description.isNotEmpty || task.dueDate != null
@@ -63,9 +63,7 @@ class _TaskListTileState extends ConsumerState<TaskListTile> {
                 ],
               )
               : null,
-      onTap: () {
-        DetailRoute(task.id).push(context);
-      },
+      onTap: () {},
     );
   }
 }

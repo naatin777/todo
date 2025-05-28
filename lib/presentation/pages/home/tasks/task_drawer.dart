@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:morph_todo/constant.dart';
-import 'package:morph_todo/domain/enums/navigation_item.dart';
-import 'package:morph_todo/presentation/pages/home/task/adding_new_project_dialog.dart';
 import 'package:morph_todo/presentation/notifiers/home/task/task_drawer_notifier.dart';
-
 import 'package:morph_todo/presentation/notifiers/task_list_id_provider.dart';
-import 'package:morph_todo/presentation/route/route.dart';
 
 class TaskDrawer extends ConsumerWidget {
   const TaskDrawer({super.key});
@@ -25,27 +21,12 @@ class TaskDrawer extends ConsumerWidget {
                 return 0;
               }
             }(),
-            onDestinationSelected: (int index) {
-              if (index == 0) {
-                HomeRoute(NavigationItems.task.name, id: inbox.id).go(context);
-                Navigator.of(context).pop();
-              } else if (0 < index && index < data.length + 1) {
-                for (final e in data) {
-                  HomeRoute(NavigationItems.task.name, id: e.id).go(context);
-                }
-                Navigator.of(context).pop();
-              } else if (index == data.length + 1) {
-                showDialog(
-                  context: context,
-                  builder: (context) => const AddingNewProjectDialog(),
-                );
-              }
-            },
+            onDestinationSelected: (int index) {},
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
                 child: Text(
-                  "Projects",
+                  "Lists",
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ),
@@ -60,33 +41,13 @@ class TaskDrawer extends ConsumerWidget {
                   label: Text(e.name),
                   selectedIcon: const Icon(Icons.list_outlined),
                 ),
-              const NavigationDrawerDestination(
-                icon: Icon(Icons.add),
-                label: Text("Add new project"),
-              ),
-              const Divider(),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
-                child: Text(
-                  "Labels",
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+                child: Divider(),
               ),
               const NavigationDrawerDestination(
                 icon: Icon(Icons.add),
-                label: Text("Add new label"),
-              ),
-              const Divider(),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
-                child: Text(
-                  "Filters",
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-              ),
-              const NavigationDrawerDestination(
-                icon: Icon(Icons.add),
-                label: Text("Add new filter"),
+                label: Text("Add new list"),
               ),
             ],
           ),

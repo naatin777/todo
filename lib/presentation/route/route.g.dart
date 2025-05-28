@@ -6,25 +6,113 @@ part of 'route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$homeRoute, $detailRoute];
+List<RouteBase> get $appRoutes => [$homeRouteData, $detailRoute];
 
-RouteBase get $homeRoute => GoRouteData.$route(
-  path: '/:nav',
-  name: 'home',
+RouteBase get $homeRouteData => StatefulShellRouteData.$route(
+  restorationScopeId: HomeRouteData.$restorationScopeId,
+  navigatorContainerBuilder: HomeRouteData.$navigatorContainerBuilder,
+  factory: $HomeRouteDataExtension._fromState,
+  branches: [
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/tasks',
+          name: 'tasks',
 
-  factory: $HomeRouteExtension._fromState,
+          factory: $TasksRouteDataExtension._fromState,
+        ),
+      ],
+    ),
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/upcoming',
+          name: 'upcoming',
+
+          factory: $UpcomingRouteDataExtension._fromState,
+        ),
+      ],
+    ),
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/analytics',
+          name: 'analytics',
+
+          factory: $AnalyticsRouteDataExtension._fromState,
+        ),
+      ],
+    ),
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/settings',
+          name: 'settings',
+
+          factory: $SettingsRouteDataExtension._fromState,
+        ),
+      ],
+    ),
+  ],
 );
 
-extension $HomeRouteExtension on HomeRoute {
-  static HomeRoute _fromState(GoRouterState state) => HomeRoute(
-    state.pathParameters['nav']!,
-    id: state.uri.queryParameters['id'],
-  );
+extension $HomeRouteDataExtension on HomeRouteData {
+  static HomeRouteData _fromState(GoRouterState state) => const HomeRouteData();
+}
 
-  String get location => GoRouteData.$location(
-    '/${Uri.encodeComponent(nav)}',
-    queryParams: {if (id != null) 'id': id},
-  );
+extension $TasksRouteDataExtension on TasksRouteData {
+  static TasksRouteData _fromState(GoRouterState state) =>
+      const TasksRouteData();
+
+  String get location => GoRouteData.$location('/tasks');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $UpcomingRouteDataExtension on UpcomingRouteData {
+  static UpcomingRouteData _fromState(GoRouterState state) =>
+      const UpcomingRouteData();
+
+  String get location => GoRouteData.$location('/upcoming');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $AnalyticsRouteDataExtension on AnalyticsRouteData {
+  static AnalyticsRouteData _fromState(GoRouterState state) =>
+      const AnalyticsRouteData();
+
+  String get location => GoRouteData.$location('/analytics');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SettingsRouteDataExtension on SettingsRouteData {
+  static SettingsRouteData _fromState(GoRouterState state) =>
+      const SettingsRouteData();
+
+  String get location => GoRouteData.$location('/settings');
 
   void go(BuildContext context) => context.go(location);
 
@@ -37,7 +125,7 @@ extension $HomeRouteExtension on HomeRoute {
 }
 
 RouteBase get $detailRoute => GoRouteData.$route(
-  path: '/detail/:id',
+  path: '/tasks/:id',
   name: 'detail',
 
   factory: $DetailRouteExtension._fromState,
@@ -48,7 +136,7 @@ extension $DetailRouteExtension on DetailRoute {
       DetailRoute(state.pathParameters['id']!);
 
   String get location =>
-      GoRouteData.$location('/detail/${Uri.encodeComponent(id)}');
+      GoRouteData.$location('/tasks/${Uri.encodeComponent(id)}');
 
   void go(BuildContext context) => context.go(location);
 

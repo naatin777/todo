@@ -15,20 +15,28 @@ class App extends ConsumerWidget {
 
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+        final c = ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.light,
+        );
+        final cc = ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.dark,
+        );
         return MaterialApp.router(
-          title: 'MorphTodo',
+          title: AppLocalizations.of(context)?.appName,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           themeMode: themeMode,
           theme: ThemeData(
             useMaterial3: true,
+            colorScheme: c,
             brightness: Brightness.light,
-            colorScheme: lightDynamic,
           ),
           darkTheme: ThemeData(
             useMaterial3: true,
+            colorScheme: cc,
             brightness: Brightness.dark,
-            colorScheme: darkDynamic,
           ),
           routerDelegate: router.routerDelegate,
           routeInformationParser: router.routeInformationParser,
