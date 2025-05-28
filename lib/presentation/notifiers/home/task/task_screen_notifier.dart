@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:morph_todo/data/database/app_database.dart';
-import 'package:morph_todo/data/repositories/tasks_repository_impl.dart';
-import 'package:morph_todo/presentation/notifiers/task_list_id_provider.dart';
+import 'package:todo/data/database/app_database.dart';
+import 'package:todo/data/repositories/tasks_repository_impl.dart';
+import 'package:todo/presentation/notifiers/task_list_id_provider.dart';
 
 part 'task_screen_notifier.g.dart';
 

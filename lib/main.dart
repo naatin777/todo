@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:morph_todo/data/preference/share_preferences_instance.dart';
-import 'package:morph_todo/presentation/app.dart';
+import 'package:todo/data/preference/share_preferences_instance.dart';
+import 'package:todo/presentation/app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

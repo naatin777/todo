@@ -1,15 +1,15 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:morph_todo/data/database/daos/filters_dao.dart';
-import 'package:morph_todo/data/database/daos/labels_dao.dart';
-import 'package:morph_todo/data/database/daos/projects_dao.dart';
-import 'package:morph_todo/data/database/daos/tasks_dao.dart';
-import 'package:morph_todo/domain/enums/priority.dart';
-import 'package:morph_todo/domain/tables/filters.dart';
-import 'package:morph_todo/domain/tables/labels.dart';
-import 'package:morph_todo/domain/tables/projects.dart';
-import 'package:morph_todo/domain/tables/tasks.dart';
+import 'package:todo/data/database/daos/filters_dao.dart';
+import 'package:todo/data/database/daos/labels_dao.dart';
+import 'package:todo/data/database/daos/projects_dao.dart';
+import 'package:todo/data/database/daos/tasks_dao.dart';
+import 'package:todo/domain/enums/priority.dart';
+import 'package:todo/domain/tables/filters.dart';
+import 'package:todo/domain/tables/labels.dart';
+import 'package:todo/domain/tables/projects.dart';
+import 'package:todo/domain/tables/tasks.dart';
 import 'package:path_provider/path_provider.dart';
 
 part 'app_database.g.dart';
@@ -26,7 +26,7 @@ class AppDatabase extends _$AppDatabase {
 
   static QueryExecutor _openConnection() {
     return driftDatabase(
-      name: "morph_todo",
+      name: "todo",
       native: const DriftNativeOptions(
         databaseDirectory: getApplicationSupportDirectory,
       ),

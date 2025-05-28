@@ -1,4 +1,4 @@
-import 'package:morph_todo/domain/models/task_list.dart';
+import 'package:todo/domain/models/task_list.dart';
 import 'package:uuid/uuid.dart';
 
 const uuid = Uuid();

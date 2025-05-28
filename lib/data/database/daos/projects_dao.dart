@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
-import 'package:morph_todo/data/database/app_database.dart';
-import 'package:morph_todo/domain/tables/projects.dart';
+import 'package:todo/data/database/app_database.dart';
+import 'package:todo/domain/tables/projects.dart';
 
 part 'projects_dao.g.dart';
 
@@ -18,13 +18,15 @@ class ProjectsDao extends DatabaseAccessor<AppDatabase>
   }
 
   Future<ProjectTable?> selectProject(String id) async {
-    return (select(projects)
-      ..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
+    return (select(
+      projects,
+    )..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
   }
 
   Stream<ProjectTable?> watchProject(String id) {
-    return (select(projects)
-      ..where((tbl) => tbl.id.equals(id))).watchSingleOrNull();
+    return (select(
+      projects,
+    )..where((tbl) => tbl.id.equals(id))).watchSingleOrNull();
   }
 
   Future<int> insertProject(ProjectTable project) async {
@@ -32,8 +34,9 @@ class ProjectsDao extends DatabaseAccessor<AppDatabase>
   }
 
   Future<int> updateProject(ProjectTable project) async {
-    return (update(projects)
-      ..where((tbl) => tbl.id.equals(project.id))).write(project);
+    return (update(
+      projects,
+    )..where((tbl) => tbl.id.equals(project.id))).write(project);
   }
 
   Future<int> deleteProject(String id) async {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:morph_todo/presentation/pages/home/analytics/analytics_screen.dart';
-import 'package:morph_todo/presentation/pages/home/settings/settings_screen.dart';
-import 'package:morph_todo/presentation/pages/home/tasks/tasks_screen.dart';
-import 'package:morph_todo/presentation/pages/home/upcoming/upcoming_screen.dart';
+import 'package:todo/presentation/pages/home/analytics/analytics_screen.dart';
+import 'package:todo/presentation/pages/home/settings/settings_screen.dart';
+import 'package:todo/presentation/pages/home/tasks/tasks_screen.dart';
+import 'package:todo/presentation/pages/home/upcoming/upcoming_screen.dart';
 
 class TasksBranch extends StatefulShellBranchData {
   const TasksBranch();

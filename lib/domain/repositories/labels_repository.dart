@@ -1,4 +1,4 @@
-import 'package:morph_todo/domain/models/task_list.dart';
+import 'package:todo/domain/models/task_list.dart';
 
 abstract class LabelsRepository {
   Future<List<Label>> getAllLabels();

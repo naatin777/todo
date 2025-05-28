@@ -1,4 +1,4 @@
-package io.github.naatin777.morph_todo
+package io.github.naatin777.todo
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:morph_todo/presentation/pages/home/tasks/adding_new_task_fab.dart';
+import 'package:todo/presentation/pages/home/tasks/adding_new_task_fab.dart';
 
 class AnimatedBranchContainer extends StatelessWidget {
   /// Creates a AnimatedBranchContainer
@@ -20,18 +20,17 @@ class AnimatedBranchContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children:
-          children.asMap().entries.map((navigator) {
-            return AnimatedScale(
-              scale: navigator.key == currentIndex ? 1 : 1.0,
-              duration: const Duration(milliseconds: 200),
-              child: AnimatedOpacity(
-                opacity: navigator.key == currentIndex ? 1 : 0,
-                duration: const Duration(milliseconds: 200),
-                child: _branchNavigatorWrapper(navigator.key, navigator.value),
-              ),
-            );
-          }).toList(),
+      children: children.asMap().entries.map((navigator) {
+        return AnimatedScale(
+          scale: navigator.key == currentIndex ? 1 : 1.0,
+          duration: const Duration(milliseconds: 200),
+          child: AnimatedOpacity(
+            opacity: navigator.key == currentIndex ? 1 : 0,
+            duration: const Duration(milliseconds: 200),
+            child: _branchNavigatorWrapper(navigator.key, navigator.value),
+          ),
+        );
+      }).toList(),
     );
   }
 

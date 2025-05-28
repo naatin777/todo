@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:morph_todo/domain/models/task_list.dart';
-import 'package:morph_todo/presentation/notifiers/home/task/editing_project_name_notifier.dart';
+import 'package:todo/domain/models/task_list.dart';
+import 'package:todo/presentation/notifiers/home/task/editing_project_name_notifier.dart';
 
 class EditingProjectNameDialog extends ConsumerStatefulWidget {
   const EditingProjectNameDialog({super.key, required this.project});

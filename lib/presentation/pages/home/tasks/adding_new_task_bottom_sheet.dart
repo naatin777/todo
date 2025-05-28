@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:morph_todo/constant.dart';
-import 'package:morph_todo/domain/enums/priority.dart';
-import 'package:morph_todo/domain/models/due_date.dart';
-import 'package:morph_todo/presentation/notifiers/home/task/adding_new_task_notifier.dart';
-import 'package:morph_todo/presentation/pages/home/tasks/due_date_dialog.dart';
-import 'package:morph_todo/presentation/pages/home/tasks/priority_selection_dialog.dart';
-import 'package:morph_todo/presentation/pages/home/tasks/project_selection_bottom_sheet.dart';
+import 'package:todo/constant.dart';
+import 'package:todo/domain/enums/priority.dart';
+import 'package:todo/domain/models/due_date.dart';
+import 'package:todo/presentation/notifiers/home/task/adding_new_task_notifier.dart';
+import 'package:todo/presentation/pages/home/tasks/due_date_dialog.dart';
+import 'package:todo/presentation/pages/home/tasks/priority_selection_dialog.dart';
+import 'package:todo/presentation/pages/home/tasks/project_selection_bottom_sheet.dart';
 
 class AddingNewTaskBottomSheet extends ConsumerStatefulWidget {
   const AddingNewTaskBottomSheet({super.key});
@@ -97,13 +97,12 @@ class _AddingNewTaskBottomSheetState
                   onPressed: () async {
                     final DueDate? result = await showDialog(
                       context: context,
-                      builder:
-                          (context) => DueDateDialog(
-                            dueDate: DueDate(
-                              dateTime: addingNewTask.dueDate,
-                              isAllDay: addingNewTask.isAllDay,
-                            ),
-                          ),
+                      builder: (context) => DueDateDialog(
+                        dueDate: DueDate(
+                          dateTime: addingNewTask.dueDate,
+                          isAllDay: addingNewTask.isAllDay,
+                        ),
+                      ),
                     );
                     ref
                         .read(addingNewTaskNotifierProvider.notifier)
@@ -132,10 +131,9 @@ class _AddingNewTaskBottomSheetState
                   onPressed: () async {
                     final Priority? result = await showDialog(
                       context: context,
-                      builder:
-                          (context) => PrioritySelectionDialog(
-                            priority: addingNewTask.priority,
-                          ),
+                      builder: (context) => PrioritySelectionDialog(
+                        priority: addingNewTask.priority,
+                      ),
                     );
                     ref
                         .read(addingNewTaskNotifierProvider.notifier)
@@ -189,16 +187,15 @@ class _AddingNewTaskBottomSheetState
                 child: Row(
                   children: [
                     project.when(
-                      data:
-                          (data) => ConstrainedBox(
-                            constraints: BoxConstraints(
-                              maxWidth: MediaQuery.of(context).size.width - 104,
-                            ),
-                            child: Text(
-                              data?.name ?? inbox.name,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
+                      data: (data) => ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width - 104,
+                        ),
+                        child: Text(
+                          data?.name ?? inbox.name,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                       loading: () => const SizedBox(),
                       error: (error, stackTrace) => const SizedBox(),
                     ),

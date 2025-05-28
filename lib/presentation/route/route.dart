@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:morph_todo/presentation/notifiers/router.dart';
-import 'package:morph_todo/presentation/pages/detail/detail.dart';
-import 'package:morph_todo/presentation/pages/home/home.dart';
-import 'package:morph_todo/presentation/route/home_route.dart';
+import 'package:todo/presentation/notifiers/router.dart';
+import 'package:todo/presentation/pages/detail/detail.dart';
+import 'package:todo/presentation/pages/home/home.dart';
+import 'package:todo/presentation/route/home_route.dart';
 
 part 'route.g.dart';
 

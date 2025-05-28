@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
-import 'package:morph_todo/data/database/app_database.dart';
-import 'package:morph_todo/domain/tables/tasks.dart';
+import 'package:todo/data/database/app_database.dart';
+import 'package:todo/domain/tables/tasks.dart';
 
 part 'tasks_dao.g.dart';
 
@@ -9,13 +9,15 @@ class TasksDao extends DatabaseAccessor<AppDatabase> with _$TasksDaoMixin {
   TasksDao(super.db);
 
   Future<List<Task>> selectTasksFromProject(String projectId) async {
-    return (select(tasks)
-      ..where((tbl) => tbl.projectId.equals(projectId))).get();
+    return (select(
+      tasks,
+    )..where((tbl) => tbl.projectId.equals(projectId))).get();
   }
 
   Stream<List<Task>> watchTasksFromProject(String projectId) {
-    return (select(tasks)
-      ..where((tbl) => tbl.projectId.equals(projectId))).watch();
+    return (select(
+      tasks,
+    )..where((tbl) => tbl.projectId.equals(projectId))).watch();
   }
 
   Future<Task?> selectTask(String id) async {
@@ -23,8 +25,9 @@ class TasksDao extends DatabaseAccessor<AppDatabase> with _$TasksDaoMixin {
   }
 
   Stream<Task?> watchTask(String id) {
-    return (select(tasks)
-      ..where((tbl) => tbl.id.equals(id))).watchSingleOrNull();
+    return (select(
+      tasks,
+    )..where((tbl) => tbl.id.equals(id))).watchSingleOrNull();
   }
 
   Future<int> insertTask(Task task) async {

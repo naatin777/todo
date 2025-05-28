@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:morph_todo/data/repositories/projects_repository_impl.dart';
-import 'package:morph_todo/domain/models/task_list.dart';
+import 'package:todo/data/repositories/projects_repository_impl.dart';
+import 'package:todo/domain/models/task_list.dart';
 
 part 'project_menu_notifier.g.dart';
 

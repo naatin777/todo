@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:morph_todo/presentation/notifiers/home/task/task_screen_notifier.dart';
-import 'package:morph_todo/presentation/pages/home/tasks/task_list_tile.dart';
+import 'package:todo/presentation/notifiers/home/task/task_screen_notifier.dart';
+import 'package:todo/presentation/pages/home/tasks/task_list_tile.dart';
 
 class TasksScreen extends ConsumerWidget {
   const TasksScreen({super.key});
@@ -16,91 +16,90 @@ class TasksScreen extends ConsumerWidget {
           return DefaultTabController(
             length: 3,
             child: NestedScrollView(
-              headerSliverBuilder: (
-                BuildContext context,
-                bool innerBoxIsScrolled,
-              ) {
-                return <Widget>[
-                  SliverOverlapAbsorber(
-                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                      context,
-                    ),
-                    sliver: SliverAppBar(
-                      bottom: TabBar(
-                        tabAlignment: TabAlignment.start,
-                        isScrollable: true,
-                        tabs: [
-                          GestureDetector(
-                            onTap: () {
-                              debugPrint("");
-                            },
-                            onLongPress: () {
-                              debugPrint("");
-                            },
-                            onDoubleTap: () {
-                              debugPrint("");
-                            },
-
-                            child: const Tab(text: "All"),
-                          ),
-                          Tab(text: "Today"),
-                          Tab(child: Text("Other")),
-                        ],
-                      ),
-                      automaticallyImplyLeading: false,
-                      title: Text('Tasks'),
-                      pinned: true,
-                      forceElevated: innerBoxIsScrolled,
-                      actions: [
-                        Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: MenuAnchor(
-                            builder: (
-                              BuildContext context,
-                              MenuController controller,
-                              Widget? child,
-                            ) {
-                              return IconButton(
-                                icon: const Icon(Icons.more_vert),
-                                onPressed: () {
-                                  if (controller.isOpen) {
-                                    controller.close();
-                                  } else {
-                                    controller.open();
-                                  }
-                                },
-                              );
-                            },
-                            menuChildren: [
-                              Directionality(
-                                textDirection: TextDirection.ltr,
-                                child: MenuItemButton(
-                                  leadingIcon: const Icon(Icons.delete),
-                                  onPressed: () async {},
-                                  trailingIcon: const Icon(null),
-                                  child: const Text("Delete project"),
-                                ),
-                              ),
-                              Directionality(
-                                textDirection: TextDirection.ltr,
-                                child: MenuItemButton(
-                                  leadingIcon: const Icon(Icons.edit),
-                                  trailingIcon: const Icon(null),
-                                  child: const Text("Edit project name"),
-                                  onPressed: () async {},
-                                ),
-                              ),
-                            ],
-                            style: MenuStyle(
-                              alignment: AlignmentDirectional.bottomCenter,
-                            ),
-                          ),
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) {
+                    return <Widget>[
+                      SliverOverlapAbsorber(
+                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                          context,
                         ),
-                      ],
-                    ),
-                  ),
-                ];
-              },
+                        sliver: SliverAppBar(
+                          bottom: TabBar(
+                            tabAlignment: TabAlignment.start,
+                            isScrollable: true,
+                            tabs: [
+                              GestureDetector(
+                                onTap: () {
+                                  debugPrint("");
+                                },
+                                onLongPress: () {
+                                  debugPrint("");
+                                },
+                                onDoubleTap: () {
+                                  debugPrint("");
+                                },
+
+                                child: const Tab(text: "All"),
+                              ),
+                              Tab(text: "Today"),
+                              Tab(child: Text("Other")),
+                            ],
+                          ),
+                          automaticallyImplyLeading: false,
+                          title: Text('Tasks'),
+                          pinned: true,
+                          forceElevated: innerBoxIsScrolled,
+                          actions: [
+                            Directionality(
+                              textDirection: TextDirection.rtl,
+                              child: MenuAnchor(
+                                builder:
+                                    (
+                                      BuildContext context,
+                                      MenuController controller,
+                                      Widget? child,
+                                    ) {
+                                      return IconButton(
+                                        icon: const Icon(Icons.more_vert),
+                                        onPressed: () {
+                                          if (controller.isOpen) {
+                                            controller.close();
+                                          } else {
+                                            controller.open();
+                                          }
+                                        },
+                                      );
+                                    },
+                                menuChildren: [
+                                  Directionality(
+                                    textDirection: TextDirection.ltr,
+                                    child: MenuItemButton(
+                                      leadingIcon: const Icon(Icons.delete),
+                                      onPressed: () async {},
+                                      trailingIcon: const Icon(null),
+                                      child: const Text("Delete project"),
+                                    ),
+                                  ),
+                                  Directionality(
+                                    textDirection: TextDirection.ltr,
+                                    child: MenuItemButton(
+                                      leadingIcon: const Icon(Icons.edit),
+                                      trailingIcon: const Icon(null),
+                                      child: const Text("Edit project name"),
+                                      onPressed: () async {},
+                                    ),
+                                  ),
+                                ],
+                                style: MenuStyle(
+                                  alignment: AlignmentDirectional.bottomCenter,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ];
+                  },
               body: Builder(
                 builder: (BuildContext context) {
                   return TabBarView(
@@ -215,75 +214,74 @@ class TasksScreen extends ConsumerWidget {
           );
         } else {
           return NestedScrollView(
-            headerSliverBuilder: (
-              BuildContext context,
-              bool innerBoxIsScrolled,
-            ) {
-              return <Widget>[
-                SliverOverlapAbsorber(
-                  handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                    context,
-                  ),
-                  sliver: SliverAppBar(
-                    automaticallyImplyLeading: false,
-                    title: Text('Tasks'),
-                    pinned: true,
-                    forceElevated: innerBoxIsScrolled,
-                    actions: [
-                      Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: MenuAnchor(
-                          builder: (
-                            BuildContext context,
-                            MenuController controller,
-                            Widget? child,
-                          ) {
-                            return IconButton(
-                              icon: const Icon(Icons.more_vert),
-                              onPressed: () {
-                                if (controller.isOpen) {
-                                  controller.close();
-                                } else {
-                                  controller.open();
-                                }
-                              },
-                            );
-                          },
-                          menuChildren: [
-                            Directionality(
-                              textDirection: TextDirection.ltr,
-                              child: MenuItemButton(
-                                leadingIcon: const Icon(Icons.delete),
-                                onPressed: () async {},
-                                trailingIcon: const Icon(
-                                  Icons.arrow_forward_ios,
-                                ),
-                                child: const Text("Delete project"),
-                              ),
-                            ),
-                            Directionality(
-                              textDirection: TextDirection.ltr,
-                              child: MenuItemButton(
-                                leadingIcon: const Icon(Icons.edit),
-
-                                trailingIcon: const Icon(
-                                  Icons.arrow_forward_ios,
-                                ),
-                                child: const Text("Edit project name"),
-                                onPressed: () async {},
-                              ),
-                            ),
-                          ],
-                          style: MenuStyle(
-                            alignment: AlignmentDirectional.bottomCenter,
-                          ),
-                        ),
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverOverlapAbsorber(
+                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                        context,
                       ),
-                    ],
-                  ),
-                ),
-              ];
-            },
+                      sliver: SliverAppBar(
+                        automaticallyImplyLeading: false,
+                        title: Text('Tasks'),
+                        pinned: true,
+                        forceElevated: innerBoxIsScrolled,
+                        actions: [
+                          Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: MenuAnchor(
+                              builder:
+                                  (
+                                    BuildContext context,
+                                    MenuController controller,
+                                    Widget? child,
+                                  ) {
+                                    return IconButton(
+                                      icon: const Icon(Icons.more_vert),
+                                      onPressed: () {
+                                        if (controller.isOpen) {
+                                          controller.close();
+                                        } else {
+                                          controller.open();
+                                        }
+                                      },
+                                    );
+                                  },
+                              menuChildren: [
+                                Directionality(
+                                  textDirection: TextDirection.ltr,
+                                  child: MenuItemButton(
+                                    leadingIcon: const Icon(Icons.delete),
+                                    onPressed: () async {},
+                                    trailingIcon: const Icon(
+                                      Icons.arrow_forward_ios,
+                                    ),
+                                    child: const Text("Delete project"),
+                                  ),
+                                ),
+                                Directionality(
+                                  textDirection: TextDirection.ltr,
+                                  child: MenuItemButton(
+                                    leadingIcon: const Icon(Icons.edit),
+
+                                    trailingIcon: const Icon(
+                                      Icons.arrow_forward_ios,
+                                    ),
+                                    child: const Text("Edit project name"),
+                                    onPressed: () async {},
+                                  ),
+                                ),
+                              ],
+                              style: MenuStyle(
+                                alignment: AlignmentDirectional.bottomCenter,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ];
+                },
             body: Builder(
               builder: (BuildContext context) {
                 return CustomScrollView(

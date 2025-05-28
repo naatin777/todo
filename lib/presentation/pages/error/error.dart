@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:morph_todo/presentation/notifiers/detail/detail_notifier.dart';
+import 'package:todo/presentation/notifiers/detail/detail_notifier.dart';
 
 class ErrorPage extends ConsumerWidget {
   const ErrorPage({super.key});

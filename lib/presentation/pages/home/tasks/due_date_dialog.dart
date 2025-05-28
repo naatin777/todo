@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:morph_todo/domain/models/due_date.dart';
-import 'package:morph_todo/presentation/notifiers/home/task/due_date_notifier.dart';
+import 'package:todo/domain/models/due_date.dart';
+import 'package:todo/presentation/notifiers/home/task/due_date_notifier.dart';
 
 class DueDateDialog extends ConsumerStatefulWidget {
   const DueDateDialog({super.key, required this.dueDate});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:morph_todo/domain/models/due_date.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:todo/domain/models/due_date.dart';
 
 part 'due_date_notifier.g.dart';
 

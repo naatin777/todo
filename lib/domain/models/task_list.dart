@@ -1,4 +1,4 @@
-import 'package:morph_todo/data/database/app_database.dart';
+import 'package:todo/data/database/app_database.dart';
 
 sealed class TaskList {
   final String id;

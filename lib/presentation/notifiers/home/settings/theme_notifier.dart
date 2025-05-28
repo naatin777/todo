@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:morph_todo/data/preference/theme_mode_preference.dart';
+import 'package:todo/data/preference/theme_mode_preference.dart';
 
 part 'theme_notifier.g.dart';
 

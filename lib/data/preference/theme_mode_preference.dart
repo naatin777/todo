@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:morph_todo/data/preference/share_preferences_instance.dart';
+import 'package:todo/data/preference/share_preferences_instance.dart';
 
 class ThemeModePreference {
   static const key = "theme_mode";
